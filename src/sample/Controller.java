@@ -13,6 +13,7 @@ public class Controller implements Observer {
     public Controller(Model model, View view) {
         this.view = view;
         this.model = model;
+        System.out.println("fada");
     }
 
     @Override
