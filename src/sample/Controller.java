@@ -1,29 +1,24 @@
 package sample;
 
-import javafx.event.ActionEvent;
+import sample.Model.Model;
 import sample.View.View;
 
-import java.util.Observable;
-import java.util.Observer;
-
-public class Controller implements Observer {
+public class Controller  {
     private View view;
     private Model model;
 
-    public Controller(Model model, View view) {
-        this.view = view;
+    public Controller(Model model) {
         this.model = model;
-        System.out.println("fada");
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
+    public void setView(View view){
+        this.view = view;
+    }
 
-        System.out.println("update method on controller b4 if");
-        if (view.createUser){
+    public void createUser(User user) {
+        if (user.isLegal()){
             System.out.println("update method on con..");
-            model.createUser(view.txtfld_userName.getText(), view.txtfld_password.getText() , view.txtfld_birthDate.getValue(),
-                    view.txtfld_firstName.getText(), view.txtfld_lastName.getText(), view.txtfld_city.getText());
+            model.createUser(user);
         }
 
     }

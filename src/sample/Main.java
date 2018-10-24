@@ -1,37 +1,38 @@
 package sample;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.Model.Model;
 import sample.View.View;
 
 public class Main extends Application {
+    public static Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        this.primaryStage = primaryStage;
         Model model = new Model();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        View view = (View) fxmlLoader.getController();
-        Controller controller = new Controller(model, view);
-        Parent root = FXMLLoader.load(getClass().getResource("View/sample.fxml"));
+        Controller controller = new Controller(model);
+        model.setController(controller);
+
         primaryStage.setTitle("Vacation4U System");
-        primaryStage.setScene(new Scene(root, 600, 575));
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(getClass().getResource("View/sample.fxml").openStream());
+        Scene scene = new Scene(root, 600, 575);
+        primaryStage.setScene(scene);
+
+        View view = fxmlLoader.getController();
+        view.setController(controller);
+        controller.setView(view);
         primaryStage.show();
-        //view.addObserver(controller);
-        //model.addObserver(controller);
-
-
     }
-
-
-
 
     public static void main(String[] args) {
         launch(args);
-        System.out.println("Nadav");
+        System.out.println("chen anf");
 
     }
 }

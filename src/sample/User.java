@@ -1,17 +1,18 @@
 package sample;
 
+import javafx.scene.control.DatePicker;
+
 import java.time.LocalDate;
-import java.util.Date;
 
 public class User {
     String userName;
     String password;
-    LocalDate birthDate;
+    String birthDate;
     String firstName;
     String lastName;
     String city;
 
-    public User(String userName, String password, LocalDate birthDate, String firstName, String lastName, String city) {
+    public User(String userName, String password, String birthDate, String firstName, String lastName, String city) {
         this.userName = userName;
         this.password = password;
         this.birthDate = birthDate;
@@ -30,5 +31,9 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", city='" + city + '\'' +
                 '}';
+    }
+
+    public boolean isLegal() {
+        return true;
     }
 }
