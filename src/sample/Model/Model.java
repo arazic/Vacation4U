@@ -19,6 +19,7 @@ public class Model  {
 
     public void createUser(User user) {
         dateBase.createNewTable();
+
         System.out.println("User in model:" + user);
 
     }

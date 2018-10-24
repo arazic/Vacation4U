@@ -47,7 +47,7 @@ public class View  {
             //to add checks
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("sample.fxml").openStream());
-            Scene scene = new Scene(root, 600, 575);
+            Scene scene = new Scene(root, 300, 300);
             Stage stage = (Stage) txtfld_userName.getScene().getWindow();
             stage.setScene(scene);
             View view = fxmlLoader.getController();

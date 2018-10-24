@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import sample.Model.Model;
 import sample.View.View;
@@ -21,7 +23,9 @@ public class Main extends Application {
         primaryStage.setTitle("Vacation4U System");
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("View/sample.fxml").openStream());
-        Scene scene = new Scene(root, 600, 575);
+        //Image image= new Image("View/vacation.jpg");
+        //ImageView mv= new ImageView(image);
+        Scene scene = new Scene(root, 300, 300);
         primaryStage.setScene(scene);
 
         View view = fxmlLoader.getController();

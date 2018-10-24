@@ -70,10 +70,6 @@ public class DateBase {
         }
         System.out.println("the new table created");
     }
-    /*  *//**
-     * @param args the command line arguments
-     *//*
-    public static void main(String[] args) {
-        connect();
-    }*/
+
+
 }
