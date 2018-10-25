@@ -1,11 +1,12 @@
 package sample.Model;
 
+import org.sqlite.SQLiteException;
 import sample.User;
 
 import java.sql.*;
 
 public class DataBase {
-//    Connection conn;
+    //    Connection conn;
     static String name;
 //    public DataBase(String name) {
 //        this.name = name;
@@ -22,7 +23,7 @@ public class DataBase {
         Connection conn = null;
         try {
             // db parameters
-            String url = "jdbc:sqlite:C:/Users/nadavbar/IdeaProjects/Vacation4UYalle/sql/" + name + ".db";
+            String url = "jdbc:sqlite:C:/Users/user/IdeaProjects/Vacation4U/sql/" + name + ".db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
@@ -40,7 +41,7 @@ public class DataBase {
     }
 
     private Connection getConnection(){
-        String url = "jdbc:sqlite:C:/Users/nadavbar/IdeaProjects/Vacation4UYalle/sql/" + name + ".db";
+        String url = "jdbc:sqlite:C:/Users/user/IdeaProjects/Vacation4U/sql/" + name + ".db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -69,7 +70,7 @@ public class DataBase {
 
     public static void createNewTable() {
         // SQLite connection string
-        String url = "jdbc:sqlite:C:/Users/nadavbar/IdeaProjects/Vacation4UYalle/sql/" + name + ".db";
+        String url = "jdbc:sqlite:C:/Users/user/IdeaProjects/Vacation4U/sql/" + name + ".db";
 
         // SQL statement for creating a new table
         String sql = "CREATE TABLE `Users` (\n" +
@@ -87,17 +88,16 @@ public class DataBase {
             // create a new table
             stmt.execute(sql);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            if (!e.getMessage().contains("already exists"))
+                System.out.println(e.getMessage());
         }
         System.out.println("The new table created");
     }
 
-    public void insert(User user){
-
-
+    public void insert(User user) throws Exception {
         String sql = "INSERT INTO Users(Username,Password,Birthdate,FirstName,LastName,City) VALUES(?,?,?,?,?,?)";
         try (Connection conn = this.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)){
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUserName());
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getBirthDate());
@@ -105,11 +105,18 @@ public class DataBase {
             pstmt.setString(5, user.getLastName());
             pstmt.setString(6, user.getCity());
             pstmt.executeUpdate();
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-
         }
     }
 
-
+    public void updateUserData(String userNameToEdit, String field, String newValue) throws SQLException {
+        String sql = "UPDATE Users SET "+ field + " = ? , "
+                + "WHERE Username = ?";
+        Connection conn = this.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        // set the corresponding param
+        pstmt.setString(1, newValue);
+        pstmt.setString(2, userNameToEdit);
+        //update
+        pstmt.executeUpdate();
+    }
 }
