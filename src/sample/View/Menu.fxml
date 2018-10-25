@@ -109,7 +109,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </opaqueInsets>
             </Button>
-            <Button layoutX="10.0" layoutY="135.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="122.0" text="Delete User" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="20">
+            <Button fx:id="btn_delete" onAction="#goToDeletePage"  layoutX="10.0" layoutY="135.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="122.0" text="Delete User" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="20">
                <GridPane.margin>
                   <Insets left="50.0" right="20.0" top="20.0" />
                </GridPane.margin>

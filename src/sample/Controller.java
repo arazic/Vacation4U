@@ -26,6 +26,10 @@ public class Controller  {
     public User seacrhUser(String userNameToSearch) {
         return model.searchUser(userNameToSearch);
     }
+
+    public boolean deleteUser(String userNameToDelete) {
+        return model.deleteUser(userNameToDelete);
+    }
 }
 
 

@@ -45,4 +45,8 @@ public class Model  {
     public User searchUser(String userNameToSearch) {
         return new User("DEMO123", "123456", "12.10.92", "FIRST DEMO", "LAST DEMO", "DEMO CITY");
     }
+
+    public boolean deleteUser(String userNameToDelete) {
+        return true;
+    }
 }
