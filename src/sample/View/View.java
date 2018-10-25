@@ -23,11 +23,15 @@ public class View  {
     public javafx.scene.control.TextField txtfld_firstName;
     public javafx.scene.control.TextField txtfld_lastName;
     public javafx.scene.control.TextField txtfld_city;
-
     public javafx.scene.control.Button btn_edit;
     public javafx.scene.control.TextField txtfld_userNameToedit;
     public javafx.scene.control.TextField txtfld_newValue;
     public javafx.scene.control.ChoiceBox<String> chbx_optionToChange;
+    public javafx.scene.control.Button btn_search;
+    public javafx.scene.control.TextField txtfld_userNameToSearch;
+    public javafx.scene.control.TextField  txtfld_userDetails;
+    public javafx.scene.control.Button btn_backToMenu;
+
 
     private static Controller controller;
 
@@ -55,6 +59,37 @@ public class View  {
         stage.setScene(scene2);
         View view = fxmlLoader.getController();
         stage.show();
+    }
+
+    public void goToSearchPage(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(getClass().getResource("searchUser.fxml").openStream());
+        Stage stage = (Stage) btn_search.getScene().getWindow();
+        stage.setTitle("Search user");
+        Scene scene2= new Scene(root,850,230);
+        stage.setScene(scene2);
+        View view = fxmlLoader.getController();
+        stage.show();
+    }
+
+
+    public void searchUser(ActionEvent actionEvent) throws IOException {
+        if (checkOneValuesIsLegal(txtfld_userNameToSearch.getText())) {
+
+            User UserDetails= controller.seacrhUser(txtfld_userNameToSearch.getText());
+
+            if(UserDetails!=null) {
+                txtfld_userDetails.setText(UserDetails.toString());
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Be Attention");
+                alert.setHeaderText("There is no such a User " );
+                alert.showAndWait();
+
+            }
+        }
+
     }
 
     public void editUser(ActionEvent actionEvent) throws IOException {
@@ -117,16 +152,22 @@ public class View  {
       //  System.out.println(" " + txtfld_firstName.getText() + " " + txtfld_lastName.getText() + " " + txtfld_birthDate.getValue().toString());
         if (checkAllValuesIsLegal(txtfld_userName.getText(),txtfld_password.getText(),txtfld_birthDate.getValue(),
                 txtfld_firstName.getText(), txtfld_lastName.getText(), txtfld_city.getText())) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Congratulations");
-            alert.setHeaderText("A new user has been created named "+txtfld_userName.getText()+ " !!!");
-            alert.showAndWait();
-
             User user= new User(txtfld_firstName.getText(),txtfld_password.getText(),txtfld_birthDate.getValue().toString(),
                     txtfld_firstName.getText(), txtfld_lastName.getText(), txtfld_city.getText() ) ;
-            System.out.println(user.toString())
-            ;
-            controller.createUser(user);
+            System.out.println(user.toString());
+
+            if(controller.createUser(user)){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Congratulations");
+                alert.setHeaderText("A new user has been created named "+txtfld_userName.getText()+ " !!!");
+                alert.showAndWait();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Be Attention");
+                alert.setHeaderText("There is no such a User " );
+                alert.showAndWait();
+            }
         }
             //to add checks
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -170,7 +211,14 @@ public class View  {
     }
 
 
+    public void BackFromSearch(ActionEvent actionEvent) throws IOException {
+             FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource("Menu.fxml").openStream());
+            Scene scene = new Scene(root, 300, 300);
+            Stage stage = (Stage) btn_backToMenu.getScene().getWindow();
+            stage.setScene(scene);
+            View view = fxmlLoader.getController();
+            stage.show();
 
-
-
+    }
 }

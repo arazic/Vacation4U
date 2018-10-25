@@ -20,12 +20,16 @@ public class Model  {
         this.controller= controller;
     }
 
-    public void createUser(User user) {
+    public boolean createUser(User user) {
         System.out.println("User in model:" + user);
-
+        return true;
     }
 
     public boolean editUser(String userNameToedit, String optionToChange, String newValue) {
         return true;
+    }
+
+    public User searchUser(String userNameToSearch) {
+        return new User("DEMO123", "123456", "12.10.92", "FIRST DEMO", "LAST DEMO", "DEMO CITY");
     }
 }

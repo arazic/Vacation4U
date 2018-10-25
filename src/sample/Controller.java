@@ -15,12 +15,16 @@ public class Controller  {
         this.view = view;
     }
 
-    public void createUser(User user) {
-            model.createUser(user);
-        }
+    public boolean createUser(User user) {
+        return model.createUser(user);
+    }
 
     public boolean editUser(String userNameToedit, String optionToChange, String newValue) {
         return model.editUser(userNameToedit, optionToChange,newValue);
+    }
+
+    public User seacrhUser(String userNameToSearch) {
+        return model.searchUser(userNameToSearch);
     }
 }
 

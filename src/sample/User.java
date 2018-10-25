@@ -23,14 +23,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "User:  " + "\n"+
                 "userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", birthDate=" + birthDate +
-                ", firstName='" + firstName + '\'' +
+                ", firstName='" + firstName + "\n" +
                 ", lastName='" + lastName + '\'' +
-                ", city='" + city + '\'' +
-                '}';
+                ", city='" + city + '\'' ;
     }
 
     public boolean isLegal() {

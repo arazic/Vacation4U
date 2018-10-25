@@ -98,7 +98,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </opaqueInsets>
                 </Button>
-            <Button layoutX="10.0" layoutY="85.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="183.0" text="Search for a user" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="15">
+            <Button fx:id="btn_search" onAction="#goToSearchPage" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="183.0" text="Search for a user" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="15">
                <GridPane.margin>
                   <Insets left="25.0" right="20.0" top="20.0" />
                </GridPane.margin>
