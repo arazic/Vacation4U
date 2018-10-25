@@ -24,4 +24,8 @@ public class Model  {
         System.out.println("User in model:" + user);
 
     }
+
+    public boolean editUser(String userNameToedit, String optionToChange, String newValue) {
+        return true;
+    }
 }
