@@ -89,6 +89,7 @@ public class View  {
         stage.setScene(scene2);
         View view = fxmlLoader.getController();
         stage.show();
+
     }
 
     public void searchUser(ActionEvent actionEvent) throws IOException {
@@ -137,6 +138,7 @@ public class View  {
                 Parent root = fxmlLoader.load(getClass().getResource("Menu.fxml").openStream());
                 Scene scene = new Scene(root, 300, 300);
                 Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
+                stage.setTitle("Vacation4U");
                 scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
                 stage.setScene(scene);
                 View view = fxmlLoader.getController();
@@ -149,6 +151,7 @@ public class View  {
                 Scene scene = new Scene(root, 300, 300);
                 scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
                 Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
+                stage.setTitle("Vacation4U");
                 stage.setScene(scene);
                 View view = fxmlLoader.getController();
                 stage.show();
@@ -180,6 +183,7 @@ public class View  {
             Scene scene = new Scene(root, 300, 300);
             scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
             Stage stage = (Stage) txtfld_userNameToedit.getScene().getWindow();
+            stage.setTitle("Vacation4U");
             stage.setScene(scene);
             View view = fxmlLoader.getController();
             stage.show();
@@ -233,6 +237,7 @@ public class View  {
                 Scene scene = new Scene(root, 300, 300);
                 scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
                 Stage stage = (Stage) txtfld_userName.getScene().getWindow();
+                stage.setTitle("Vacation4U");
                 stage.setScene(scene);
                 View view = fxmlLoader.getController();
                 stage.show();
@@ -285,6 +290,7 @@ public class View  {
         Scene scene = new Scene(root, 300, 300);
         Stage stage = (Stage) btn_backToMenu.getScene().getWindow();
         scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
+        stage.setTitle("Vacation4U");
         stage.setScene(scene);
         View view = fxmlLoader.getController();
         stage.show();
