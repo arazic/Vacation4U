@@ -36,7 +36,6 @@ public class View  {
     public javafx.scene.control.TextField  txtfld_userNameToDelete;
     public javafx.scene.control.Button btn_delete;
 
-
     private static Controller controller;
 
     public void setController(Controller controller) {
@@ -89,7 +88,6 @@ public class View  {
         stage.setScene(scene2);
         View view = fxmlLoader.getController();
         stage.show();
-
     }
 
     public void searchUser(ActionEvent actionEvent) throws IOException {
@@ -102,10 +100,8 @@ public class View  {
             }
             else{
                 ThereIsNoUser();
-
             }
         }
-
     }
 
     private void ThereIsNoUser() {
@@ -117,7 +113,6 @@ public class View  {
 
     public void deleteUser(ActionEvent actionEvent) throws IOException {
         if (checkOneValuesIsLegal(txtfld_userNameToDelete.getText())) {
-
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Be Attention");
             alert.setHeaderText("Delete user\n");
@@ -155,20 +150,14 @@ public class View  {
                 stage.setScene(scene);
                 View view = fxmlLoader.getController();
                 stage.show();
-
             }
-
         }
     }
-
-
-
 
 
     public void editUser(ActionEvent actionEvent) throws IOException {
         if (checkOneValuesIsLegal(txtfld_userNameToedit.getText())&& checkOneValuesIsLegal(txtfld_newValue.getText())
                 && checkChbxValuesIsLegal(chbx_optionToChange.getValue())) {
-
             if(controller.editUser(txtfld_userNameToedit.getText(),chbx_optionToChange.getValue(),txtfld_newValue.getText())) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Congratulations");
@@ -188,7 +177,6 @@ public class View  {
             View view = fxmlLoader.getController();
             stage.show();
         }
-
     }
 
     private boolean checkChbxValuesIsLegal(String value) {
@@ -277,10 +265,8 @@ public class View  {
 
             alert.showAndWait();
             return false;
-
         }
         return true;
-
     }
 
 
@@ -294,7 +280,5 @@ public class View  {
         stage.setScene(scene);
         View view = fxmlLoader.getController();
         stage.show();
-
     }
-
 }
