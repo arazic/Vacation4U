@@ -16,12 +16,10 @@ public class Controller  {
     }
 
     public void createUser(User user) {
-        if (user.isLegal()){
-            System.out.println("update method on con..");
             model.createUser(user);
         }
 
     }
 
 
-}
+

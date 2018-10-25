@@ -9,8 +9,11 @@ public class Model  {
     private static DateBase dateBase;
 
     public Model() {
+
         dateBase.connect();
         dateBase.createNewDatabase("MySql.db");
+        dateBase.createNewTable();
+
     }
 
     public void setController(Controller controller) {
@@ -18,8 +21,6 @@ public class Model  {
     }
 
     public void createUser(User user) {
-        dateBase.createNewTable();
-
         System.out.println("User in model:" + user);
 
     }

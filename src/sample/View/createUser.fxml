@@ -8,10 +8,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<?import javafx.scene.control.DateCell?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.PasswordField?>
-<AnchorPane prefHeight="294.0" prefWidth="302.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.View">
+<AnchorPane  prefHeight="294.0" prefWidth="302.0" xmlns="http://javafx.com/javafx/8.0.121"
+             xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.View"
+             style="-fx-background-image: url('vacation.JPG');">
     <children>
         <GridPane layoutX="25.0" layoutY="20.0" prefHeight="242.0" prefWidth="341.0">
             <columnConstraints>
