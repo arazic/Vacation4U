@@ -25,7 +25,9 @@ public class Main extends Application {
         Parent root = fxmlLoader.load(getClass().getResource("View/Menu.fxml").openStream());
         //Image image= new Image("View/vacation.jpg");
         //ImageView mv= new ImageView(image);
-        Scene scene = new Scene(root, 300, 300);
+        Scene scene = new Scene(root, 300, 250);
+        scene.getStylesheets().add(getClass().getResource("View/MenuStyle.css").toExternalForm());
+
         primaryStage.setScene(scene);
 
         View view = fxmlLoader.getController();

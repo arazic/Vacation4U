@@ -49,6 +49,7 @@ public class View  {
         Stage stage = (Stage) btn_create.getScene().getWindow();
         stage.setTitle("Create user");
         Scene scene2= new Scene(root,300,300);
+        scene2.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
         View view = fxmlLoader.getController();
         stage.show();
@@ -60,6 +61,7 @@ public class View  {
         Stage stage = (Stage) btn_edit.getScene().getWindow();
         stage.setTitle("Edit user");
         Scene scene2= new Scene(root,400,350);
+        scene2.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
         View view = fxmlLoader.getController();
         stage.show();
@@ -71,6 +73,7 @@ public class View  {
         Stage stage = (Stage) btn_search.getScene().getWindow();
         stage.setTitle("Search user");
         Scene scene2= new Scene(root,850,230);
+        scene2.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
         View view = fxmlLoader.getController();
         stage.show();
@@ -82,6 +85,7 @@ public class View  {
         Stage stage = (Stage) btn_search.getScene().getWindow();
         stage.setTitle("Delete user");
         Scene scene2= new Scene(root,400,250);
+        scene2.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
         View view = fxmlLoader.getController();
         stage.show();
@@ -128,12 +132,22 @@ public class View  {
                 } else {
                     ThereIsNoUser();
                 }
+
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                Parent root = fxmlLoader.load(getClass().getResource("Menu.fxml").openStream());
+                Scene scene = new Scene(root, 300, 300);
+                Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
+                scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
+                stage.setScene(scene);
+                View view = fxmlLoader.getController();
+                stage.show();
             } else {
                 // ... user chose CANCEL or closed the dialog
                 alert.close();
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root = fxmlLoader.load(getClass().getResource("Menu.fxml").openStream());
                 Scene scene = new Scene(root, 300, 300);
+                scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
                 Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
                 stage.setScene(scene);
                 View view = fxmlLoader.getController();
@@ -164,6 +178,7 @@ public class View  {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("Menu.fxml").openStream());
             Scene scene = new Scene(root, 300, 300);
+            scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
             Stage stage = (Stage) txtfld_userNameToedit.getScene().getWindow();
             stage.setScene(scene);
             View view = fxmlLoader.getController();
@@ -216,6 +231,7 @@ public class View  {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root = fxmlLoader.load(getClass().getResource("Menu.fxml").openStream());
                 Scene scene = new Scene(root, 300, 300);
+                scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
                 Stage stage = (Stage) txtfld_userName.getScene().getWindow();
                 stage.setScene(scene);
                 View view = fxmlLoader.getController();
@@ -268,6 +284,7 @@ public class View  {
         Parent root = fxmlLoader.load(getClass().getResource("Menu.fxml").openStream());
         Scene scene = new Scene(root, 300, 300);
         Stage stage = (Stage) btn_backToMenu.getScene().getWindow();
+        scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene);
         View view = fxmlLoader.getController();
         stage.show();
