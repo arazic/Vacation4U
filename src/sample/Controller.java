@@ -19,7 +19,10 @@ public class Controller  {
             model.createUser(user);
         }
 
+    public boolean editUser(String userNameToedit, String optionToChange, String newValue) {
+        return model.editUser(userNameToedit, optionToChange,newValue);
     }
+}
 
 
 
