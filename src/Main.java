@@ -1,12 +1,11 @@
-package sample;
-
+import Controller.Controller;
+import Model.Model;
+import View.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.Model.Model;
-import sample.View.View;
 
 public class Main extends Application {
     public static Stage primaryStage;

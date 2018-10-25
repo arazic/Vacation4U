@@ -1,8 +1,4 @@
-package sample;
-
-import javafx.scene.control.DatePicker;
-
-import java.time.LocalDate;
+package Controller;
 
 public class User {
     String userName;
@@ -52,11 +48,11 @@ public class User {
         this.password = password;
     }
 
-    public String getBirthDate() {
+    public String getbirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setbirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

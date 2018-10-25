@@ -1,5 +1,7 @@
-package sample.View;
+package View;
 
+import Controller.Controller;
+import Controller.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,8 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-import sample.Controller;
-import sample.User;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -246,15 +246,15 @@ public class View  {
         String error="";
         if(userName.isEmpty() || password.isEmpty()  ||birthDate==null  ||firstName.isEmpty()  || lastName.isEmpty()  ||city.isEmpty()){
             if(userName.isEmpty() )
-                error="You have to choose User name!";
+                error="You have to choose UserName!";
             else if(password.isEmpty() )
                 error="You have to choose Password!";
             else if(birthDate==null || birthDate.toString().isEmpty() )
-                error="You have to choose Birth Date!";
+                error="You have to choose BirthDate!";
             else if(firstName.isEmpty() )
-                error="You have to choose First Name!";
+                error="You have to choose FirstName!";
             else if(lastName.isEmpty() )
-                error="You have to choose Last Name!";
+                error="You have to choose LastName!";
             else if(city.isEmpty() )
                 error="You have to choose City!";
 

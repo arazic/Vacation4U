@@ -1,7 +1,7 @@
-package sample;
+package Controller;
 
-import sample.Model.Model;
-import sample.View.View;
+import Model.Model;
+import View.View;
 
 public class Controller  {
     private View view;
@@ -31,6 +31,4 @@ public class Controller  {
         return model.deleteUser(userNameToDelete);
     }
 }
-
-
 
