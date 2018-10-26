@@ -2,10 +2,8 @@ package Model;
 
 import Controller.Controller;
 import Controller.User;
-
 import java.sql.Connection;
 import java.sql.SQLException;
-
 public class Model  {
 
     private static Controller controller;
@@ -23,11 +21,10 @@ public class Model  {
         this.controller= controller;
     }
 
-
     public boolean createUser(User user) {
         try{
             dataBase.insert(user);
-            System.out.println("Controller.User should be on the DB:" + user);
+            System.out.println("User should be on the DB:" + user);
             return true;
         }catch (Exception e){
             return false;
@@ -45,18 +42,13 @@ public class Model  {
     }
 
     public User searchUser(String userNameToSearch) {
-            return dataBase.searchUser(userNameToSearch);
         //return new User("DEMO123", "123456", "12.10.92", "FIRST DEMO", "LAST DEMO", "DEMO CITY");
+        return dataBase.searchUser(userNameToSearch);
     }
 
-    public boolean deleteUser(String userNameToDelete){
-        try {
-            int result = dataBase.deleteUser(userNameToDelete);
-            if (result == 1)
-                return true;
-            return false;
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public boolean deleteUser(String userNameToDelete) throws SQLException {
+        if(dataBase.deleteUser(userNameToDelete)==1){
+              return true;
         }
         return false;
     }

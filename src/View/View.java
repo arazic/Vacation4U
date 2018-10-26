@@ -1,7 +1,5 @@
 package View;
 
-import Controller.Controller;
-import Controller.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import Controller.Controller;
+import Controller.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -111,7 +112,7 @@ public class View  {
         alert.showAndWait();
     }
 
-    public void deleteUser(ActionEvent actionEvent) throws IOException {
+    public void deleteUser(ActionEvent actionEvent) throws IOException, SQLException {
         if (checkOneValuesIsLegal(txtfld_userNameToDelete.getText())) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Be Attention");
@@ -246,15 +247,15 @@ public class View  {
         String error="";
         if(userName.isEmpty() || password.isEmpty()  ||birthDate==null  ||firstName.isEmpty()  || lastName.isEmpty()  ||city.isEmpty()){
             if(userName.isEmpty() )
-                error="You have to choose UserName!";
+                error="You have to choose User name!";
             else if(password.isEmpty() )
                 error="You have to choose Password!";
             else if(birthDate==null || birthDate.toString().isEmpty() )
-                error="You have to choose BirthDate!";
+                error="You have to choose Birth Date!";
             else if(firstName.isEmpty() )
-                error="You have to choose FirstName!";
+                error="You have to choose First Name!";
             else if(lastName.isEmpty() )
-                error="You have to choose LastName!";
+                error="You have to choose Last Name!";
             else if(city.isEmpty() )
                 error="You have to choose City!";
 
