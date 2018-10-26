@@ -107,16 +107,23 @@ public class DataBase {
         }
     }
 
-    public void updateUserData(String userNameToEdit, String field, String newValue) throws SQLException {
-        String sql = "UPDATE Users SET " + field + "= ? "
-                + "WHERE UserName = ?";
-        Connection conn = this.getConnection();
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        // set the corresponding param
-        pstmt.setString(1, newValue);
-        pstmt.setString(2, userNameToEdit);
-        //update
-        pstmt.executeUpdate();
+    public boolean updateUserData(String userNameToEdit, String field, String newValue) throws SQLException {
+        User user= this.searchUser(userNameToEdit);
+        if(user==null){
+            return false;
+        }
+        else {
+            String sql = "UPDATE Users SET " + field + "= ? "
+                    + "WHERE UserName = ?";
+            Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the corresponding param
+            pstmt.setString(1, newValue);
+            pstmt.setString(2, userNameToEdit);
+            //update
+            pstmt.executeUpdate();
+            return true;
+        }
     }
 
     public User searchUser(String userNameToSearch) {

@@ -34,11 +34,12 @@ public class Model  {
 
     public boolean editUser(String userNameToEdit, String optionToChange, String newValue) {
         try {
-            dataBase.updateUserData(userNameToEdit, optionToChange, newValue);
-            return true;
-        }catch (SQLException e){
-            return false;
+            return dataBase.updateUserData(userNameToEdit, optionToChange, newValue);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return false;
     }
 
     public User searchUser(String userNameToSearch) {
