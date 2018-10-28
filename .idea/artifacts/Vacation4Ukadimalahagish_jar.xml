@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact name="Vacation4Ukadimalahagish:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Vacation4Ukadimalahagish_jar</output-path>
+    <root id="root" />
+  </artifact>
+</component>
