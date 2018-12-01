@@ -45,6 +45,6 @@
                </children></AnchorPane>
         </items>
       </SplitPane>
-      <Button fx:id="btn_backToMenu" layoutX="683.0" layoutY="172.0" mnemonicParsing="false" onAction="#BackFromSearch" prefHeight="27.0" prefWidth="143.0" text="Back to menu" />
+      <Button fx:id="btn_backToMenu" layoutX="683.0" layoutY="172.0" mnemonicParsing="false" onAction="#BackToMenu" prefHeight="27.0" prefWidth="143.0" text="Back to menu" />
    </children>
 </AnchorPane>

@@ -1,30 +1,78 @@
-.root{
+.root {
     -fx-background-color: #c1f5ff;
+    /*-fx-background-image: url("vacation.jpg");*/
+    -fx-background-size: 100% 100%;
 }
 
-body {
-    background: url("vacation.jpg");
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+    img.bg {
+        left: 50%;
+        margin-left: -512px;   /* 50% */
+    }
 }
+.label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+     -fx-font-family: 'Arial Narrow';
+}
+
 .sectionTitle {
     -fx-text-fill   : #01579B;
     -fx-font-weight : bolder;
     -fx-font-size   : 14px;
+    -fx-font-family: 'Arial Narrow';
+
+}
+.date-chooser {
+    -fx-background-color:linear-gradient(white,#DDDDDD);
+    -fx-font-family: 'Arial Narrow';
+
+}
+
+.date-chooser {
+...
+-fx-background-image: url("images/background.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left bottom;
 }
 
 .warningText {
     -fx-fill : #0277BD;
+    -fx-font-family: 'Arial Narrow';
+
 }
 
 .inputSection {
     -fx-background-color : #E1F5FE;
+    -fx-font-family: 'Arial Narrow';
+
 }
 
 .button {
     -fx-background-color : #29B6F6;
     -fx-text-fill        : #E1F5FE;
     -fx-font-weight      : 900;
+    -fx-font-family: 'Arial Narrow';
+
 }
 
 .button:hover {
     -fx-background-color : #01579B;
+    -fx-font-family: 'Arial Narrow';
+
 }
+
+
+.tab-pane > .tab-header-area > .headers-region > .tab:top {
+    -fx-border-color:  #c1f5ff;
+    -fx-border-radius: 5 5 0 0;
+    -fx-background-color: #f1f1f1;
+    -fx-background-insets: 0;
+    -fx-text-fill: #2381E9;
+    -fx-font-family: 'Arial Narrow';
+
+}
+

@@ -1,8 +1,5 @@
-package Controller;
+package View;
 
-import javafx.scene.control.DatePicker;
-
-import java.time.LocalDate;
 
 public class User {
     String userName;
@@ -11,14 +8,16 @@ public class User {
     String firstName;
     String lastName;
     String city;
+    boolean logIn;
 
-    public User(String userName, String password, String birthDate, String firstName, String lastName, String city) {
+    public User(String userName, String password, String birthDate, String firstName, String lastName, String city, boolean logIn) {
         this.userName = userName;
         this.password = password;
         this.birthDate = birthDate;
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
+        this.logIn= false;
     }
 
     @Override
@@ -83,4 +82,19 @@ public class User {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setLogIn(boolean logIn) {
+        this.logIn = logIn;
+    }
+
+    public boolean isLogIn() {
+        return logIn;
+    }
+
+
+
 }

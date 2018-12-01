@@ -2,9 +2,12 @@ package Controller;
 
 import Model.Model;
 import View.View;
-import Controller.User;
+import View.User;
+import View.Vacation;
+import View.userMessage;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class Controller  {
     private View view;
@@ -33,6 +36,23 @@ public class Controller  {
     public boolean deleteUser(String userNameToDelete) throws SQLException {
         return model.deleteUser(userNameToDelete);
     }
+
+    public List<Vacation> searchVacation(Vacation vacationTerms) {
+        return model.searchVacation(vacationTerms);
+    }
+
+    public boolean insertMessage(userMessage Message) throws Exception {
+        return model.insertMessage(Message);
+    }
+
+    public List<userMessage> searchReqFromPurchaser(User registeredUser) {
+        return model.searchReqFromPurchaser(registeredUser);
+
+    }
+
+    public List<userMessage> searchAnsFromSalers(User registeredUser) {
+        return model.searchAnsFromSalers(registeredUser);
+        }
 }
 
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-image: url('vacation.jpg');" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.View">
+    <children>
+        <GridPane layoutX="155.0" layoutY="60.0" prefHeight="92.0" prefWidth="394.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="272.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="115.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="126.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <TextField fx:id="txtfld_userNameToLogIn" GridPane.columnIndex="1" />
+                <PasswordField fx:id="txtfld_passwordToLogIn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="User name" />
+                <Label layoutX="10.0" layoutY="24.0" text="Password" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+      <GridPane layoutX="12.0" layoutY="14.0" prefHeight="39.0" prefWidth="689.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Log in to Vacation4U" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="btn_back" mnemonicParsing="false" onAction="#backToMenu" prefHeight="28.0" prefWidth="43.0" text="back" GridPane.halignment="LEFT">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+      <GridPane layoutX="6.0" layoutY="170.0" prefHeight="131.0" prefWidth="701.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+                <Button fx:id="btn_LogInside" mnemonicParsing="false" onAction="#logIn" prefHeight="27.0" prefWidth="90.0" text="Log in" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button fx:id="btn_forgotUser" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goToForgotUser" prefHeight="39.0" prefWidth="364.0" style="-fx-background-color: #bae3fa;    -fx-text-fill: #283958;" text="Forgot user name OR password?" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+         </children>
+      </GridPane>
+    </children>
+</AnchorPane>
