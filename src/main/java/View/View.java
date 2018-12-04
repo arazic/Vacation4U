@@ -54,7 +54,6 @@ public class View {
     public javafx.scene.control.TextField txtflf_found1;
     public javafx.scene.control.TextField txtflf_found2;
     public javafx.scene.control.TextField txtflf_found3;
-    public javafx.scene.control.Button bnt_showMeVac;
     public javafx.scene.control.Button bnt_foundDetails1;
     public javafx.scene.control.Button bnt_foundDetails2;
     public javafx.scene.control.Button bnt_foundDetails3;
@@ -370,10 +369,7 @@ public class View {
             User UserDetails = controller.seacrhUser(txtfld_userNameToLogIn.getText());
             if (UserDetails != null) {
                 if (UserDetails.getPassword().equals(txtfld_passwordToLogIn.getText())) {
-                   /*     btn_LogIn.setText("Log Out");
-                   btn_SignIn.setText("to the personal area");
-                   אני רוצה לשנות משהו בדף שעוד לא הטענתי אותו...
-                   */
+
                     registeredUser = UserDetails;
                     registeredUser.setLogIn(true);
                     if (pagesApp.contains("foundVacations")) {
@@ -398,19 +394,22 @@ public class View {
                         stage.setTitle(title);
                         stage.setScene(scene);
                         stage.show();
+                        btn_LogIn= (Button) scene.lookup("#btn_LogIn");
+                        btn_LogIn.setText("Log Out");
+                        btn_SignIn= (Button) scene.lookup("#btn_SignIn");
+                        btn_SignIn.setVisible(false);
+                        btn_SignIn= (Button) scene.lookup("#btn_SignIn");
+                        btn_SignIn.setVisible(false);
+                        btn_PerArea= (Button) scene.lookup("#btn_PerArea");
+                        if(registeredUser.getMessageNum()==0){
+                            btn_PerArea.setText(" There are no messages");
+                        }else{
+                            btn_PerArea.setText(registeredUser.getMessageNum()+ " message are waiting for you");
+                        }
+                        btn_PerArea.setVisible(true);
+
                     }
-                    //btn_LogIn.setText("Log Out");
-                    //btn_SignIn.setVisible(false);
-                /*       FXMLLoader fxmlLoader = new FXMLLoader();
-                       Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("personalArea.fxml").openStream());
-                       Scene scene = new Scene(root, 700, 500);
-                       scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
-                       Stage stage = (Stage) btn_LogInside.getScene().getWindow();
-                       String title="Welcome "+UserDetails.getFirstName() +" "+UserDetails.getLastName();
-                       stage.setTitle(title);
-                       stage.setScene(scene);
-                       stage.show();*/
-//                       updateWelcome(UserDetails);
+
                 } else {
                     incorrectPassword();
                 }
@@ -419,10 +418,6 @@ public class View {
             }
         }
 
-    }
-
-    private void updateWelcome(User UserDetails) {
-        txt_Welcome.setText("Welcome " + UserDetails.getFirstName() + " " + UserDetails.getLastName() + "!");
     }
 
 
@@ -451,8 +446,6 @@ public class View {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("foundVacations.fxml"));
                 pagesApp.add("foundVacations");
                 Parent root = fxmlLoader.load();
-//   View view= fxmlLoader.getController();
-//   view.updateGridPane();
                 Scene scene = new Scene(root, 700, 500);
                 scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
                 Stage stage = (Stage) btn_GoSearchVacation.getScene().getWindow();
@@ -461,9 +454,38 @@ public class View {
                 stage.setScene(scene);
                 stage.show();
 
+             //   bnt_showMeVac= (Button) scene.lookup("bnt_showMeVac");
+                lab_looking= (Label) scene.lookup("#lab_looking");
+                txtflf_found1= (TextField) scene.lookup("#txtflf_found1");
+                bnt_foundDetails1= (Button) scene.lookup("#bnt_foundDetails1");
+                txtflf_found2= (TextField) scene.lookup("#txtflf_found2");
+                bnt_foundDetails2= (Button) scene.lookup("#bnt_foundDetails2");
+                txtflf_found3= (TextField) scene.lookup("#txtflf_found3");
+                bnt_foundDetails3= (Button) scene.lookup("#bnt_foundDetails3");
 
-  /*          Stage stage2 = (Stage) txtflf_found1.getScene().getWindow();
-            txtflf_found1.setText("hi");*/
+
+                    lab_looking.setText("The vacations we found for you..");
+                    for (int i = 0; i < foundVacation.size(); i += 2) {
+                        txtflf_found1.setVisible(true);
+                        txtflf_found1.setText(foundVacation.get(i).shortToString());
+                        bnt_foundDetails1.setVisible(true);
+                        if ((i + 1) < foundVacation.size()) {
+                            txtflf_found2.setVisible(true);
+                            txtflf_found2.setText(foundVacation.get(i + 1).shortToString());
+                            bnt_foundDetails2.setVisible(true);
+                            if ((i + 2) < foundVacation.size()) {
+                                txtflf_found3.setVisible(true);
+                                txtflf_found3.setText(foundVacation.get(i + 2).shortToString());
+                                bnt_foundDetails3.setVisible(true);
+
+                            }
+
+                    }
+                    // vacationToBuy=foundVacation.get(i);
+
+                  //  bnt_showMeVac.setVisible(false);
+                }
+
 
             }
     }
@@ -603,13 +625,11 @@ public class View {
         bnt_foundDetails1.setVisible(false);
         bnt_foundDetails2.setVisible(false);
         bnt_foundDetails3.setVisible(false);
-        bnt_showMeVac.setVisible(true);
-        bnt_showMeVac.setVisible(false);
         btn_toBuy.setVisible(true);
     }
 
     public void updateVacations(ActionEvent actionEvent) throws IOException {
-        if (bnt_showMeVac.getText().equals("Show me vacations!")) {
+     /*   if (bnt_showMeVac.getText().equals("Show me vacations!")) {
             lab_looking.setText("The vacations we found for you..");
             String allVacations = "";
             for (int i = 0; i < foundVacation.size(); i += 2) {
@@ -631,7 +651,7 @@ public class View {
             // vacationToBuy=foundVacation.get(i);
 
             bnt_showMeVac.setVisible(false);
-        }
+        }*/
 
     }
 

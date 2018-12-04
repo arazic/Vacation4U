@@ -68,6 +68,7 @@ public class Model  {
     public boolean insertMessage(userMessage Message) throws Exception {
         try{
             dataBase.insertMessage(Message.getFromUser(),Message.getVacationToBuy(), Message.getToUser().getUserName());
+            Message.getToUser().setMessageNum(Message.getToUser().getMessageNum()+1);
 //            System.out.println("User should be on the DB:" + user);
             return true;
         }catch (Exception e){

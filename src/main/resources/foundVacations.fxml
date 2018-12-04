@@ -62,8 +62,8 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <TextField fx:id="txtflf_found1" prefHeight="41.0" prefWidth="450.0" visible="false" />
-                        <Button fx:id="bnt_foundDetails1" mnemonicParsing="false" onAction="#goToDetailPage" prefHeight="39.0" prefWidth="79.0" text="Details" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                        <TextField fx:id="txtflf_found1" prefHeight="41.0" prefWidth="450.0"  />
+                        <Button fx:id="bnt_foundDetails1" mnemonicParsing="false" onAction="#goToDetailPage" prefHeight="39.0" prefWidth="79.0" text="Details" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                            <GridPane.margin>
                               <Insets right="20.0" />
                            </GridPane.margin>
@@ -96,11 +96,6 @@
                         <Button fx:id="bnt_foundDetails2" mnemonicParsing="false" onAction="#goToDetailPage" text="Details" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                            <GridPane.margin>
                               <Insets right="20.0" />
-                           </GridPane.margin>
-                        </Button>
-                        <Button fx:id="bnt_showMeVac" mnemonicParsing="false" onAction="#updateVacations" prefHeight="39.0" prefWidth="181.0" text="Show me vacations!" GridPane.halignment="CENTER">
-                           <GridPane.margin>
-                              <Insets left="170.0" />
                            </GridPane.margin>
                         </Button>
                         <Button fx:id="btn_toBuy" onAction="#goToBuyPage" visible="false" mnemonicParsing="false" text="I want to Buy!">

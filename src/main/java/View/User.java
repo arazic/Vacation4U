@@ -9,6 +9,7 @@ public class User {
     String lastName;
     String city;
     boolean logIn;
+    int messageNum;
 
     public User(String userName, String password, String birthDate, String firstName, String lastName, String city, boolean logIn) {
         this.userName = userName;
@@ -18,7 +19,7 @@ public class User {
         this.lastName = lastName;
         this.city = city;
         this.logIn= false;
-    }
+this.messageNum=0;    }
 
     @Override
     public String toString() {
@@ -94,6 +95,15 @@ public class User {
     public boolean isLogIn() {
         return logIn;
     }
+
+    public int getMessageNum() {
+        return messageNum;
+    }
+
+    public void setMessageNum(int messageNum) {
+        this.messageNum = messageNum;
+    }
+
 
 
 

@@ -157,9 +157,11 @@ public class DataBase {
                 String FirstName = rs.getString("FirstName");
                 String LastName = rs.getString("LastName");
                 String City = rs.getString("City");
+
                 User user = new User(UserName, Password, BirthDate, FirstName, LastName, City, false);
                 return user;
             }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
