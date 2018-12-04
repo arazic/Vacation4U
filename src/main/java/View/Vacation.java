@@ -42,6 +42,23 @@ public class Vacation {
         this.salerName = salerName;
     }
 
+    public Vacation(String FlightNum) {
+        this.FlightNum = FlightNum;
+        this.FromPlace = null;
+        this.ToPlace = null;
+        this.Airline = null;
+        this.FromDate = null;
+        this.ToDate = null;
+        this.TicketNum = 1;
+        this.baggage = null;
+        this.baggageWeight = 0;
+        this.Back = null;
+        this.BackDate = null;
+        this.Kind = null;
+        this.hotel = null;
+        this.salerName = null;
+    }
+
 
     public String getFlightNum() {
         return FlightNum;

@@ -83,4 +83,8 @@ public class Model  {
     public List<userMessage> searchAnsFromSalers(User registeredUser) {
         return dataBase.searchAnsFromSalers(registeredUser);
     }
+
+    public Vacation searchVacationByFlightNum(Vacation vacation) {
+        return dataBase.searchVacationByFlightNum(vacation);
+    }
 }

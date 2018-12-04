@@ -362,6 +362,57 @@ public class DataBase {
         return foundMessages;
 
     }
+
+    public Vacation searchVacationByFlightNum(Vacation vacation) {
+        Vacation returnVacations=null;
+        String sql = "SELECT FlightNum, FromPlace, ToPlace, Airline, FromDate, ToDate, TicketNum, baggage, " +
+                "baggageWeight, Back, BackDate, Kind, Hotel, salerName " +
+                "FROM Vacations WHERE (FlightNum =? ) ";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, vacation.getFlightNum());
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String FlightNum= rs.getString("FlightNum");
+                String FromPlace = rs.getString("FromPlace");
+                String ToPlace = rs.getString("ToPlace");
+                String Airline= rs.getString("Airline");
+                String FromDate = rs.getString("FromDate");
+                String ToDate = rs.getString("ToDate");
+                Integer TicketNum = rs.getInt("TicketNum");
+                String baggage= rs.getString("baggage");
+                Integer baggageWeight = rs.getInt("baggageWeight");
+                String Back= rs.getString("Back");
+                String BackDate = rs.getString("BackDate");
+                String Kind= rs.getString("Kind");
+                String Hotel= rs.getString("Hotel");
+                String salerName= rs.getString("salerName");
+
+                Date backDate=null;
+                Date fromDate=null;
+                Date toDate=null;
+                DateFormat dateFormatbackDate =  new SimpleDateFormat("yyyy-MM-dd");
+                DateFormat dateFormatfromDate =  new SimpleDateFormat("yyyy-MM-dd");
+                DateFormat dateFormattoDate =  new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    fromDate =  (Date)dateFormatfromDate.parse(FromDate);
+                    toDate =  (Date)dateFormattoDate.parse(ToDate);
+                    if(backDate!=null)
+                        backDate =  (Date)dateFormatbackDate.parse(BackDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                 returnVacations= new Vacation(FlightNum,FromPlace,ToPlace,Airline,
+                        fromDate,toDate, TicketNum,baggage,baggageWeight,
+                        Back,backDate,Kind,Hotel,salerName);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return returnVacations;
+    }
 }
 
 

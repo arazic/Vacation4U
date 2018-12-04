@@ -53,6 +53,10 @@ public class Controller  {
     public List<userMessage> searchAnsFromSalers(User registeredUser) {
         return model.searchAnsFromSalers(registeredUser);
         }
+
+    public Vacation searchVacationByFlightNum(Vacation vacation) {
+        return model.searchVacationByFlightNum(vacation);
+    }
 }
 
 

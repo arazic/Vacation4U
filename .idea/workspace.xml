@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+    <list id="7c93ab68-3698-4b01-9487-7094993caaf7" name="Revert &quot;almost done&quot;" comment="Revert &quot;almost done&quot;&#10;&#10;This reverts commit bf3d43d" />
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/vacationDetails.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/DataBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/View/Vacation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/Vacation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/foundVacations.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/foundVacations.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/homeMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/homeMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/personalArea.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/personalArea.fxml" afterDir="false" />
     </list>
-    <list id="7c93ab68-3698-4b01-9487-7094993caaf7" name="Revert &quot;almost done&quot;" comment="Revert &quot;almost done&quot;&#10;&#10;This reverts commit bf3d43d" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -86,8 +86,8 @@
       <file leaf-file-name="View.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/View/View.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="64" column="37" lean-forward="true" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
+            <state relative-caret-position="165">
+              <caret line="713" lean-forward="true" selection-start-line="713" selection-end-line="713" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -95,75 +95,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Scene.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/Scene.java">
+      <file leaf-file-name="TextInputControl.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/control/TextInputControl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="201">
-              <caret line="1480" selection-start-line="1480" selection-end-line="1480" />
+              <caret line="347" column="35" selection-start-line="347" selection-start-column="35" selection-end-line="347" selection-end-column="35" />
               <folding>
-                <element signature="e#39846#39847#0" expanded="true" />
-                <element signature="e#39901#39902#0" expanded="true" />
-                <element signature="e#55917#55918#0" expanded="true" />
+                <element signature="e#50373#50374#0" expanded="true" />
+                <element signature="e#50422#50423#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Parent.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/Parent.java">
+      <file leaf-file-name="Labeled.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/control/Labeled.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="733" selection-start-line="733" selection-end-line="733" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/Node.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="1708" selection-start-line="1708" selection-end-line="1708" />
+            <state relative-caret-position="211">
+              <caret line="145" column="35" selection-start-line="145" selection-start-column="35" selection-end-line="145" selection-end-column="35" />
               <folding>
-                <element signature="e#21385#21386#0" expanded="true" />
-                <element signature="e#21422#21423#0" expanded="true" />
-                <element signature="e#40714#40715#0" expanded="true" />
-                <element signature="e#40745#40746#0" expanded="true" />
-                <element signature="e#40782#40783#0" expanded="true" />
-                <element signature="e#40816#40817#0" expanded="true" />
-                <element signature="e#48507#48508#0" expanded="true" />
-                <element signature="e#48551#48552#0" expanded="true" />
+                <element signature="e#3369#3370#0" expanded="true" />
+                <element signature="e#3398#3399#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ObjectPropertyBase.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/beans/property/ObjectPropertyBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="131" selection-start-line="131" selection-end-line="131" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="foundVacations.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/foundVacations.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="99" column="33" selection-start-line="99" selection-start-column="33" selection-end-line="99" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Controller/Controller.java">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/View/User.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="228">
-              <caret line="32" selection-start-line="32" selection-end-line="32" />
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#766#767#0" expanded="true" />
+                <element signature="e#1084#1085#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StringExpression.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/beans/binding/StringExpression.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
+              <folding>
+                <element signature="e#1142#1143#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -172,10 +148,26 @@
       <file leaf-file-name="Model.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Model/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="53" column="27" lean-forward="true" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
+            <state relative-caret-position="532">
+              <caret line="74" selection-start-line="74" selection-end-line="74" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Controller/Controller.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="316">
+              <caret line="44" selection-start-line="44" selection-end-line="44" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#709#710#0" expanded="true" />
+                <element signature="e#766#767#0" expanded="true" />
+                <element signature="e#1505#1506#0" expanded="true" />
+                <element signature="e#1569#1570#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -184,12 +176,20 @@
       <file leaf-file-name="DataBase.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Model/DataBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="717">
-              <caret line="367" lean-forward="true" selection-start-line="367" selection-end-line="367" />
+            <state relative-caret-position="417">
+              <caret line="306" selection-start-line="306" selection-end-line="306" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#12194#12207#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JDBC3PreparedStatement.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/src/SQL/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3PreparedStatement.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="77" column="89" selection-start-line="77" selection-start-column="89" selection-end-line="77" selection-end-column="89" />
             </state>
           </provider>
         </entry>
@@ -209,34 +209,22 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Mess</find>
-      <find />
-      <find>Messa</find>
-      <find>vis</find>
-      <find>confi</find>
-      <find>userMessage</find>
-      <find>ChBox_1</find>
-      <find>tex</find>
-      <find>ch</find>
-      <find>che</find>
-      <find>textA</find>
       <find>logout</find>
       <find>btn_</find>
       <find>btn_LogIn</find>
-      <find />
+      <find>log out</find>
       <find>LOgIn</find>
       <find>personal</find>
       <find>welcome</find>
       <find>txt_Welcome</find>
       <find>insertMessage</find>
-      <find>insertVacation</find>
       <find>Looking</find>
       <find>search</find>
       <find>Show</find>
@@ -245,7 +233,19 @@
       <find>Login</find>
       <find>txtflf_found1</find>
       <find>scene.look</find>
+      <find>insertVacation</find>
       <find>bnt_showMeVac</find>
+      <find>acc_Vacations</find>
+      <find>accordion</find>
+      <find>TA_details</find>
+      <find>buy</find>
+      <find>logIn</find>
+      <find>vacationDetails</find>
+      <find>logOut</find>
+      <find>goToLo</find>
+      <find>Buy</find>
+      <find>LogIn</find>
+      <find>personalHome</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -294,20 +294,20 @@
         <option value="$PROJECT_DIR$/src/main/java/javafx/scene/control/SpinnerValueFactory/IntegerSpinnerValueFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/vacation.java" />
         <option value="$PROJECT_DIR$/src/main/resources/forgotUser.fxml" />
-        <option value="$PROJECT_DIR$/src/main/resources/vacationDetails.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/View/Vacation.java" />
         <option value="$PROJECT_DIR$/src/main/resources/Buy.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/HomeMenu2.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/Controller/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/userMessage.java" />
         <option value="$PROJECT_DIR$/src/main/resources/Messages.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/Model/Model.java" />
         <option value="$PROJECT_DIR$/src/main/resources/personalArea.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/View/User.java" />
         <option value="$PROJECT_DIR$/src/main/resources/homeMenu.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/Model/DataBase.java" />
-        <option value="$PROJECT_DIR$/src/main/java/View/View.java" />
         <option value="$PROJECT_DIR$/src/main/resources/foundVacations.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/View/Vacation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Controller/Controller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Model/Model.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Model/DataBase.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/vacationDetails.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/View/View.java" />
       </list>
     </option>
   </component>
@@ -618,7 +618,7 @@
       <workItem from="1543309742703" duration="26333000" />
       <workItem from="1543565269831" duration="1274000" />
       <workItem from="1543665593416" duration="24974000" />
-      <workItem from="1543758942524" duration="8572000" />
+      <workItem from="1543758942524" duration="15667000" />
     </task>
     <task id="LOCAL-00001" summary="try">
       <created>1540372627453</created>
@@ -725,11 +725,18 @@
       <option name="project" value="LOCAL" />
       <updated>1543699579087</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="part 3+">
+      <created>1543931502413</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1543931502413</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159219000" />
+    <option name="totallyTimeSpent" value="166314000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -742,7 +749,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
@@ -753,8 +759,8 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="12" weight="0.13059033" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25054467" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="12" visible="true" weight="0.12962963" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25054467" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.32897604" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="2" />
@@ -865,79 +871,68 @@
     <MESSAGE value="almost done" />
     <MESSAGE value="almost done..." />
     <MESSAGE value="part 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="part 3" />
+    <MESSAGE value="part 3+" />
+    <option name="LAST_COMMIT_MESSAGE" value="part 3+" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
+          <url>file://$PROJECT_DIR$/src/Model/Model.java</url>
           <line>37</line>
           <properties />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
-          <line>372</line>
+          <url>file://$PROJECT_DIR$/src/main/java/Model/DataBase.java</url>
+          <line>423</line>
           <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
+          <url>file://$PROJECT_DIR$/src/main/java/Model/DataBase.java</url>
           <line>297</line>
           <properties />
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
-          <line>584</line>
+          <url>file://$PROJECT_DIR$/src/main/java/View/View.java</url>
+          <line>618</line>
           <properties />
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
-          <line>696</line>
+          <url>file://$PROJECT_DIR$/src/main/java/View/View.java</url>
+          <line>730</line>
           <properties />
           <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
-          <line>709</line>
+          <url>file://$PROJECT_DIR$/src/main/java/View/View.java</url>
+          <line>743</line>
           <properties />
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
-          <line>702</line>
+          <url>file://$PROJECT_DIR$/src/main/java/View/View.java</url>
+          <line>736</line>
           <properties />
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
-          <line>403</line>
-          <properties />
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url />
-          <line>368</line>
-          <properties />
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url />
+          <url>file://$PROJECT_DIR$/src/main/java/Model/DataBase.java</url>
           <line>320</line>
           <properties />
           <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url />
-          <line>458</line>
+          <url>file://$PROJECT_DIR$/src/main/java/View/View.java</url>
+          <line>342</line>
           <properties />
-          <option name="timeStamp" value="75" />
+          <option name="timeStamp" value="79" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="76" />
+      <option name="time" value="81" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -946,6 +941,21 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>((Button)actionEvent.getSource()).getText().equals(&quot;Log Out&quot;);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>((Button)actionEvent.getSource()).getText().equals(&quot;Log In&quot;);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>(Button)actionEvent.getSource())</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>scene.lookup(&quot;txtflf_found1&quot;);</expression-string>
         <language-id>JAVA</language-id>
@@ -976,60 +986,9 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>(Button)scene.lookup(&quot;#btn_LogIn&quot;)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>scene.lookup(&quot;#btn_LogIn&quot;)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>scene.lookup(&quot;#btn_LogIn&quot;).setText(&quot;h&quot;)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/View/Vacation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1809">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2123#2124#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Model/DataBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8991">
-          <caret line="348" column="38" selection-start-line="348" selection-start-column="38" selection-end-line="348" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12194#12207#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/SQL/sqlite-jdbc-3.23.1.jar!/org/sqlite/JDBC.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="25" column="118" selection-start-line="25" selection-start-column="118" selection-end-line="25" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/beans/property/ObjectProperty.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/beans/property/SimpleObjectProperty.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
@@ -1084,7 +1043,7 @@
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
           <ID>JavaScript-modules-diagram</ID>
-          <OriginalElement />
+          <OriginalElement>$PROJECT_DIR$</OriginalElement>
           <nodes />
           <notes />
           <edges />
@@ -1102,7 +1061,7 @@
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
           <ID>JavaScript-modules-diagram</ID>
-          <OriginalElement />
+          <OriginalElement>$PROJECT_DIR$/src/main</OriginalElement>
           <nodes />
           <notes />
           <edges />
@@ -1186,20 +1145,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/beans/property/StringPropertyBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="129" selection-start-line="129" selection-end-line="129" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/beans/binding/StringExpression.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/stage/Window.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
@@ -1232,23 +1177,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="1768" column="19" lean-forward="true" selection-start-line="1768" selection-start-column="19" selection-end-line="1768" selection-end-column="19" />
-          <folding>
-            <element signature="e#66921#66922#0" expanded="true" />
-            <element signature="e#66966#66967#0" expanded="true" />
-            <element signature="e#78827#78828#0" expanded="true" />
-            <element signature="e#78858#78859#0" expanded="true" />
-            <element signature="e#79010#79011#0" expanded="true" />
-            <element signature="e#79046#79047#0" expanded="true" />
-            <element signature="e#79248#79249#0" expanded="true" />
-            <element signature="e#79295#79296#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/MenuStyle.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="436">
@@ -1263,32 +1191,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/View/Vacation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1809">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2123#2124#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/View/userMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
           <caret line="49" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/control/Labeled.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="144" column="45" selection-start-line="144" selection-start-column="45" selection-end-line="144" selection-end-column="45" />
-          <folding>
-            <element signature="e#3369#3370#0" expanded="true" />
-            <element signature="e#3398#3399#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1297,21 +1203,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="243" column="9" selection-start-line="243" selection-start-column="9" selection-end-line="246" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/View/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="91" column="27" lean-forward="true" selection-start-line="91" selection-start-column="27" selection-end-line="91" selection-end-column="27" />
-          <folding>
-            <element signature="e#2003#2004#0" expanded="true" />
-            <element signature="e#2037#2038#0" expanded="true" />
-            <element signature="e#2155#2156#0" expanded="true" />
-            <element signature="e#2188#2189#0" expanded="true" />
-            <element signature="e#2237#2238#0" expanded="true" />
-            <element signature="e#2281#2282#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1340,68 +1231,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/control/TextInputControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="347" column="35" selection-start-line="347" selection-start-column="35" selection-end-line="347" selection-end-column="35" />
-          <folding>
-            <element signature="e#50373#50374#0" expanded="true" />
-            <element signature="e#50422#50423#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#766#767#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/src/SQL/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3Connection.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="60" column="107" selection-start-line="60" selection-start-column="107" selection-end-line="60" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Model/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="53" column="27" lean-forward="true" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Model/DataBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="717">
-          <caret line="367" lean-forward="true" selection-start-line="367" selection-end-line="367" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12194#12207#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/searchUser.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/beans/property/ObjectPropertyBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="131" selection-start-line="131" selection-end-line="131" />
         </state>
       </provider>
     </entry>
@@ -1422,10 +1256,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/Parent.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/css/PseudoClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="733" selection-start-line="733" selection-end-line="733" />
+        <state relative-caret-position="249">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/control/TitledPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="288" selection-start-line="288" selection-end-line="288" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/beans/property/ObjectPropertyBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="131" selection-start-line="131" selection-end-line="131" />
         </state>
       </provider>
     </entry>
@@ -1441,18 +1289,156 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/Parent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="651" column="13" lean-forward="true" selection-start-line="651" selection-start-column="13" selection-end-line="651" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/View/Vacation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="52" column="28" lean-forward="true" selection-start-line="52" selection-start-column="28" selection-end-line="52" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/foundVacations.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="99" column="33" selection-start-line="99" selection-start-column="33" selection-end-line="99" selection-end-column="33" />
+        <state relative-caret-position="194">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/vacationDetails.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="55" column="58" lean-forward="true" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="2057" selection-start-line="2057" selection-end-line="2057" />
+          <folding>
+            <element signature="e#66921#66922#0" expanded="true" />
+            <element signature="e#66966#66967#0" expanded="true" />
+            <element signature="e#78827#78828#0" expanded="true" />
+            <element signature="e#78858#78859#0" expanded="true" />
+            <element signature="e#79010#79011#0" expanded="true" />
+            <element signature="e#79248#79249#0" expanded="true" />
+            <element signature="e#79295#79296#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/beans/property/StringPropertyBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="129" selection-start-line="129" selection-end-line="129" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/control/TextInputControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="347" column="35" selection-start-line="347" selection-start-column="35" selection-end-line="347" selection-end-column="35" />
+          <folding>
+            <element signature="e#50373#50374#0" expanded="true" />
+            <element signature="e#50422#50423#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/beans/binding/StringExpression.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+          <folding>
+            <element signature="e#1142#1143#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/scene/control/Labeled.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="145" column="35" selection-start-line="145" selection-start-column="35" selection-end-line="145" selection-end-column="35" />
+          <folding>
+            <element signature="e#3369#3370#0" expanded="true" />
+            <element signature="e#3398#3399#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/SQL/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3Connection.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="60" column="107" selection-start-line="60" selection-start-column="107" selection-end-line="60" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/src/SQL/sqlite-jdbc-3.23.1.jar!/org/sqlite/jdbc3/JDBC3PreparedStatement.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="77" column="89" selection-start-line="77" selection-start-column="89" selection-end-line="77" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/View/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="e#1084#1085#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Model/DataBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="306" selection-start-line="306" selection-end-line="306" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Model/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Controller/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#709#710#0" expanded="true" />
+            <element signature="e#766#767#0" expanded="true" />
+            <element signature="e#1505#1506#0" expanded="true" />
+            <element signature="e#1569#1570#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/View/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="64" column="37" lean-forward="true" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
+        <state relative-caret-position="165">
+          <caret line="713" lean-forward="true" selection-start-line="713" selection-end-line="713" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
