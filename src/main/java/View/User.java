@@ -1,6 +1,9 @@
 package View;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     String userName;
     String password;
@@ -10,6 +13,10 @@ public class User {
     String city;
     boolean logIn;
     int messageNum;
+    List<userMessage> incomingReqMessages;
+    List<userMessage> incomingAnsMessages;
+    List<userMessage> outgoingMessages;
+
 
     public User(String userName, String password, String birthDate, String firstName, String lastName, String city, boolean logIn) {
         this.userName = userName;
@@ -19,7 +26,11 @@ public class User {
         this.lastName = lastName;
         this.city = city;
         this.logIn= false;
-this.messageNum=0;    }
+        this.messageNum=0;
+        this.incomingReqMessages = new ArrayList<userMessage>();
+        this.incomingAnsMessages = new ArrayList<userMessage>();
+        this.outgoingMessages = new ArrayList<userMessage>();
+    }
 
     @Override
     public String toString() {
@@ -97,12 +108,60 @@ this.messageNum=0;    }
     }
 
     public int getMessageNum() {
-        return messageNum;
+        return incomingReqMessages.size()+ incomingAnsMessages.size();
     }
 
     public void setMessageNum(int messageNum) {
         this.messageNum = messageNum;
     }
+
+    public void addIncomingReqMessages(userMessage message) {
+        incomingReqMessages.add(message);
+    }
+
+    public void removeIncomingReqMessages(userMessage message) {
+        incomingReqMessages.remove(message);
+    }
+
+    public void addIncomingAnsMessages(userMessage message) {
+        incomingAnsMessages.add(message);
+    }
+
+    public void removeIncomingAnsMessages(userMessage message) {
+        incomingAnsMessages.remove(message);
+    }
+
+    public List<userMessage> getIncomingReqMessages() {
+        return incomingReqMessages;
+    }
+
+    public void setIncomingReqMessages(List<userMessage> incomingReqMessages) {
+        this.incomingReqMessages = incomingReqMessages;
+    }
+
+    public List<userMessage> getIncomingAnsMessages() {
+        return incomingAnsMessages;
+    }
+
+    public void setIncomingAnsMessages(List<userMessage> incomingAnsMessages) {
+        this.incomingAnsMessages = incomingAnsMessages;
+    }
+
+    public List<userMessage> getOutgoingMessages() {
+        return outgoingMessages;
+    }
+
+    public void setOutgoingMessages(List<userMessage> outgoingMessages) {
+        this.outgoingMessages = outgoingMessages;
+    }
+
+    public void addOutgoingMessages(userMessage message) {
+        outgoingMessages.add(message);
+    }
+    public void removeOutgoingMessages(userMessage message) {
+        outgoingMessages.remove(message);
+    }
+
 
 
 

@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class DataBase {
     //    Connection conn;
@@ -176,6 +175,8 @@ public class DataBase {
         pstmt.setString(1, userNameToDelete);
         return pstmt.executeUpdate();
     }
+
+
     public  void createVacationNewTable() {
         // SQLite connection string
         String url = "jdbc:sqlite:src\\SQL\\" + name + ".db";
@@ -307,7 +308,7 @@ public class DataBase {
         }
     }
 
-    public List<userMessage> searchReqFromPurchaser(User user) {
+    public List<userMessage> searchReqMessages(User user) {
 
         List<userMessage> foundMessages= new ArrayList <userMessage> ();
 
@@ -335,7 +336,7 @@ public class DataBase {
 
     }
 
-    public List<userMessage> searchAnsFromSalers(User user) {
+    public List<userMessage> searchAnsMessages(User user) {
 
         List<userMessage> foundMessages= new ArrayList <userMessage> ();
 
@@ -352,7 +353,8 @@ public class DataBase {
                 String Status= rs.getString("Status");
 
                 User userFrom= searchUser(UserNameFrom);
-                userMessage inboxMessage= new userMessage(FlightNum,userFrom, user, Status) ;
+                User userTo= searchUser(UserNameTo);
+                userMessage inboxMessage= new userMessage(FlightNum,userFrom, userTo, Status) ;
                 foundMessages.add(inboxMessage);
             }
         } catch (SQLException e) {
@@ -360,17 +362,16 @@ public class DataBase {
             return null;
         }
         return foundMessages;
-
     }
 
-    public Vacation searchVacationByFlightNum(Vacation vacation) {
+    public Vacation searchVacationByFlightNum(String vacation) {
         Vacation returnVacations=null;
         String sql = "SELECT FlightNum, FromPlace, ToPlace, Airline, FromDate, ToDate, TicketNum, baggage, " +
                 "baggageWeight, Back, BackDate, Kind, Hotel, salerName " +
                 "FROM Vacations WHERE (FlightNum =? ) ";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, vacation.getFlightNum());
+            pstmt.setString(1, vacation);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 String FlightNum= rs.getString("FlightNum");
@@ -412,6 +413,45 @@ public class DataBase {
             return null;
         }
         return returnVacations;
+    }
+
+    public boolean updateMessage(userMessage currentMessage, String newStatus) throws SQLException {
+        if(currentMessage==null ||newStatus==null){
+            return false;
+        }
+        else {
+            String sql = "UPDATE Messages SET Status " + " = ? "
+                    + "WHERE (FlightNum = ?) AND (UserNameFrom = ?) AND (UserNameTo = ?)";
+//            System.out.println(sql);
+            Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the corresponding param
+            pstmt.setString(1, newStatus);
+            pstmt.setString(2, currentMessage.getVacationToBuy());
+            pstmt.setString(3, currentMessage.getFromUser().getUserName());
+            pstmt.setString(4, currentMessage.getToUser().getUserName());
+            //update
+            pstmt.executeUpdate();
+            return true;
+        }
+    }
+
+
+    public int removeMessage(userMessage currentMessage) {
+        String sql = "DELETE FROM Messages WHERE (FlightNum = ?) AND (UserNameFrom = ?) AND (UserNameTo = ?)";
+        Connection conn = this.getConnection();
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, currentMessage.getVacationToBuy());
+            pstmt.setString(2, currentMessage.getFromUser().getUserName());
+            pstmt.setString(3, currentMessage.getToUser().getUserName());
+            return pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+
     }
 }
 

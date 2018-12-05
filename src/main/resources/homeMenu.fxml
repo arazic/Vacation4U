@@ -92,8 +92,8 @@
                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                      </rowConstraints>
                                      <children>
-                                         <DatePicker fx:id="dp_departure" prefHeight="26.0" prefWidth="148.0" GridPane.columnIndex="1" />
-                                         <DatePicker fx:id="dp_return" prefHeight="26.0" prefWidth="140.0" />
+                                         <DatePicker fx:id="dp_departure" prefHeight="26.0" prefWidth="145.0" GridPane.columnIndex="1" />
+                                         <DatePicker fx:id="dp_return" prefHeight="26.0" prefWidth="145.0" />
                                          <fx:define>
                                              <Integer fx:id="min" fx:value="0"/>
                                              <Integer fx:id="max" fx:value="50"/>
@@ -251,7 +251,7 @@
                         <Insets left="400.0" />
                      </GridPane.margin>
                   </Button>
-                       <Button fx:id="btn_PerArea" onAction="#goToPersonal" visible="false" prefHeight="31.0" prefWidth="450" mnemonicParsing="false" text="Personal Area" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                       <Button fx:id="btn_PerArea" onAction="#goToPersonal" visible="false" prefHeight="31.0" prefWidth="300" mnemonicParsing="false" text="Personal Area" GridPane.columnIndex="0" GridPane.rowIndex="2">
                            <GridPane.margin>
                                <Insets left="20.0" />
                            </GridPane.margin></Button>

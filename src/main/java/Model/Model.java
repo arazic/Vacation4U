@@ -5,7 +5,6 @@ import View.User;
 import View.Vacation;
 import View.userMessage;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class Model  {
 
     private static Controller controller;
     private DataBase dataBase;
-    private Connection db_connection;
+//    private Connection db_connection;
 
     public Model() {
         dataBase = new DataBase("Vacation4u");
@@ -76,15 +75,30 @@ public class Model  {
         }
     }
 
-    public List<userMessage> searchReqFromPurchaser(User registeredUser) {
-        return dataBase.searchReqFromPurchaser(registeredUser);
+    public List<userMessage> searchAnsMessages(User registeredUser) {
+        return dataBase.searchAnsMessages(registeredUser);
     }
 
-    public List<userMessage> searchAnsFromSalers(User registeredUser) {
-        return dataBase.searchAnsFromSalers(registeredUser);
+    public List<userMessage> searchReqMessages(User registeredUser) {
+        return dataBase.searchReqMessages(registeredUser);
     }
 
-    public Vacation searchVacationByFlightNum(Vacation vacation) {
+    public Vacation searchVacationByFlightNum(String vacation) {
         return dataBase.searchVacationByFlightNum(vacation);
+    }
+
+    public boolean updateMessage(userMessage currentMessage, String newStatus) {
+        try {
+            return dataBase.updateMessage(currentMessage,newStatus);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean removeMessage(userMessage currentMessage) {
+        if(dataBase.removeMessage(currentMessage)==1)
+        return true;
+    return false;
     }
 }

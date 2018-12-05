@@ -45,17 +45,27 @@ public class Controller  {
         return model.insertMessage(Message);
     }
 
-    public List<userMessage> searchReqFromPurchaser(User registeredUser) {
-        return model.searchReqFromPurchaser(registeredUser);
+    public List<userMessage> searchAnsMessages(User registeredUser) {
+        return model.searchAnsMessages(registeredUser);
 
     }
 
-    public List<userMessage> searchAnsFromSalers(User registeredUser) {
-        return model.searchAnsFromSalers(registeredUser);
+    public List<userMessage> searchReqMessages(User registeredUser) {
+        return model.searchReqMessages(registeredUser);
         }
 
-    public Vacation searchVacationByFlightNum(Vacation vacation) {
+    public Vacation searchVacationByFlightNum(String vacation) {
         return model.searchVacationByFlightNum(vacation);
+    }
+
+    public boolean updateMessage(userMessage currentMessage, String newStatus) {
+        return model.updateMessage(currentMessage,newStatus);
+    }
+
+
+    public boolean removeMessage(userMessage currentMessage) {
+        return model.removeMessage(currentMessage);
+
     }
 }
 
