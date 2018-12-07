@@ -74,6 +74,7 @@ public class View {
     public javafx.scene.control.Accordion acc_ansMessage;
     public javafx.scene.control.Label txt_messageLabel;
     public javafx.scene.control.Button btn_backFromMes;
+    public javafx.scene.control.Button btn_SellVacation;
 
 
     public static List<Vacation> foundVacation;
@@ -337,15 +338,16 @@ public class View {
 
     public void goToLogInPage(ActionEvent actionEvent) throws IOException {
 
-        if(((Button)actionEvent.getSource()).getText().equals("Log Out")) {
+        if (((Button) actionEvent.getSource()).getText().equals("Log Out")) {
             Scene scene = getScene();
             registeredUser.setLogIn(false);
             Stage stage = (Stage) btn_LogIn.getScene().getWindow();
             showStage(scene, stage);
-            btn_PerArea= (Button)scene.lookup("#btn_PerArea");
+            btn_PerArea = (Button) scene.lookup("#btn_PerArea");
             btn_PerArea.setVisible(false);
-        }
-        else {
+            txt_Welcome = (Label) scene.lookup("#txt_Welcome");
+            txt_Welcome.setVisible(false);
+        } else {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
             pagesApp.add("logIn");
@@ -372,50 +374,50 @@ public class View {
     }
 
     public void logIn(ActionEvent actionEvent) throws IOException {
-            if (checkOneValuesIsLegal(txtfld_userNameToLogIn.getText())) {
+        if (checkOneValuesIsLegal(txtfld_userNameToLogIn.getText())) {
 
-                User UserDetails = controller.seacrhUser(txtfld_userNameToLogIn.getText());
-                if (UserDetails != null) {
-                    if (UserDetails.getPassword().equals(txtfld_passwordToLogIn.getText())) {
+            User UserDetails = controller.seacrhUser(txtfld_userNameToLogIn.getText());
+            if (UserDetails != null) {
+                if (UserDetails.getPassword().equals(txtfld_passwordToLogIn.getText())) {
 
-                        registeredUser = UserDetails;
-                        registeredUser.setLogIn(true);
-                        if (pagesApp.size()>=2 && pagesApp.get(pagesApp.size() - 2).equals("vacationDetails")) {
-                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
-                            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("vacationDetails.fxml").openStream());
-                            pagesApp.add("vacationDetails");
-                            Scene scene = new Scene(root, 700, 500);
-                            scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
-                            Stage stage = (Stage) btn_LogInside.getScene().getWindow();
-                            String title = "available vacations";
-                            stage.setTitle(title);
-                            stage.setScene(scene);
-                            stage.show();
-                            TA_details = (TextArea) scene.lookup("#TA_details");
-                            TA_details.setText(vacationToBuy.toString());
-                        } else {
-                            FXMLLoader fxmlLoader = new FXMLLoader();
-                            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-                            pagesApp.add("homeMenu");
-                            Scene scene = new Scene(root, 700, 500);
-                            scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
-                            Stage stage = (Stage) btn_LogInside.getScene().getWindow();
-                            String title = "Welcome " + registeredUser.getFirstName() + " " + registeredUser.getLastName();
-                            stage.setTitle(title);
-                            stage.setScene(scene);
-                            stage.show();
-                            personalHome(scene);
-
-
-                        }
-
+                    registeredUser = UserDetails;
+                    registeredUser.setLogIn(true);
+                    if (pagesApp.size() >= 2 && pagesApp.get(pagesApp.size() - 2).equals("vacationDetails")) {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
+                        Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("vacationDetails.fxml").openStream());
+                        pagesApp.add("vacationDetails");
+                        Scene scene = new Scene(root, 700, 500);
+                        scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                        Stage stage = (Stage) btn_LogInside.getScene().getWindow();
+                        String title = "available vacations";
+                        stage.setTitle(title);
+                        stage.setScene(scene);
+                        stage.show();
+                        TA_details = (TextArea) scene.lookup("#TA_details");
+                        TA_details.setText(vacationToBuy.toString());
                     } else {
-                        incorrectPassword();
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
+                        pagesApp.add("homeMenu");
+                        Scene scene = new Scene(root, 700, 500);
+                        scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                        Stage stage = (Stage) btn_LogInside.getScene().getWindow();
+                        String title = "Welcome " + registeredUser.getFirstName() + " " + registeredUser.getLastName();
+                        stage.setTitle(title);
+                        stage.setScene(scene);
+                        stage.show();
+                        personalHome(scene);
+
+
                     }
+
                 } else {
-                    ThereIsNoUser();
+                    incorrectPassword();
                 }
+            } else {
+                ThereIsNoUser();
             }
+        }
 
 
     }
@@ -428,19 +430,19 @@ public class View {
         btn_SignIn = (Button) scene.lookup("#btn_SignIn");
         btn_SignIn.setVisible(false);
         btn_PerArea = (Button) scene.lookup("#btn_PerArea");
-        registeredUser.setIncomingReqMessages( controller.searchReqMessages(registeredUser));
+        txt_Welcome = (Label) scene.lookup("#txt_Welcome");
+        registeredUser.setIncomingReqMessages(controller.searchReqMessages(registeredUser));
         registeredUser.setIncomingAnsMessages(controller.searchAnsMessages(registeredUser));
         if (registeredUser.getMessageNum() == 0) {
             btn_PerArea.setText(" no messages");
-        }
-        else if (registeredUser.getMessageNum() == 1){
+        } else if (registeredUser.getMessageNum() == 1) {
             btn_PerArea.setText(registeredUser.getMessageNum() + " message");
-        }
-        else
-        {
+        } else {
             btn_PerArea.setText(registeredUser.getMessageNum() + " messages");
         }
         btn_PerArea.setVisible(true);
+        txt_Welcome.setText("welcome " + registeredUser.userName +" !");
+        txt_Welcome.setVisible(true);
     }
 
 
@@ -477,14 +479,14 @@ public class View {
                 stage.setScene(scene);
                 stage.show();
 
-             //   bnt_showMeVac= (Button) scene.lookup("bnt_showMeVac");
-                lab_looking= (Label) scene.lookup("#lab_looking");
+                //   bnt_showMeVac= (Button) scene.lookup("bnt_showMeVac");
+                lab_looking = (Label) scene.lookup("#lab_looking");
 
                 TitledPane[] tps = new TitledPane[foundVacation.size()];
                 for (int i = 0; i < foundVacation.size(); i++) {
-                    acc_Vacations= (Accordion) scene.lookup("#acc_Vacations");
-                    TextArea TA= new TextArea(foundVacation.get(i).toString());
-                    Button Bt=  new Button(foundVacation.get(i).getFlightNum());
+                    acc_Vacations = (Accordion) scene.lookup("#acc_Vacations");
+                    TextArea TA = new TextArea(foundVacation.get(i).toString());
+                    Button Bt = new Button(foundVacation.get(i).getFlightNum());
                     Bt.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent e) {
@@ -503,25 +505,24 @@ public class View {
                             stage.setTitle(title);
                             stage.setScene(scene);
                             stage.show();
-                            vacationToBuy= (Vacation) controller.searchVacationByFlightNum(Bt.getText());
-                            TA_details= (TextArea) scene.lookup("#TA_details");
+                            vacationToBuy = (Vacation) controller.searchVacationByFlightNum(Bt.getText());
+                            TA_details = (TextArea) scene.lookup("#TA_details");
                             TA_details.setText(vacationToBuy.toString());
                         }
                     });
-                    GridPane GP= new GridPane();
+                    GridPane GP = new GridPane();
                     GP.add(TA, 0, 0);
-                    GP.add(Bt,1,0);
-                    tps[i]= new TitledPane(foundVacation.get(i).getFlightNum(), GP);
+                    GP.add(Bt, 1, 0);
+                    tps[i] = new TitledPane(foundVacation.get(i).getFlightNum(), GP);
 
                 }
                 acc_Vacations.getPanes().addAll(tps);
                 acc_Vacations.setExpandedPane(tps[0]);
-                 root = scene.getRoot();
+                root = scene.getRoot();
                 stage.setScene(scene);
                 stage.show();
 
-                }
-
+            }
 
 
     }
@@ -580,36 +581,10 @@ public class View {
     public void goToBuyPage(ActionEvent actionEvent) throws IOException {
 
         if (registeredUser == null || (!registeredUser.isLogIn())) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Be Attention");
-            alert.setHeaderText("You need to be logged in to buy a vacation\n");
-            alert.setContentText("Do you want to log in?");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                // ... user chose OK
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
-                pagesApp.add("logIn");
-                Scene scene = new Scene(root, 700, 500);
-                Stage stage = (Stage) btn_toBuy.getScene().getWindow();
-                scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
-                stage.setTitle("Log in");
-                stage.setScene(scene);
-                stage.show();
-            } else {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-                pagesApp.add("homeMenu");
-                Scene scene = new Scene(root, 700, 500);
-                Stage stage = (Stage) btn_toBuy.getScene().getWindow();
-                scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
-                stage.setTitle("Vacation 4U");
-                stage.setScene(scene);
-                stage.show();
-            }
+            askToLogIn();
         } else {
 
-            if(pagesApp.get(pagesApp.size()-1)=="vacationDetailsAfterOk"){
+            if (pagesApp.get(pagesApp.size() - 1) == "vacationDetailsAfterOk") {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("secure payment ");
                 alert.setHeaderText("This step will go beyond filling out details for a secure payment");
@@ -618,13 +593,12 @@ public class View {
                 if (result.get() == ButtonType.OK) {
                     Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Congratulations");
-                    alert.setHeaderText("You bought your vacation to " +vacationToBuy.getToPlace()+" !!!");
-                    alert.setContentText(vacationToBuy.getToPlace() +" feels closer than ever...!");
+                    alert.setHeaderText("You bought your vacation to " + vacationToBuy.getToPlace() + " !!!");
+                    alert.setContentText(vacationToBuy.getToPlace() + " feels closer than ever...!");
                     alert.showAndWait();
 
                 }
-            }
-            else {
+            } else {
                 Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
                 alert2.setTitle("Request sent");
                 alert2.setHeaderText("Do You want to send the request to the seller " + vacationToBuy.getSalerName() + " ?");
@@ -679,6 +653,36 @@ public class View {
         }
     }
 
+    private void askToLogIn() throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Be Attention");
+        alert.setHeaderText("You need to be logged in to sell your vacation\n");
+        alert.setContentText("Do you want to log in?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            // ... user chose OK
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
+            pagesApp.add("logIn");
+            Scene scene = new Scene(root, 700, 500);
+            Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
+            scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+            stage.setTitle("Log in");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
+            pagesApp.add("homeMenu");
+            Scene scene = new Scene(root, 700, 500);
+            Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
+            scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+            stage.setTitle("Vacation 4U");
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
+
 
     public void goToPersonal(ActionEvent actionEvent) throws IOException {
         if (registeredUser == null || (!registeredUser.isLogIn())) {
@@ -714,18 +718,17 @@ public class View {
 
             TitledPane[] tpsReq = new TitledPane[registeredUser.getIncomingReqMessages().size()];
             for (int i = 0; i < registeredUser.getIncomingReqMessages().size(); i++) {
-                acc_reqMessage= (Accordion) scene.lookup("#acc_reqMessage");
-                currentMessage= registeredUser.getIncomingReqMessages().get(i);
-                TextArea TA= new TextArea(registeredUser.getIncomingReqMessages().get(i).getFromUser().getUserName()+" want to buy from" +
-                        " you flight num: " +registeredUser.getIncomingReqMessages().get(i).getVacationToBuy());
-                Button Confirm=  new Button("confirm "+registeredUser.getIncomingReqMessages().get(i).toString());
-                Button Reject=  new Button("Reject "+registeredUser.getIncomingReqMessages().get(i).toString());
+                acc_reqMessage = (Accordion) scene.lookup("#acc_reqMessage");
+                currentMessage = registeredUser.getIncomingReqMessages().get(i);
+                TextArea TA = new TextArea(registeredUser.getIncomingReqMessages().get(i).getFromUser().getUserName() + " want to buy from" +
+                        " you flight num: " + registeredUser.getIncomingReqMessages().get(i).getVacationToBuy());
+                Button Confirm = new Button("confirm " + registeredUser.getIncomingReqMessages().get(i).toString());
+                Button Reject = new Button("Reject " + registeredUser.getIncomingReqMessages().get(i).toString());
                 Confirm.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
                         currentMessage.setStatus("confirm");
-                        if(controller.updateMessage(currentMessage, "confirm"))
-                        {
+                        if (controller.updateMessage(currentMessage, "confirm")) {
                             registeredUser.removeIncomingReqMessages(currentMessage);
                             System.out.println("conf");
                         }
@@ -735,40 +738,40 @@ public class View {
                     @Override
                     public void handle(ActionEvent e) {
                         currentMessage.setStatus("reject");
-                        if(controller.updateMessage(currentMessage, "reject"))
-                        {
+                        if (controller.updateMessage(currentMessage, "reject")) {
                             registeredUser.removeIncomingReqMessages(currentMessage);
                             System.out.println("reject");
                         }
                     }
                 });
-                GridPane GP= new GridPane();
+                GridPane GP = new GridPane();
                 GP.add(TA, 0, 0);
 
-                GP.add(Confirm,1,0);
-                GP.add(Reject,2,0);
-                tpsReq[i]= new TitledPane("request number "+ (i+1) , GP);
+                GP.add(Confirm, 1, 0);
+                GP.add(Reject, 2, 0);
+                tpsReq[i] = new TitledPane("request number " + (i + 1), GP);
             }
 
-            if(registeredUser.getIncomingReqMessages().size()!=0){
-            acc_reqMessage.getPanes().addAll(tpsReq);
-            acc_reqMessage.setExpandedPane(tpsReq[0]);}
+            if (registeredUser.getIncomingReqMessages().size() != 0) {
+                acc_reqMessage.getPanes().addAll(tpsReq);
+                acc_reqMessage.setExpandedPane(tpsReq[0]);
+            }
 
-            acc_ansMessage= (Accordion) scene.lookup("#acc_ansMessage");
+            acc_ansMessage = (Accordion) scene.lookup("#acc_ansMessage");
 
             TitledPane[] tpsAns = new TitledPane[registeredUser.getIncomingAnsMessages().size()];
             for (int i = 0; i < registeredUser.getIncomingAnsMessages().size(); i++) {
 //                acc_ansMessage= (Accordion) scene.lookup("#acc_ansMessage");
-                currentMessage= registeredUser.getIncomingAnsMessages().get(i);
-                TextArea TA= new TextArea(registeredUser.getIncomingAnsMessages().get(i).getToUser().getUserName()+" answer to your request  " +
-                        " regarding flight num: " +registeredUser.getIncomingAnsMessages().get(i).getVacationToBuy()+ ". The answer is: "
-                        +registeredUser.getIncomingAnsMessages().get(i).getStatus());
-                Button toBuy=  new Button("Buy "+currentMessage.getVacationToBuy());
+                currentMessage = registeredUser.getIncomingAnsMessages().get(i);
+                TextArea TA = new TextArea(registeredUser.getIncomingAnsMessages().get(i).getToUser().getUserName() + " answer to your request  " +
+                        " regarding flight num: " + registeredUser.getIncomingAnsMessages().get(i).getVacationToBuy() + ". The answer is: "
+                        + registeredUser.getIncomingAnsMessages().get(i).getStatus());
+                Button toBuy = new Button("Buy " + currentMessage.getVacationToBuy());
                 toBuy.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
                         registeredUser.removeIncomingAnsMessages(currentMessage);
-                        vacationToBuy= controller.searchVacationByFlightNum(currentMessage.getVacationToBuy());
+                        vacationToBuy = controller.searchVacationByFlightNum(currentMessage.getVacationToBuy());
 
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
                         Parent root = null;
@@ -787,21 +790,22 @@ public class View {
                         stage.show();
                         TA_details = (TextArea) scene.lookup("#TA_details");
                         TA_details.setText(vacationToBuy.toString());
-                        if(controller.removeMessage(currentMessage)){
+                        if (controller.removeMessage(currentMessage)) {
                             System.out.println("Message removed");
                         }
                     }
                 });
 
-                GridPane GP= new GridPane();
+                GridPane GP = new GridPane();
                 GP.add(TA, 0, 0);
-                GP.add(toBuy,1,0);
-                tpsAns[i]= new TitledPane("answer number "+ (i+1) , GP);
+                GP.add(toBuy, 1, 0);
+                tpsAns[i] = new TitledPane("answer number " + (i + 1), GP);
 
             }
-            if(registeredUser.getIncomingAnsMessages().size()!=0){
+            if (registeredUser.getIncomingAnsMessages().size() != 0) {
                 acc_ansMessage.getPanes().addAll(tpsAns);
-            acc_ansMessage.setExpandedPane(tpsAns[0]);}
+                acc_ansMessage.setExpandedPane(tpsAns[0]);
+            }
             root = scene.getRoot();
             stage.setScene(scene);
             stage.show();
@@ -811,34 +815,6 @@ public class View {
 
     }
 
-  /*  public void goToMessages(ActionEvent actionEvent) {
-        List<userMessage> ReqFromPurchasers = controller.searchAnsMessages(registeredUser);
-        TabP_Waiting.setVisible(true);
-        txt_loading.setVisible(false);
-        btn_patience.setVisible(false);
-
-        ChBox_1.setText("The user " + ReqFromPurchasers.get(0).getFromUser().getUserName() +
-                " want to buy the vacation " + ReqFromPurchasers.get(0).getVacationToBuy() + " from you");
-        ChBox_1.setVisible(true);
-
-        if (ChBox_1.isSelected())
-            System.out.println(ReqFromPurchasers.toString());
-
-
-        List<userMessage> AnsFromSalersMessages = controller.searchReqMessages(registeredUser);
-        TabP_Waiting.setVisible(true);
-        txt_loading.setVisible(false);
-        btn_patience.setVisible(false);
-
-        txt_ansMessage.setText("The Message status to " + AnsFromSalersMessages.get(0).getFromUser().getUserName()
-              + " Regarding the " + AnsFromSalersMessages.get(0).getVacationToBuy() + " vacations, is: "+
-                AnsFromSalersMessages.get(0).getStatus());
-        txt_ansMessage.setVisible(true);
-
-
-
-    }
-*/
     public void handleWithMessage(ActionEvent actionEvent) {
         if (actionEvent.getSource().equals(btn_Reject)) {
             System.out.println("delete");
@@ -861,6 +837,28 @@ public class View {
         stage.show();
         personalHome(scene);
 
+    }
+
+    public void goToSellVacation(ActionEvent actionEvent) throws IOException {
+        if (registeredUser == null || (!registeredUser.isLogIn())) {
+            try {
+                askToLogIn();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("addVacation.fxml").openStream());
+            pagesApp.add("sellVacation");
+            Scene scene = new Scene(root, 700, 500);
+            scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+            Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
+            String title = "Welcome " + registeredUser.getFirstName() + " " + registeredUser.getLastName();
+            stage.setTitle(title);
+            stage.setScene(scene);
+            stage.show();
+            personalHome(scene);
+        }
     }
 }
 

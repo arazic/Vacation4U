@@ -251,10 +251,23 @@
                         <Insets left="400.0" />
                      </GridPane.margin>
                   </Button>
-                       <Button fx:id="btn_PerArea" onAction="#goToPersonal" visible="false" prefHeight="31.0" prefWidth="300" mnemonicParsing="false" text="Personal Area" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                       <Button fx:id="btn_PerArea" onAction="#goToPersonal"  visible="false" prefHeight="31.0" prefWidth="90" mnemonicParsing="false" text="Personal Area" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <GridPane.margin>
-                               <Insets left="20.0" />
+                               <Insets left="3.0" />
                            </GridPane.margin></Button>
+
+                       <Label fx:id="txt_Welcome" visible="false" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="98.0" text="Welcome !" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                               <Insets top="10.0" />
+                           </GridPane.margin>
+                           <padding>
+                               <Insets top="10.0" />
+                           </padding></Label>
+                       <Button fx:id="btn_SellVacation" onAction="#goToSellVacation" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Sell your vacation" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                               <Insets left="5.0" />
+                           </GridPane.margin>
+                       </Button>
                    </children>
                </GridPane>
            </top>
