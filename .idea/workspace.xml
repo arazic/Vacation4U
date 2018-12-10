@@ -81,7 +81,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/View/View.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
-              <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+              <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -553,7 +553,7 @@
       <workItem from="1543758942524" duration="41461000" />
       <workItem from="1544076057737" duration="8320000" />
       <workItem from="1544455210482" duration="100000" />
-      <workItem from="1544457811851" duration="16000" />
+      <workItem from="1544457811851" duration="258000" />
     </task>
     <task id="LOCAL-00001" summary="try">
       <created>1540372627453</created>
@@ -702,11 +702,25 @@
       <option name="project" value="LOCAL" />
       <updated>1544455267835</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="changes2">
+      <created>1544457883530</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1544457883530</updated>
+    </task>
+    <task id="LOCAL-00023" summary="changes2">
+      <created>1544458031933</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1544458031933</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="200544000" />
+    <option name="totallyTimeSpent" value="200786000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -719,19 +733,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3267974" />
+      <window_info anchor="bottom" id="Messages" order="15" weight="0.31663686" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50040483" side_tool="true" visible="true" weight="0.56529516" />
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.14488018" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="12" visible="true" weight="0.56529516" />
-      <window_info anchor="bottom" id="Terminal" order="14" weight="0.32897604" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.1431127" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="12" sideWeight="0.49959514" visible="true" weight="0.56529516" />
+      <window_info anchor="bottom" id="Terminal" order="14" weight="0.32737032" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.16194332" />
@@ -750,7 +764,6 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Profiler" order="9" />
       <window_info anchor="bottom" id="Problems" order="11" />
-      <window_info anchor="bottom" id="Messages" order="15" weight="0.31808278" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Application Servers" order="13" />
@@ -848,7 +861,8 @@
     <MESSAGE value="I added fxml to add vacation" />
     <MESSAGE value="I added fxml to add vacation222" />
     <MESSAGE value="change" />
-    <option name="LAST_COMMIT_MESSAGE" value="change" />
+    <MESSAGE value="changes2" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1072,6 +1086,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8775">
           <caret line="325" selection-start-line="325" selection-end-line="325" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1318,6 +1335,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
           <caret line="100" selection-start-line="100" selection-end-line="100" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2570#2571#0" expanded="true" />
+            <element signature="e#2637#2638#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1353,6 +1375,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8397">
           <caret line="325" selection-start-line="325" selection-end-line="325" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1443,7 +1468,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/View/View.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
