@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class View {
-
+//update
     @FXML
     public javafx.scene.control.Button btn_create;
     public javafx.scene.control.TextField txtfld_userName;
@@ -521,9 +521,7 @@ public class View {
                 root = scene.getRoot();
                 stage.setScene(scene);
                 stage.show();
-
             }
-
 
     }
     //  txtflf_found1.setText("From "+ Vacation1.getFromPlace()+" To"+Vacation1.getToPlace());
@@ -581,7 +579,33 @@ public class View {
     public void goToBuyPage(ActionEvent actionEvent) throws IOException {
 
         if (registeredUser == null || (!registeredUser.isLogIn())) {
-            askToLogIn();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Be Attention");
+            alert.setHeaderText("You need to be logged in to sell your vacation\n");
+            alert.setContentText("Do you want to log in?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                // ... user chose OK
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
+                pagesApp.add("logIn");
+                Scene scene = new Scene(root, 700, 500);
+                Stage stage = (Stage) btn_toBuy.getScene().getWindow();
+                scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                stage.setTitle("Log in");
+                stage.setScene(scene);
+                stage.show();
+            } else {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
+                pagesApp.add("homeMenu");
+                Scene scene = new Scene(root, 700, 500);
+                Stage stage = (Stage) btn_toBuy.getScene().getWindow();
+                scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                stage.setTitle("Vacation 4U");
+                stage.setScene(scene);
+                stage.show();
+            }
         } else {
 
             if (pagesApp.get(pagesApp.size() - 1) == "vacationDetailsAfterOk") {
@@ -842,7 +866,33 @@ public class View {
     public void goToSellVacation(ActionEvent actionEvent) throws IOException {
         if (registeredUser == null || (!registeredUser.isLogIn())) {
             try {
-                askToLogIn();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Be Attention");
+                alert.setHeaderText("You need to be logged in to sell your vacation\n");
+                alert.setContentText("Do you want to log in?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    // ... user chose OK
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
+                    pagesApp.add("logIn");
+                    Scene scene = new Scene(root, 700, 500);
+                    Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
+                    scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                    stage.setTitle("Log in");
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
+                    pagesApp.add("homeMenu");
+                    Scene scene = new Scene(root, 700, 500);
+                    Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
+                    scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                    stage.setTitle("Vacation 4U");
+                    stage.setScene(scene);
+                    stage.show();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -861,31 +911,3 @@ public class View {
         }
     }
 }
-
-/*  TableView table = new TableView();
-             ObservableList<userMessage> data;
-
-             TableColumn flightNameCol = new TableColumn("FlightNumber");
-              TableColumn purchaserNameCol = new TableColumn("PurchaserName");
-             TableColumn actionCol = new TableColumn("Reply");
-
-            table.getColumns().addAll(flightNameCol, purchaserNameCol, actionCol);
-
-            data = FXCollections.observableArrayList(
-                    new userMessage("Dd234234","chen")
-            );
-
-            flightNameCol.setCellValueFactory(
-                    new PropertyValueFactory<userMessage, String>("FlightNumber")
-            );
-
-            purchaserNameCol.setCellValueFactory(
-                    new PropertyValueFactory<userMessage, String>("purchaserNameCol")
-            );
-
-            actionCol.setCellValueFactory(
-                    new PropertyValueFactory<userMessage, String>("checkbox")
-            );
-
-            table.setItems(data);
-           // table.setEditable(true);*/
