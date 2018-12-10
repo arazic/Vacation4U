@@ -18,8 +18,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
-public class View {
-//update23
+public class System {
+
     @FXML
     public javafx.scene.control.Button btn_create;
     public javafx.scene.control.TextField txtfld_userName;
@@ -107,7 +107,7 @@ public class View {
         Scene scene2 = new Scene(root, 700, 500);
         scene2.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
-        View view = fxmlLoader.getController();
+        System system = fxmlLoader.getController();
         stage.show();
     }
 
@@ -119,7 +119,7 @@ public class View {
         Scene scene2 = new Scene(root, 850, 230);
         scene2.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
-        View view = fxmlLoader.getController();
+        System system = fxmlLoader.getController();
         stage.show();
     }
 
@@ -131,7 +131,7 @@ public class View {
         Scene scene2 = new Scene(root, 400, 250);
         scene2.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
-        View view = fxmlLoader.getController();
+        System system = fxmlLoader.getController();
         stage.show();
     }
 
@@ -181,7 +181,7 @@ public class View {
                 stage.setTitle("Vacation4U");
                 scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
                 stage.setScene(scene);
-                View view = fxmlLoader.getController();
+                System system = fxmlLoader.getController();
                 stage.show();
             } else {
                 // ... user chose CANCEL or closed the dialog
@@ -193,7 +193,7 @@ public class View {
                 Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
                 stage.setTitle("Vacation4U");
                 stage.setScene(scene);
-                View view = fxmlLoader.getController();
+                System system = fxmlLoader.getController();
                 stage.show();
             }
         }
@@ -218,7 +218,7 @@ public class View {
             Stage stage = (Stage) txtfld_userNameToedit.getScene().getWindow();
             stage.setTitle("Vacation4U");
             stage.setScene(scene);
-            View view = fxmlLoader.getController();
+            System system = fxmlLoader.getController();
             stage.show();
         }
     }
@@ -754,7 +754,7 @@ public class View {
                         currentMessage.setStatus("confirm");
                         if (controller.updateMessage(currentMessage, "confirm")) {
                             registeredUser.removeIncomingReqMessages(currentMessage);
-                            System.out.println("conf");
+                            java.lang.System.out.println("conf");
                         }
                     }
                 });
@@ -764,7 +764,7 @@ public class View {
                         currentMessage.setStatus("reject");
                         if (controller.updateMessage(currentMessage, "reject")) {
                             registeredUser.removeIncomingReqMessages(currentMessage);
-                            System.out.println("reject");
+                            java.lang.System.out.println("reject");
                         }
                     }
                 });
@@ -815,7 +815,7 @@ public class View {
                         TA_details = (TextArea) scene.lookup("#TA_details");
                         TA_details.setText(vacationToBuy.toString());
                         if (controller.removeMessage(currentMessage)) {
-                            System.out.println("Message removed");
+                            java.lang.System.out.println("Message removed");
                         }
                     }
                 });
@@ -841,9 +841,9 @@ public class View {
 
     public void handleWithMessage(ActionEvent actionEvent) {
         if (actionEvent.getSource().equals(btn_Reject)) {
-            System.out.println("delete");
+            java.lang.System.out.println("delete");
         } else if (actionEvent.getSource().equals(btn_Confirm)) {
-            System.out.println("not delete");
+            java.lang.System.out.println("not delete");
 
         }
     }

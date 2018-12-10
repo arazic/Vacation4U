@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Model;
-import View.View;
+import View.System;
 import View.User;
 import View.Vacation;
 import View.userMessage;
@@ -10,15 +10,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Controller  {
-    private View view;
+    private System system;
     private Model model;
 
     public Controller(Model model) {
         this.model = model;
     }
 
-    public void setView(View view){
-        this.view = view;
+    public void setSystem(System system){
+        this.system = system;
     }
 
     public boolean createUser(User user) {

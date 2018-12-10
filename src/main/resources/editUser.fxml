@@ -12,7 +12,7 @@
 
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<AnchorPane id="AnchorPane" prefHeight="340.0" prefWidth="400.0" style="-fx-background-image: url('./vacation.JPG');" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.View">
+<AnchorPane id="AnchorPane" prefHeight="340.0" prefWidth="400.0" style="-fx-background-image: url('./vacation.JPG');" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.System">
    <children>
       <GridPane layoutX="24.0" layoutY="27.0" prefHeight="304.0" prefWidth="355.0">
         <columnConstraints>

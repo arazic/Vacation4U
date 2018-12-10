@@ -1,25 +1,11 @@
 import Controller.Controller;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import Model.Model;
-import View.View;
-import javafx.util.Duration;
-
-import java.util.List;
+import View.System;
 
 public class Main extends Application {
     public static Stage primaryStage;
@@ -39,9 +25,9 @@ public class Main extends Application {
         scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
         primaryStage.setScene(scene);
 
-        View view = fxmlLoader.getController();
-        view.setController(controller);
-        controller.setView(view);
+        System system = fxmlLoader.getController();
+        system.setController(controller);
+        controller.setSystem(system);
         primaryStage.show();
     }
 

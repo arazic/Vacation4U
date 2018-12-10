@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="195.0" prefWidth="397.0" style="-fx-background-image: url('./vacation.JPG');" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.View">
+<AnchorPane id="AnchorPane" prefHeight="195.0" prefWidth="397.0" style="-fx-background-image: url('./vacation.JPG');" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.System">
    <children>
       <GridPane layoutX="24.0" layoutY="27.0" prefHeight="159.0" prefWidth="341.0">
         <columnConstraints>
