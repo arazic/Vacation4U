@@ -6,10 +6,7 @@ import View.userMessage;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
@@ -186,17 +183,14 @@ public class DataBase {
                 "\t`FlightNum`\tTEXT NOT NULL,\n" +
                 "\t`FromPlace`\tTEXT NOT NULL,\n" +
                 "\t`ToPlace`\tTEXT,\n" +
-                "\t`Airline`\tTEXT,\n" +
+                "\t`AirlineCompany`\tTEXT,\n" +
                 "\t`FromDate`\tDATE,\n" +
                 "\t`ToDate`\tDATE,\n" +
-                "\t`TicketNum`\tINTEGER,\n" +
-                "\t`baggage`\tTEXT,\n" +
-                "\t`baggageWeight`\tINTEGER,\n" +
-                "\t`Back`\tTEXT,\n" +
-                "\t`BackDate`\tDATE,\n" +
-                "\t`Kind`\tTEXT,\n" +
-                "\t`Hotel`\tTEXT,\n" +
-                "\t`salerName`\tTEXT NOT NULL,\n" +
+                "\t`TicketType`\tINTEGER,\n" +
+                "\t`Baggage`\tTEXT,\n" +
+                "\t`TripType`\tTEXT,\n" +
+                "\t`Lodging`\tTEXT,\n" +
+                "\t`SalerName`\tTEXT NOT NULL,\n" +
                 "\tPRIMARY KEY(`FlightNum`)\n" +
                 ");";
 
@@ -211,7 +205,7 @@ public class DataBase {
 //        System.out.println("The new table created");
 
     }
-
+/*
     public List<Vacation> searchVacation(Vacation vacationTerms) {
 
         List<Vacation> foundVacation= new ArrayList <Vacation> ();
@@ -234,11 +228,9 @@ public class DataBase {
                 String Airline= rs.getString("Airline");
                 String FromDate = rs.getString("FromDate");
                 String ToDate = rs.getString("ToDate");
-                Integer TicketNum = rs.getInt("TicketNum");
+                Integer TicketNum = rs.getInt("TicketType");
                 String baggage= rs.getString("baggage");
                 Integer baggageWeight = rs.getInt("baggageWeight");
-                String Back= rs.getString("Back");
-                String BackDate = rs.getString("BackDate");
                 String Kind= rs.getString("Kind");
                 String Hotel= rs.getString("Hotel");
                 String salerName= rs.getString("salerName");
@@ -252,22 +244,58 @@ public class DataBase {
                 try {
                     fromDate =  (Date)dateFormatfromDate.parse(FromDate);
                     toDate =  (Date)dateFormattoDate.parse(ToDate);
-                    if(backDate!=null)
-                       backDate =  (Date)dateFormatbackDate.parse(BackDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
-                Vacation vacation= new Vacation(FlightNum,FromPlace,ToPlace,Airline,
-                        fromDate,toDate, TicketNum,baggage,baggageWeight,
-                        Back,backDate,Kind,Hotel,salerName);
-                foundVacation.add(vacation);
+////
+////                Vacation vacation= new Vacation(FlightNum,FromPlace,ToPlace,Airline,
+////                        fromDate,toDate, TicketNum,baggage,baggageWeight,
+////                        backDate,Kind,Hotel,salerName);
+//                foundVacation.add(vacation);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
         }
         return foundVacation;
+    }*/
+
+
+    public Vacation searchVacationFlightNum(String vacationFlightNum) {
+
+        Vacation foundVacation= null;
+
+        String sql = "SELECT FlightNum, FromPlace, ToPlace, AirlineCompany, FromDate, ToDate, TicketType, Baggage, TripType, Lodging, SalerName "
+                + "FROM Vacations "
+                + "WHERE (FlightNum = ?) ";  //AND ((FromDate BETWEEN ? AND ?) OR (ToDate BETWEEN ? AND ?))
+
+        try (
+                Connection conn = this.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)
+        ) {
+            pstmt.setString(1, vacationFlightNum);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String FlightNum= rs.getString("FlightNum");
+                String FromPlace = rs.getString("FromPlace");
+                String ToPlace = rs.getString("ToPlace");
+                String Airline= rs.getString("AirlineCompany");
+                String TicketType = rs.getString("TicketType");
+                String baggage= rs.getString("Baggage");
+                String salerName= rs.getString("SalerName");
+                String tripType = rs.getString("TripType");
+                String lodging = rs.getString("Lodging");
+                LocalDate FromDate = LocalDate.parse(rs.getString("FromDate"));
+                LocalDate ToDate = LocalDate.parse(rs.getString("ToDate"));
+
+                foundVacation= new Vacation(FlightNum,FromPlace,ToPlace,Airline,FromDate,ToDate,TicketType,baggage,tripType,lodging,salerName);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return foundVacation;
+
     }
 
     public void createMessagesNewTable() {
@@ -364,10 +392,10 @@ public class DataBase {
         return foundMessages;
     }
 
-    public Vacation searchVacationByFlightNum(String vacation) {
+   /* public Vacation searchVacationByFlightNum(String vacation) {
         Vacation returnVacations=null;
         String sql = "SELECT FlightNum, FromPlace, ToPlace, Airline, FromDate, ToDate, TicketNum, baggage, " +
-                "baggageWeight, Back, BackDate, Kind, Hotel, salerName " +
+                "baggageWeight, Kind, Hotel, salerName " +
                 "FROM Vacations WHERE (FlightNum =? ) ";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -383,13 +411,10 @@ public class DataBase {
                 Integer TicketNum = rs.getInt("TicketNum");
                 String baggage= rs.getString("baggage");
                 Integer baggageWeight = rs.getInt("baggageWeight");
-                String Back= rs.getString("Back");
-                String BackDate = rs.getString("BackDate");
                 String Kind= rs.getString("Kind");
                 String Hotel= rs.getString("Hotel");
                 String salerName= rs.getString("salerName");
 
-                Date backDate=null;
                 Date fromDate=null;
                 Date toDate=null;
                 DateFormat dateFormatbackDate =  new SimpleDateFormat("yyyy-MM-dd");
@@ -398,22 +423,20 @@ public class DataBase {
                 try {
                     fromDate =  (Date)dateFormatfromDate.parse(FromDate);
                     toDate =  (Date)dateFormattoDate.parse(ToDate);
-                    if(backDate!=null)
-                        backDate =  (Date)dateFormatbackDate.parse(BackDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
-                 returnVacations= new Vacation(FlightNum,FromPlace,ToPlace,Airline,
-                        fromDate,toDate, TicketNum,baggage,baggageWeight,
-                        Back,backDate,Kind,Hotel,salerName);
+//
+//                 returnVacations= new Vacation(FlightNum,FromPlace,ToPlace,Airline,
+//                        fromDate,toDate, TicketNum,baggage,baggageWeight,
+//                        Kind,Hotel,salerName);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
         }
         return returnVacations;
-    }
+    }*/
 
     public boolean updateMessage(userMessage currentMessage, String newStatus) throws SQLException {
         if(currentMessage==null ||newStatus==null){
@@ -453,41 +476,86 @@ public class DataBase {
         return 0;
 
     }
-}
 
+    public boolean addVacation(Vacation vacation) {
+        String sql = "INSERT INTO Vacations(FlightNum, FromPlace, ToPlace, AirlineCompany, FromDate, ToDate, TicketType, Baggage, TripType, Lodging, SalerName) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        //java.sql.Time fromDate = new java.sql.Time(vacation.getFromDate().);
 
-
-/*    public  void insertFictiveVacations() throws Exception {
-        String sql = "INSERT INTO Vacations(FlightNum,FromPlace,ToPlace,Airline,FromDate,ToDate,TicketNum," +
-                "baggage,baggageWeight,Back,BackDate,Kind,Hotel,salerName) VALUES('LACI6','Israel','London','ELAL','2018-12-05','2018-12-14','1','yes','7','NO','-','Romantic','NO','chen')";
         try (Connection conn = this.getConnection();
-            PreparedStatement pstmt2 = conn.prepareStatement(sql)) {
-           pstmt2.executeUpdate();
-        }
-    }*/
-   /* public  void insertFictiveVacations() throws Exception {
-        String sql = "INSERT INTO Vacations(FlightNum,FromPlace,ToPlace,Airline,FromDate,ToDate,TicketNum," +
-                "baggage,baggageWeight,Back,BackDate,Kind,Hotel) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        try (Connection conn = this.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, "LACI6");
-            pstmt.setString(2, "Israel");
-            pstmt.setString(3, "London");
-            pstmt.setString(4, "ELAL");
-            pstmt.setString(5, "2018-12-05");
-            pstmt.setString(6, "2018-12-14");
-            pstmt.setString(7, "1");
-            pstmt.setString(8, "YES");
-            pstmt.setString(9, "7");
-            pstmt.setString(10, "NO");
-            pstmt.setString(11, "-");
-            pstmt.setString(12, "Romantic");
-            pstmt.setString(13, "NO");
-            pstmt.setString(13, "salerName");
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, vacation.getFlightNum());
+            pstmt.setString(2, vacation.getFromPlace());
+            pstmt.setString(3, vacation.getToPlace());
+            pstmt.setString(4, vacation.getAirlineCompany());
+            pstmt.setObject(5,  vacation.getFromDate());
+            pstmt.setObject(6,  vacation.getToDate());
+            pstmt.setString(7, vacation.getTicketType());
+            pstmt.setString(8, vacation.getBaggage());
+            pstmt.setString(9, vacation.getTripType());
+            pstmt.setString(10, vacation.getLodging());
+            pstmt.setString(11, vacation.getSaler());
             pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    }*/
+        return true;
+    }
 
+    public ArrayList<Vacation> searchVacation(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
+        ArrayList<Vacation> foundVacation= new ArrayList <Vacation> ();
+
+        String sql = "SELECT FlightNum, FromPlace, ToPlace, AirlineCompany, FromDate, ToDate, TicketType, Baggage, TripType, Lodging, SalerName "
+                + "FROM Vacations "
+                + "WHERE (FromPlace = ?) AND (ToPlace = ?) AND(FromDate BETWEEN ? AND ?) AND(ToDate BETWEEN ? AND ?);";  //AND ((FromDate BETWEEN ? AND ?) OR (ToDate BETWEEN ? AND ?))
+
+        try (
+                Connection conn = this.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)
+        ) {
+            pstmt.setString(1, fromPlace);
+            pstmt.setString(2, toPlace);
+            pstmt.setString(3, dp_departureDate.minusDays(3).toString());
+            pstmt.setString(4, dp_departureDate.plusDays(3).toString());
+            pstmt.setString(5, dp_returnDate.minusDays(3).toString());
+            pstmt.setString(6, dp_returnDate.plusDays(3).toString());
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String FlightNum= rs.getString("FlightNum");
+                String FromPlace = rs.getString("FromPlace");
+                String ToPlace = rs.getString("ToPlace");
+                String Airline= rs.getString("AirlineCompany");
+                String TicketType = rs.getString("TicketType");
+                String baggage= rs.getString("Baggage");
+                String salerName= rs.getString("SalerName");
+                String tripType = rs.getString("TripType");
+                String lodging = rs.getString("Lodging");
+                LocalDate FromDate = LocalDate.parse(rs.getString("FromDate"));
+                LocalDate ToDate = LocalDate.parse(rs.getString("ToDate"));
+
+                Vacation vacation= new Vacation(FlightNum,FromPlace,ToPlace,Airline,FromDate,ToDate,TicketType,baggage,tripType,lodging,salerName);
+                foundVacation.add(vacation);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return foundVacation;
+
+    }
+
+    public int deleteVacation(Vacation vacationToBuy) throws SQLException {
+        String sql = "DELETE FROM Vacations WHERE FlightNum = ?";
+        Connection conn = this.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        try {
+            pstmt.setString(1, vacationToBuy.getFlightNum());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pstmt.executeUpdate();
+    }
+}
 
 
 

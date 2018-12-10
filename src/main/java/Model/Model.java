@@ -6,6 +6,8 @@ import View.Vacation;
 import View.userMessage;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model  {
@@ -55,14 +57,14 @@ public class Model  {
 
     public boolean deleteUser(String userNameToDelete) throws SQLException {
         if(dataBase.deleteUser(userNameToDelete)==1){
-              return true;
+            return true;
         }
         return false;
     }
 
-    public List<Vacation> searchVacation(Vacation vacationTerms) {
+  /*  public List<Vacation> searchVacation(Vacation vacationTerms) {
         return dataBase.searchVacation(vacationTerms);
-    }
+    }*/
 
     public boolean insertMessage(userMessage Message) throws Exception {
         try{
@@ -83,8 +85,8 @@ public class Model  {
         return dataBase.searchReqMessages(registeredUser);
     }
 
-    public Vacation searchVacationByFlightNum(String vacation) {
-        return dataBase.searchVacationByFlightNum(vacation);
+    public Vacation searchVacationFlightNum(String vacation) {
+        return dataBase.searchVacationFlightNum(vacation);
     }
 
     public boolean updateMessage(userMessage currentMessage, String newStatus) {
@@ -98,7 +100,27 @@ public class Model  {
 
     public boolean removeMessage(userMessage currentMessage) {
         if(dataBase.removeMessage(currentMessage)==1)
-        return true;
-    return false;
+            return true;
+        return false;
+    }
+
+    public boolean addVacationToSell(Vacation vacation) {
+        return dataBase.addVacation(vacation);
+    }
+
+    public ArrayList<Vacation> searchVacation(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
+        return dataBase.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
+    }
+
+
+    public boolean deleteVacation(Vacation vacationToBuy) {
+        try {
+            if(dataBase.deleteVacation(vacationToBuy)==1){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

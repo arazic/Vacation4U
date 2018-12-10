@@ -7,6 +7,8 @@ import View.Vacation;
 import View.userMessage;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller  {
@@ -37,9 +39,6 @@ public class Controller  {
         return model.deleteUser(userNameToDelete);
     }
 
-    public List<Vacation> searchVacation(Vacation vacationTerms) {
-        return model.searchVacation(vacationTerms);
-    }
 
     public boolean insertMessage(userMessage Message) throws Exception {
         return model.insertMessage(Message);
@@ -52,10 +51,10 @@ public class Controller  {
 
     public List<userMessage> searchReqMessages(User registeredUser) {
         return model.searchReqMessages(registeredUser);
-        }
+    }
 
-    public Vacation searchVacationByFlightNum(String vacation) {
-        return model.searchVacationByFlightNum(vacation);
+    public Vacation searchVacationFlightNum(String vacation) {
+        return model.searchVacationFlightNum(vacation);
     }
 
     public boolean updateMessage(userMessage currentMessage, String newStatus) {
@@ -65,6 +64,19 @@ public class Controller  {
 
     public boolean removeMessage(userMessage currentMessage) {
         return model.removeMessage(currentMessage);
+
+    }
+
+    public boolean addVacationToSell(Vacation vacation){
+        return model.addVacationToSell(vacation);
+    }
+
+    public ArrayList<Vacation> searchVacation(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
+        return model.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
+    }
+
+    public boolean deleteVacation(Vacation vacationToBuy) {
+        return model.deleteVacation(vacationToBuy);
 
     }
 }

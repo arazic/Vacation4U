@@ -5,146 +5,106 @@ import javafx.scene.control.DatePicker;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Vacation {
-    String FlightNum;
-    String FromPlace;
-    String ToPlace;
-    String Airline;
-    Date FromDate;
-    Date ToDate;
-    int TicketNum;
+    String flightNum;
+    String fromPlace;
+    String toPlace;
+    String airlineCompany;
+    LocalDate fromDate;
+    LocalDate toDate;
+    String ticketType;
     String baggage;
-    int baggageWeight;
-    String Back;
-    Date BackDate;
-    String Kind;
-    String hotel;
-    String salerName;
+    String tripType;
+    String lodging = "NOT INCLUDED";
+    String saler;
 
-    public Vacation(String FlightNum, String FromPlace, String ToPlace, String Airline, Date FromDate,
-                    Date ToDate, int TicketNum, String baggage, int baggageWeight,
-                    String Back, Date BackDate, String Kind, String hotel, String salerName) {
-        this.FlightNum = FlightNum;
-        this.FromPlace = FromPlace;
-        this.ToPlace = ToPlace;
-        this.Airline = Airline;
-        this.FromDate = FromDate;
-        this.ToDate = ToDate;
-        this.TicketNum = TicketNum;
+    public Vacation(String flightNum, String fromPlace, String toPlace, String airlineCompany, LocalDate fromDate, LocalDate toDate, String ticketType, String baggage, String tripType, String lodging, String saler) {
+        this.flightNum = flightNum;
+        this.fromPlace = fromPlace;
+        this.toPlace = toPlace;
+        this.airlineCompany = airlineCompany;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.ticketType = ticketType;
         this.baggage = baggage;
-        this.baggageWeight = baggageWeight;
-        this.Back = Back;
-        this.BackDate = BackDate;
-        this.Kind = Kind;
-        this.hotel = hotel;
-        this.salerName = salerName;
+        this.tripType = tripType;
+        if (lodging != null && !lodging.equals(""))
+            this.lodging = lodging;
+        this.saler = saler;
     }
 
-    public Vacation(String FlightNum) {
-        this.FlightNum = FlightNum;
-        this.FromPlace = null;
-        this.ToPlace = null;
-        this.Airline = null;
-        this.FromDate = null;
-        this.ToDate = null;
-        this.TicketNum = 1;
-        this.baggage = null;
-        this.baggageWeight = 0;
-        this.Back = null;
-        this.BackDate = null;
-        this.Kind = null;
-        this.hotel = null;
-        this.salerName = null;
+    public String getSaler() {
+        return saler;
     }
-
 
     public String getFlightNum() {
-        return FlightNum;
+        return flightNum;
     }
 
     public String getFromPlace() {
-        return FromPlace;
+        return fromPlace;
     }
 
     public String getToPlace() {
-        return ToPlace;
+        return toPlace;
     }
 
-    public String getAirline() {
-        return Airline;
+    public String getAirlineCompany() {
+        return airlineCompany;
     }
 
-    public Date getFromDate() {
-        return FromDate;
+    public LocalDate getFromDate() {
+        return fromDate;
     }
 
-    public Date getToDate() {
-        return ToDate;
+    public LocalDate getToDate() {
+        return toDate;
     }
 
-    public int getTicketNum() {
-        return TicketNum;
+    public String getTicketType() {
+        return ticketType;
     }
 
     public String getBaggage() {
         return baggage;
     }
 
-    public int getBaggageWeight() {
-        return baggageWeight;
+    public String getTripType() {
+        return tripType;
     }
 
-    public String getBack() {
-        return Back;
+    public String getLodging() {
+        return lodging;
     }
 
-    public Date getBackDate() {
-        return BackDate;
-    }
-
-    public String getKind() {
-        return Kind;
-    }
-
-    public String getHotel() {
-        return hotel;
-    }
-
-    public String getSalerName() {
-        return salerName;
-    }
 
     @Override
     public String toString() {
-        return "Vacation{" +
-                "FlightNum='" + FlightNum + '\'' +
-                ", FromPlace='" + FromPlace + '\'' +
-                ", ToPlace='" + ToPlace + '\'' +
-                ", Airline='" + Airline + '\'' +
-                ", FromDate=" + FromDate +
-                ", ToDate=" + ToDate +
-                ", TicketNum=" + TicketNum +
-                ", baggage='" + baggage + '\'' +
-                ", baggageWeight=" + baggageWeight +
-                ", Back='" + Back + '\'' +
-                ", BackDate=" + BackDate +
-                ", Kind='" + Kind + '\'' +
-                ", hotel='" + hotel + '\'' +
-                ", salerName='" + salerName + '\'' +
-                '}';
+        return "Vacation" + '\n' +
+                "flightNum: " + flightNum + '\n' +
+                "fromPlace: " + fromPlace + '\n' +
+                "toPlace: " + toPlace + '\n' +
+                "airlineCompany: " + airlineCompany + '\n' +
+                "fromDate: " + fromDate + '\n' +
+                "toDate: " + toDate + '\n' +
+                "ticketType: " + ticketType + '\n' +
+                "baggage: " + baggage + '\n' +
+                "tripType: " + tripType + '\n' +
+                "lodging: " + lodging + '\n';
     }
 
     public String shortToString() {
 
         return
-                "FlightNum='" + FlightNum + '\'' +
-                        ", FromPlace='" + FromPlace + '\'' +
-                        ", ToPlace='" + ToPlace + '\'' +
-                        ", FromDate=" + FromDate +
-                        ", ToDate=" + ToDate +
-                        ", TicketNum=" + TicketNum;
+                "FlightNum='" + flightNum + '\'' +
+                        ", FromPlace='" + fromPlace + '\'' +
+                        ", ToPlace='" + toPlace + '\'' +
+                        ", FromDate=" + fromDate +
+                        ", ToDate=" + toDate +
+                        ", TicketType=" + ticketType;
     }
 
 }
