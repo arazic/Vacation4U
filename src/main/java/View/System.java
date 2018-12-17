@@ -1,5 +1,6 @@
 package View;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 import Controller.Controller;
 
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -100,6 +102,8 @@ public class System {
     public static List<String> pagesApp = new ArrayList<>();
     private static Controller controller;
     public static userMessage currentMessage;
+    public Accordion my_Vacations;
+    public Accordion acc_Vacations1;
 
 
     public void setController(Controller controller) {
@@ -490,6 +494,7 @@ public class System {
 //                        dp_departureDate, dp_returnDate, TicketNum, null, 0, "", null, null, null, null);
 
                 ArrayList<Vacation> foundVacation = controller.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
+                ArrayList<Vacation> foundVacationForTrading = controller.searchVacationTrading(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
 
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("foundVacations.fxml"));
@@ -548,6 +553,62 @@ public class System {
                     acc_Vacations.getPanes().addAll(tps);
                     acc_Vacations.setExpandedPane(tps[0]);
                 }
+
+                TitledPane[] tps1 = new TitledPane[foundVacationForTrading.size()];
+                for (int i = 0; i < foundVacationForTrading.size(); i++) {
+                    ChoiceBox cb = null;
+                    if (registeredUser != null){
+                        ArrayList<Vacation> userVactions = controller.getUserVacations(registeredUser.userName);
+                         cb = new ChoiceBox(FXCollections.observableArrayList(
+                                userVactions)
+                        );
+                    }
+                    acc_Vacations1 = (Accordion) scene.lookup("#acc_Vacations1");
+                    TextArea TA = new TextArea(foundVacationForTrading.get(i).toString());
+                    Button Bt = new Button(foundVacationForTrading.get(i).getFlightNum());
+                    Label lb = new Label("Vacation to offer");
+                    Bt.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent e) {
+                            Bt.getText();
+                            //vacationToBuy= controller.searchVacationByFlightNum(Bt.getText());
+                            vacationToBuy= controller.searchVacationFlightNum(Bt.getText());
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
+                            pagesApp.add("vacationDetails");
+                            Parent root = null;
+                            try {
+                                root = fxmlLoader.load();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            Scene scene = new Scene(root, 700, 500);
+                            scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                            Stage stage = (Stage) Bt.getScene().getWindow();
+                            String title = "available vacations";
+                            stage.setTitle(title);
+                            stage.setScene(scene);
+                            stage.show();
+                            //vacationToBuy = (Vacation) controller.searchVacationByFlightNum(Bt.getText());
+                            TA_details = (TextArea) scene.lookup("#TA_details");
+                            TA_details.setText(vacationToBuy.toString());
+                        }
+                    });
+
+                    GridPane GP1 = new GridPane();
+                    GP1.add(TA, 0, 0);
+                    GP1.add(Bt, 1, 0);
+                    if (registeredUser != null){
+                        GP1.add(lb, 2, 0);
+                        GP1.add(cb, 2, 1);
+                    }
+                    tps1[i] = new TitledPane(foundVacationForTrading.get(i).getFlightNum(), GP1);
+
+                }
+                if(tps1.length>0) {
+                    acc_Vacations1.getPanes().addAll(tps1);
+                    acc_Vacations1.setExpandedPane(tps1[0]);
+                }
+
                 root = scene.getRoot();
                 stage.setScene(scene);
                 stage.show();
@@ -647,13 +708,14 @@ public class System {
                 alert.setContentText("We assume that your secure payment has been successful");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
+                    registeredUser.buyVacation(vacationToBuy);
                     Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Congratulations");
                     alert.setHeaderText("You bought your vacation to " + vacationToBuy.getToPlace() + " !!!");
                     alert.setContentText(vacationToBuy.getToPlace() + " feels closer than ever...!");
                     alert.showAndWait();
 
-                    if(controller.deleteVacation(vacationToBuy)){
+                    if(controller.updateVacationSell(vacationToBuy, registeredUser.userName)){
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
                         pagesApp.add("homeMenu");
@@ -1036,6 +1098,108 @@ public class System {
 
 
         }
+    }
+
+    public void goToMyVacation(ActionEvent actionEvent) throws IOException {
+        if (registeredUser == null || (!registeredUser.isLogIn())) {
+            try {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Be Attention");
+                alert.setHeaderText("You need to be logged in to see your vacations\n");
+                alert.setContentText("Do you want to log in?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    // ... user chose OK
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
+                    pagesApp.add("logIn");
+                    Scene scene = new Scene(root, 700, 500);
+                    Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
+                    scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                    stage.setTitle("Log in");
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
+                    pagesApp.add("homeMenu");
+                    Scene scene = new Scene(root, 700, 500);
+                    Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
+                    scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                    stage.setTitle("Vacation 4U");
+                    stage.setScene(scene);
+                    stage.show();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("myVacations.fxml").openStream());
+            pagesApp.add("myVacations");
+            Scene scene = new Scene(root, 700, 500);
+            scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+            Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
+            String title = registeredUser.getFirstName() + " " + registeredUser.getLastName() + " Vacations" ;
+            stage.setTitle(title);
+            stage.setScene(scene);
+            stage.show();
+            //personalHome(scene);
+
+            registeredUser.myVacations = controller.getUserVacations(registeredUser.userName);
+            TitledPane[] tps = new TitledPane[registeredUser.myVacations.size()];
+            for (int i = 0; i < registeredUser.myVacations.size(); i++) {
+                my_Vacations = (Accordion) scene.lookup("#user_Vacations");
+                TextArea TA = new TextArea(registeredUser.myVacations.get(i).toString());
+                Button Bt = new Button(registeredUser.myVacations.get(i).getFlightNum());
+//                Bt.setOnAction(new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent e) {
+//                        Bt.getText();
+//                        //vacationToBuy= controller.searchVacationByFlightNum(Bt.getText());
+//                        vacationToBuy= controller.searchVacationFlightNum(Bt.getText());
+//                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
+//                        pagesApp.add("vacationDetails");
+//                        Parent root = null;
+//                        try {
+//                            root = fxmlLoader.load();
+//                        } catch (IOException e1) {
+//                            e1.printStackTrace();
+//                        }
+//                        Scene scene = new Scene(root, 700, 500);
+//                        scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+//                        Stage stage = (Stage) Bt.getScene().getWindow();
+//                        String title = "available vacations";
+//                        stage.setTitle(title);
+//                        stage.setScene(scene);
+//                        stage.show();
+//                        //vacationToBuy = (Vacation) controller.searchVacationByFlightNum(Bt.getText());
+//                        TA_details = (TextArea) scene.lookup("#TA_details");
+//                        TA_details.setText(vacationToBuy.toString());
+//                    }
+//                });
+
+                GridPane GP = new GridPane();
+                GP.add(TA, 0, 0);
+                GP.add(Bt, 1, 0);
+                tps[i] = new TitledPane(registeredUser.myVacations.get(i).getFlightNum(), GP);
+            }
+            if(tps.length>0) {
+                my_Vacations.getPanes().addAll(tps);
+                my_Vacations.setExpandedPane(tps[0]);
+            }
+            root = scene.getRoot();
+            stage.setScene(scene);
+            stage.show();
+
+
+        }
+    }
+
+    public void showTradingOppor(ActionEvent actionEvent) {
+
+
+
     }
 }
 

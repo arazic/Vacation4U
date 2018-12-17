@@ -1,6 +1,7 @@
 package View;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class User {
     List<userMessage> incomingReqMessages;
     List<userMessage> incomingAnsMessages;
     List<userMessage> outgoingMessages;
+    List<Vacation> myVacations;
 
 
     public User(String userName, String password, String birthDate, String firstName, String lastName, String city, boolean logIn) {
@@ -30,6 +32,8 @@ public class User {
         this.incomingReqMessages = new ArrayList<userMessage>();
         this.incomingAnsMessages = new ArrayList<userMessage>();
         this.outgoingMessages = new ArrayList<userMessage>();
+        this.myVacations = new ArrayList<Vacation>();
+        //Vacation test = new Vacation("31d","israel","london","elal",)
     }
 
     @Override
@@ -163,7 +167,8 @@ public class User {
     }
 
 
-
-
+    public void buyVacation(Vacation vacationToBuy) {
+        myVacations.add(vacationToBuy);
+    }
 
 }

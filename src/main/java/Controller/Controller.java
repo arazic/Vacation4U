@@ -79,6 +79,18 @@ public class Controller  {
         return model.deleteVacation(vacationToBuy);
 
     }
+    public boolean updateVacationSell(Vacation vacationToBuy, String buyer) {
+        return model.updateVacationSell(vacationToBuy, buyer);
+
+    }
+
+    public ArrayList<Vacation> getUserVacations(String userName) {
+        return model.getUserVacations(userName);
+    }
+
+    public ArrayList<Vacation> searchVacationTrading(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
+        return model.searchVacationTrading(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
+    }
 }
 
 

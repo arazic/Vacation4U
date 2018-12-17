@@ -109,7 +109,8 @@ public class Model  {
     }
 
     public ArrayList<Vacation> searchVacation(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
-        return dataBase.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
+            return dataBase.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
+
     }
 
 
@@ -122,5 +123,24 @@ public class Model  {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public boolean updateVacationSell(Vacation vacationToBuy, String buyer) {
+        try {
+            if(dataBase.updateVacationSell(vacationToBuy, buyer)==1){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public ArrayList<Vacation> getUserVacations(String userName) {
+        return dataBase.getUserVacations(userName);
+    }
+
+    public ArrayList<Vacation> searchVacationTrading(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
+        return dataBase.searchVacationTrading(fromPlace,toPlace,dp_departureDate,dp_returnDate,ticketType);
     }
 }
