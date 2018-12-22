@@ -16,7 +16,7 @@ public class userMessage {
         this.Status= Status;
 
     }
-//    userMessage Message = new userMessage(vacationToBuy.getFlightNum(), registeredUser, vacationToOffer.getFlightNum(),  salerUser, "waiting");
+    // what the buyer offer , who is the buyer,  what the buyer want, from how he want to buy
 
     public userMessage(String vacationOffering, User fromUser,  String vacationToBuy, User toUser, String status) {
         this.vacationOffer = vacationOffering;
@@ -58,4 +58,11 @@ public class userMessage {
         Status = status;
     }
 
+    public String getVacationOffer() {
+        return vacationOffer;
+    }
+
+    public void setVacationOffer(String vacationOffer) {
+        this.vacationOffer = vacationOffer;
+    }
 }
