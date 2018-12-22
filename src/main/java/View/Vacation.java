@@ -20,6 +20,7 @@ public class Vacation {
     String tripType;
     String lodging = "NOT INCLUDED";
     String saler;
+    String buyer;
 
     public Vacation(String flightNum, String fromPlace, String toPlace, String airlineCompany, LocalDate fromDate, LocalDate toDate, String ticketType, String baggage, String tripType, String lodging, String saler) {
         this.flightNum = flightNum;
@@ -34,6 +35,7 @@ public class Vacation {
         if (lodging != null && !lodging.equals(""))
             this.lodging = lodging;
         this.saler = saler;
+        this.buyer= buyer;
     }
 
     public String getSaler() {
@@ -80,6 +82,14 @@ public class Vacation {
         return lodging;
     }
 
+
+    public String getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(String buyer) {
+        this.buyer = buyer;
+    }
 
     @Override
     public String toString() {

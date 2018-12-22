@@ -55,7 +55,7 @@
                         <TextArea fx:id="TA_vacationOfferDetails" prefHeight="122.0" prefWidth="621.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="  The Vacation you ask for" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <TextArea fx:id="TA_vacationToGetDetails" prefHeight="122.0" prefWidth="621.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Button fx:id="btn_toTrade" mnemonicParsing="false" onAction="#sendTradeRequesMsg" text="Send Trade Offer" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <Button fx:id="btn_toTrade" mnemonicParsing="false" onAction="#sendTradeRequestMsg" text="Send Trade Offer" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
                     </children>
                 </GridPane>
             </children>
