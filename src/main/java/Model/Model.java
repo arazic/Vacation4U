@@ -26,7 +26,7 @@ public class Model  {
     }
 
     public void setController(Controller controller) {
-        this.controller= controller;
+        this.controller = controller;
     }
 
     public boolean createUser(User user) {

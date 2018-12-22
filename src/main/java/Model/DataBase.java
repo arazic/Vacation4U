@@ -195,29 +195,29 @@ public class DataBase {
                 "\tPRIMARY KEY(`FlightNum`,`SalerName`)\n" +
                 ");";
 
-//        try (Connection conn = DriverManager.getConnection(url);
-//             Statement stmt = conn.createStatement()) {
-//            // create a new table
-//            stmt.execute(sql);
-//        } catch (SQLException e) {
-//            if (!e.getMessage().contains("already exists"))
-//                System.out.println(e.getMessage());
-//        }
-//
-//        sql = "CREATE TABLE `VacationsOfUsers` (\n" +
-//                "\t`UserName`\tTEXT NOT NULL,\n" +
-//                "\t`FlightNum`\tINTEGER NOT NULL,\n" +
-//                "\tPRIMARY KEY(`UserName`,`FlightNum`)\n" +
-//                ");";
-//
-//        try (Connection conn = DriverManager.getConnection(url);
-//             Statement stmt = conn.createStatement()) {
-//            // create a new table
-//            stmt.execute(sql);
-//        } catch (SQLException e) {
-//            if (!e.getMessage().contains("already exists"))
-//                System.out.println(e.getMessage());
-//        }
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            // create a new table
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            if (!e.getMessage().contains("already exists"))
+                System.out.println(e.getMessage());
+        }
+
+        sql = "CREATE TABLE `VacationsOfUsers` (\n" +
+                "\t`UserName`\tTEXT NOT NULL,\n" +
+                "\t`FlightNum`\tINTEGER NOT NULL,\n" +
+                "\tPRIMARY KEY(`UserName`,`FlightNum`)\n" +
+                ");";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            // create a new table
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            if (!e.getMessage().contains("already exists"))
+                System.out.println(e.getMessage());
+        }
 //        System.out.println("The new table created");
 
     }

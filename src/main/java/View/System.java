@@ -1212,7 +1212,7 @@ public class System {
 
     }
 
-    public void sendTradeRequesMsg(ActionEvent actionEvent) throws IOException {
+    public void sendTradeRequestMsg(ActionEvent actionEvent) throws IOException {
         Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
         alert2.setTitle("Request sent");
         alert2.setHeaderText("Do You want to send the trade request to the seller " + vacationToBuy.getSaler() + " ?");
@@ -1225,7 +1225,6 @@ public class System {
                 userMessage Message = new userMessage(vacationToBuy.getFlightNum(), registeredUser, vacationToOffer.getFlightNum(), salerUser, "waiting");
                 salerUser.addIncomingReqMessages(Message);
                 registeredUser.addIncomingReqMessages(Message);
-                registeredUser.addOutgoingMessages(Message);
                 try {
 //                    if (controller.insertTradingMessage(Message)) {
                     if (controller.insertMessage(Message)) {
