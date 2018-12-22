@@ -352,12 +352,55 @@ public class DataBase {
             if (!e.getMessage().contains("already exists"))
                 System.out.println(e.getMessage());
         }
+        //     public userMessage(String vacationToBuy, User fromUser, String vacationOffering, User toUser, String status) {
         //System.out.println("The new table created");
+        sql = "CREATE TABLE `TradingMessages` (\n" +
+                "\t`FlightNumToGet`\tTEXT NOT NULL,\n" +
+                "\t`UserNameFrom`\tTEXT NOT NULL,\n" +
+                "\t`FlightNumOffering`\tTEXT NOT NULL,\n" +
+                "\t`UserNameOffering`\tTEXT,\n" +
+                "\t`Status`\tTEXT,\n" +
+                "\tPRIMARY KEY(`FlightNumToGet`,`UserNameFrom`,`FlightNumOffering`,`UserNameOffering`)\n" +
+                ");";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            // create a new table
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            if (!e.getMessage().contains("already exists"))
+                System.out.println(e.getMessage());
+        }
     }
 
 
     public void insertMessage(User FromUser, String vacationToBuy, String ToUser) throws Exception {
         String sql = "INSERT INTO Messages(FlightNum,UserNameFrom,UserNameTo,Status) VALUES(?,?,?,?)";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, vacationToBuy);
+            pstmt.setString(2, FromUser.getUserName());
+            pstmt.setString(3, ToUser);
+            pstmt.setString(4, "waiting");
+//            pstmt.setString(4, "waiting");
+            pstmt.executeUpdate();
+        }
+    }
+
+//            dataBase.insertTradingMessage(Message.getVacationOffer(),Message.getFromUser().getUserName(),
+//                    Message.getVacationToBuy(), Message.getToUser().getUserName());
+//
+//    sql = "CREATE TABLE `TradingMessages` (\n" +
+//            "\t`FlightNumToGet`\tTEXT NOT NULL,\n" +
+//            "\t`UserNameFrom`\tTEXT NOT NULL,\n" +
+//            "\t`FlightNumOffering`\tTEXT NOT NULL,\n" +
+//            "\t`UserNameOffering`\tTEXT,\n" +
+//            "\t`Status`\tTEXT,\n" +
+//            "\tPRIMARY KEY(`FlightNumToGet`,`UserNameFrom`,`FlightNumOffering`,`UserNameOffering`)\n" +
+//            ");";
+
+    public void insertTradingMessage(String vacationToBuy, String userName, String userOffering, String vacationToGet, String getFromUser) {
+        String sql = "INSERT INTO TradingMessages(FlightNumToGet,UserNameFrom,FlightNumOffering,UserNameOffering,Status) VALUES(?,?,?,?)";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, vacationToBuy);
@@ -696,5 +739,7 @@ public class DataBase {
         }
         return userVacations;
     }
+
+
 }
 
