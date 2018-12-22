@@ -588,8 +588,6 @@ public class System {
                                  vacationToBuy= controller.searchVacationFlightNum(flightNumOfVacationToGet, seller);
                                  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationTrading.fxml"));
                                 pagesApp.add("vacationTrading");
-                                userMessage message= new userMessage(vacationToOffer.getFlightNum(), registeredUser,vacationToBuy.getFlightNum(),vacationToBuy.getBuyer(),"waiting");
-                                registeredUser.addIncomingTradingReqMessages(message);
 
                                 Parent root = null;
                                 try {
@@ -608,8 +606,7 @@ public class System {
                                 TA_vacationOfferDetails = (TextArea) scene.lookup("#TA_vacationOfferDetails");
                                 TA_vacationToGetDetails = (TextArea) scene.lookup("#TA_vacationToGetDetails");
                                 TA_vacationOfferDetails.setText(vacationToOffer.toString());
-                                TA_vacationToGetDetails.setText(vacationToGet.toString());
-
+                                TA_vacationToGetDetails.setText(vacationToBuy.toString());
                             }
                         }
                     });
@@ -964,6 +961,60 @@ public class System {
                 acc_ansMessage.getPanes().addAll(tpsAns);
                 acc_ansMessage.setExpandedPane(tpsAns[0]);
             }
+
+/////////////////
+          /*  acc_reqMessage = (Accordion) scene.lookup("#acc_reqMessage");
+
+            TitledPane[] tpsReq = new TitledPane[registeredUser.getIncomingReqMessages().size()];
+            for (int i = 0; i < registeredUser.getIncomingReqMessages().size(); i++) {
+                acc_reqMessage = (Accordion) scene.lookup("#acc_reqMessage");
+                currentMessage = registeredUser.getIncomingReqMessages().get(i);
+                TextArea TA = new TextArea(registeredUser.getIncomingReqMessages().get(i).getFromUser().getUserName() + " want to buy from" +
+                        " you flight num: " + registeredUser.getIncomingReqMessages().get(i).getVacationToBuy());
+                Button Confirm = new Button("confirm " + registeredUser.getIncomingReqMessages().get(i).toString());
+                Button Reject = new Button("Reject " + registeredUser.getIncomingReqMessages().get(i).toString());
+                Confirm.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        currentMessage.setStatus("confirm");
+                        if (controller.updateMessage(currentMessage, "confirm")) {
+                            registeredUser.removeIncomingReqMessages(currentMessage);
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Congratulation");
+                            alert.setHeaderText("Your message has been sent \n");
+                            alert.showAndWait();
+                            Confirm.setDisable(true);
+                        }
+                    }
+                });
+                Reject.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        currentMessage.setStatus("reject");
+                        if (controller.updateMessage(currentMessage, "reject")) {
+                            registeredUser.removeIncomingReqMessages(currentMessage);
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Congratulation");
+                            alert.setHeaderText("Your message has been sent \n");
+                            alert.showAndWait();
+                            Reject.setDisable(true);
+                        }
+                    }
+                });
+                GridPane GP = new GridPane();
+                GP.add(TA, 0, 0);
+
+                GP.add(Confirm, 1, 0);
+                GP.add(Reject, 2, 0);
+                tpsReq[i] = new TitledPane("request number " + (i + 1), GP);
+            }
+
+            if (registeredUser.getIncomingReqMessages().size() != 0) {
+                acc_reqMessage.getPanes().addAll(tpsReq);
+                acc_reqMessage.setExpandedPane(tpsReq[0]);
+            }*/
+            ///////////////////
+
             root = scene.getRoot();
             stage.setScene(scene);
             stage.show();
@@ -1206,9 +1257,6 @@ public class System {
         }
     }
 
-    public void showTradingOppor(ActionEvent actionEvent) {
-
-    }
 
     public void sendTradeRequestMsg(ActionEvent actionEvent) throws IOException {
         Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
@@ -1220,13 +1268,13 @@ public class System {
             // ... user chose OK
             User sellerUser = controller.seacrhUser(vacationToBuy.getSaler());
             if (!registeredUser.userName.equals(sellerUser.userName)) {
-                userMessage Message = new userMessage(vacationToOffer.getFlightNum(), registeredUser ,vacationToBuy.getFlightNum(), sellerUser, "waiting");
-                // what the buyer offer , who is the buyer,  what the buyer want, from how he want to buy
-                sellerUser.addIncomingTradingReqMessages(Message);
-                registeredUser.addIncomingTradingReqMessages(Message);
+                User buyer= controller.seacrhUser(vacationToBuy.getBuyer());
+                userMessage message= new userMessage(vacationToOffer.getFlightNum(), registeredUser,vacationToBuy.getFlightNum(),buyer,"waiting");
+                registeredUser.addIncomingTradingReqMessages(message);
+               // sellerUser.addIncomingTradingReqMessages(Message);
                 try {
 //                    if (controller.insertTradingMessage(Message)) {
-                    if (controller.insertMessage(Message)) {
+                    if (controller.insertTradingMessage(message)) {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Good news");
                         alert.setHeaderText("The message has been sent ");

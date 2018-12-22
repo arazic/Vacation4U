@@ -18,12 +18,12 @@ public class userMessage {
     }
 //    userMessage Message = new userMessage(vacationToBuy.getFlightNum(), registeredUser, vacationToOffer.getFlightNum(),  salerUser, "waiting");
 
-    public userMessage(String vacationToBuy, User fromUser, String vacationOffering, User toUser, String status) {
-        this.vacationToBuy = vacationToBuy;
+    public userMessage(String vacationOffering, User fromUser,  String vacationToBuy, User toUser, String status) {
+        this.vacationOffer = vacationOffering;
         this.fromUser = fromUser;
+        this.vacationToBuy = vacationToBuy;
         this.toUser = toUser;
         this.Status= status;
-        this.vacationOffer = vacationOffering;
     }
 
     public String getVacationToBuy() {
