@@ -77,6 +77,17 @@ public class Model  {
         }
     }
 
+//    public boolean insertTradingMessge(userMessage Message) throws  Exception{
+//        try{
+//            dataBase.insertMessage(Message.getFromUser(),Message.getVacationToBuy(), Message.getToUser().getUserName());
+//            Message.getToUser().setMessageNum(Message.getToUser().getMessageNum()+1);
+//            return true;
+//        }catch (Exception e){
+//            return false;
+//        }
+//        }
+//    }
+
     public List<userMessage> searchAnsMessages(User registeredUser) {
         return dataBase.searchAnsMessages(registeredUser);
     }
@@ -85,8 +96,8 @@ public class Model  {
         return dataBase.searchReqMessages(registeredUser);
     }
 
-    public Vacation searchVacationFlightNum(String vacation) {
-        return dataBase.searchVacationFlightNum(vacation);
+    public Vacation searchVacationFlightNum(String flightNum, String seller) {
+        return dataBase.searchVacationFlightNum(flightNum, seller);
     }
 
     public boolean updateMessage(userMessage currentMessage, String newStatus) {
@@ -143,4 +154,6 @@ public class Model  {
     public ArrayList<Vacation> searchVacationTrading(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
         return dataBase.searchVacationTrading(fromPlace,toPlace,dp_departureDate,dp_returnDate,ticketType);
     }
+
+
 }

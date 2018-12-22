@@ -3,6 +3,7 @@ package View;
 public class userMessage {
 
     String vacationToBuy;
+    String vacationOffer;
     User fromUser; // purchaser
     User toUser; // saler
     String Status;
@@ -14,6 +15,15 @@ public class userMessage {
         this.toUser = toUser;
         this.Status= Status;
 
+    }
+//    userMessage Message = new userMessage(vacationToBuy.getFlightNum(), registeredUser, vacationToOffer.getFlightNum(),  salerUser, "waiting");
+
+    public userMessage(String vacationToBuy, User fromUser, String vacationOffering, User toUser, String status) {
+        this.vacationToBuy = vacationToBuy;
+        this.fromUser = fromUser;
+        this.toUser = toUser;
+        this.Status= status;
+        this.vacationOffer = vacationOffering;
     }
 
     public String getVacationToBuy() {

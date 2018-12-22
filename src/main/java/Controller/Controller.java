@@ -44,6 +44,10 @@ public class Controller  {
         return model.insertMessage(Message);
     }
 
+//    public boolean insertTradingMessage(userMessage message) {
+//        return model.insertTradingMessge(message);
+//    }
+
     public List<userMessage> searchAnsMessages(User registeredUser) {
         return model.searchAnsMessages(registeredUser);
 
@@ -53,8 +57,8 @@ public class Controller  {
         return model.searchReqMessages(registeredUser);
     }
 
-    public Vacation searchVacationFlightNum(String vacation) {
-        return model.searchVacationFlightNum(vacation);
+    public Vacation searchVacationFlightNum(String flightNum, String seller) {
+        return model.searchVacationFlightNum(flightNum, seller);
     }
 
     public boolean updateMessage(userMessage currentMessage, String newStatus) {
@@ -91,6 +95,7 @@ public class Controller  {
     public ArrayList<Vacation> searchVacationTrading(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
         return model.searchVacationTrading(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
     }
+
 }
 
 
