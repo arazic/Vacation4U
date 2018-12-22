@@ -40,12 +40,17 @@
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
                             <rowConstraints>
-                        <RowConstraints maxHeight="249.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
-                                <RowConstraints maxHeight="333.0" minHeight="10.0" prefHeight="333.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="249.0" minHeight="8.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="333.0" minHeight="10.0" prefHeight="132.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="333.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="333.0" minHeight="10.0" prefHeight="146.0" vgrow="SOMETIMES" />
                             </rowConstraints>
-                     <children>
-                        <Accordion fx:id="acc_reqMessage" prefHeight="376.0" prefWidth="655.0" GridPane.rowIndex="1" />
-                     </children>
+                            <children>
+                                <Accordion fx:id="acc_reqMessage" prefHeight="376.0" prefWidth="655.0" GridPane.rowIndex="1" />
+                        <Label text="want to buy from me..." GridPane.halignment="CENTER" />
+                        <Label text="want to traid...." GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Accordion fx:id="acc_TraidreqMessage" GridPane.rowIndex="3" />
+                            </children>
                         </GridPane>
                     </content>
                 </Tab>
@@ -53,16 +58,22 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <GridPane layoutX="7.0" layoutY="7.0" prefHeight="372.0" prefWidth="676.0">
+                                <GridPane layoutX="7.0" layoutY="7.0" prefHeight="349.0" prefWidth="676.0">
                                     <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="629.0" minWidth="10.0" prefWidth="629.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="629.0" minWidth="10.0" prefWidth="629.0" />
                                     </columnConstraints>
                                     <rowConstraints>
-                                        <RowConstraints maxHeight="328.0" minHeight="10.0" prefHeight="328.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="328.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="328.0" minHeight="10.0" prefHeight="156.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="328.0" minHeight="0.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="328.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
-                           <children>
-                              <Accordion fx:id="acc_ansMessage" prefHeight="293.0" prefWidth="578.0" />
-                           </children>
+                                    <children>
+                                        <Accordion fx:id="acc_ansMessage" prefHeight="293.0" prefWidth="578.0" GridPane.rowIndex="1" />
+                              <Label text="want to buy from me..." GridPane.halignment="CENTER" />
+                              <Label text="want to traid" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Accordion fx:id="acc_TraidAnsMessage" GridPane.rowIndex="3" />
+                                    </children>
                                 </GridPane>
                             </children>
                         </AnchorPane>

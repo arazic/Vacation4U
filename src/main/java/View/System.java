@@ -74,6 +74,8 @@ public class System {
     public javafx.scene.control.Accordion acc_Vacations;
     public javafx.scene.control.Accordion acc_reqMessage;
     public javafx.scene.control.Accordion acc_ansMessage;
+    public javafx.scene.control.Accordion acc_TraidreqMessage;
+    public javafx.scene.control.Accordion acc_TraidansMessage;
     public javafx.scene.control.Label txt_messageLabel;
     public javafx.scene.control.Button btn_backFromMes;
     public javafx.scene.control.Button btn_SellVacation;
@@ -581,31 +583,34 @@ public class System {
                                 alert.setContentText("You have to choose vacation to offer");
                                 alert.showAndWait();
                                 return;
+                            } else {
+                                vacationToOffer = (Vacation) finalCb.getValue();
+                                 vacationToBuy= controller.searchVacationFlightNum(flightNumOfVacationToGet, seller);
+                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationTrading.fxml"));
+                                pagesApp.add("vacationTrading");
+                                userMessage message= new userMessage(vacationToOffer.getFlightNum(), registeredUser,vacationToBuy.getFlightNum(),vacationToBuy.getBuyer(),"waiting");
+                                registeredUser.addIncomingTradingReqMessages(message);
+
+                                Parent root = null;
+                                try {
+                                    root = fxmlLoader.load();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                                Scene scene = new Scene(root, 700, 500);
+                                scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                                Stage stage = (Stage) Bt.getScene().getWindow();
+                                String title = "Vacation Trading";
+                                stage.setTitle(title);
+                                stage.setScene(scene);
+                                stage.show();
+                                //vacationToBuy = (Vacation) controller.searchVacationByFlightNum(Bt.getText());
+                                TA_vacationOfferDetails = (TextArea) scene.lookup("#TA_vacationOfferDetails");
+                                TA_vacationToGetDetails = (TextArea) scene.lookup("#TA_vacationToGetDetails");
+                                TA_vacationOfferDetails.setText(vacationToOffer.toString());
+                                TA_vacationToGetDetails.setText(vacationToGet.toString());
+
                             }
-                            Vacation vacationToOffer = (Vacation) finalCb.getValue();
-                            Vacation vacationToGet = controller.searchVacationFlightNum(flightNumOfVacationToGet, seller);
-                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationTrading.fxml"));
-                            pagesApp.add("vacationTrading");
-                            Parent root = null;
-                            try {
-                                root = fxmlLoader.load();
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                            Scene scene = new Scene(root, 700, 500);
-                            scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
-                            Stage stage = (Stage) Bt.getScene().getWindow();
-                            String title = "Vacation Trading";
-                            stage.setTitle(title);
-                            stage.setScene(scene);
-                            stage.show();
-                            //vacationToBuy = (Vacation) controller.searchVacationByFlightNum(Bt.getText());
-                            TA_vacationOfferDetails = (TextArea) scene.lookup("#TA_vacationOfferDetails");
-                            TA_vacationToGetDetails = (TextArea) scene.lookup("#TA_vacationToGetDetails");
-                            TA_vacationOfferDetails.setText(vacationToOffer.toString());
-                            TA_vacationToGetDetails.setText(vacationToGet.toString());
-                            vacationToBuy = vacationToGet;
-                            System.vacationToOffer = vacationToOffer;
                         }
                     });
 
@@ -685,7 +690,6 @@ public class System {
 
 
     public void goToBuyPage(ActionEvent actionEvent) throws IOException {
-
         if (registeredUser == null || (!registeredUser.isLogIn())) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Be Attention");
@@ -965,8 +969,6 @@ public class System {
             stage.show();
 
         }
-
-
     }
 
     public void handleWithMessage(ActionEvent actionEvent) {
@@ -974,7 +976,6 @@ public class System {
             java.lang.System.out.println("delete");
         } else if (actionEvent.getSource().equals(btn_Confirm)) {
             java.lang.System.out.println("not delete");
-
         }
     }
 
@@ -1217,11 +1218,11 @@ public class System {
         Optional<ButtonType> result2 = alert2.showAndWait();
         if (result2.get() == ButtonType.OK) {
             // ... user chose OK
-            User salerUser = controller.seacrhUser(vacationToBuy.getSaler());
-            if (!registeredUser.userName.equals(salerUser.userName)) {
-                userMessage Message = new userMessage(vacationToOffer.getFlightNum(), registeredUser ,vacationToBuy.getFlightNum(), salerUser, "waiting");
+            User sellerUser = controller.seacrhUser(vacationToBuy.getSaler());
+            if (!registeredUser.userName.equals(sellerUser.userName)) {
+                userMessage Message = new userMessage(vacationToOffer.getFlightNum(), registeredUser ,vacationToBuy.getFlightNum(), sellerUser, "waiting");
                 // what the buyer offer , who is the buyer,  what the buyer want, from how he want to buy
-                salerUser.addIncomingTradingReqMessages(Message);
+                sellerUser.addIncomingTradingReqMessages(Message);
                 registeredUser.addIncomingTradingReqMessages(Message);
                 try {
 //                    if (controller.insertTradingMessage(Message)) {
