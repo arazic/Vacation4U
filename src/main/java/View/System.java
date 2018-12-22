@@ -585,7 +585,7 @@ public class System {
                                 return;
                             } else {
                                 vacationToOffer = (Vacation) finalCb.getValue();
-                                 vacationToBuy= controller.searchVacationFlightNum(flightNumOfVacationToGet, seller);
+                                vacationToBuy= controller.searchVacationFlightNum(flightNumOfVacationToGet, seller);
                                  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationTrading.fxml"));
                                 pagesApp.add("vacationTrading");
 

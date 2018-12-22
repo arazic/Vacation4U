@@ -297,7 +297,7 @@ public class DataBase {
     public Vacation searchVacationFlightNum(String vacationFlightNum, String seller) {
         Vacation foundVacation= null;
 
-        String sql = "SELECT FlightNum, FromPlace, ToPlace, AirlineCompany, FromDate, ToDate, TicketType, Baggage, TripType, Lodging, SalerName "
+        String sql = "SELECT FlightNum, FromPlace, ToPlace, AirlineCompany, FromDate, ToDate, TicketType, Baggage, TripType, Lodging, SalerName, BuyerName "
                 + "FROM Vacations "
                 + "WHERE (FlightNum = ?) AND (SalerName = ?)";  //AND ((FromDate BETWEEN ? AND ?) OR (ToDate BETWEEN ? AND ?))
 
@@ -320,8 +320,9 @@ public class DataBase {
                 String lodging = rs.getString("Lodging");
                 LocalDate FromDate = LocalDate.parse(rs.getString("FromDate"));
                 LocalDate ToDate = LocalDate.parse(rs.getString("ToDate"));
+                String BuyerName= rs.getString("BuyerName");
 
-                foundVacation= new Vacation(FlightNum,FromPlace,ToPlace,Airline,FromDate,ToDate,TicketType,baggage,tripType,lodging,salerName);
+                foundVacation= new Vacation(FlightNum,FromPlace,ToPlace,Airline,FromDate,ToDate,TicketType,baggage,tripType,lodging,salerName, BuyerName);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
