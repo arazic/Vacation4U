@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list id="7c93ab68-3698-4b01-9487-7094993caaf7" name="Revert &quot;almost done&quot;" comment="Revert &quot;almost done&quot;&#10;&#10;This reverts commit bf3d43d" />
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/System.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/System.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Messages.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Messages.fxml" afterDir="false" />
     </list>
+    <list id="7c93ab68-3698-4b01-9487-7094993caaf7" name="Revert &quot;almost done&quot;" comment="Revert &quot;almost done&quot;&#10;&#10;This reverts commit bf3d43d" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -78,11 +76,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="System.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="System.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/View/System.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="591" column="86" selection-start-line="591" selection-start-column="86" selection-end-line="591" selection-end-column="86" />
+            <state relative-caret-position="81">
+              <caret line="1008" column="76" lean-forward="true" selection-start-line="1008" selection-start-column="76" selection-end-line="1008" selection-end-column="76" />
               <folding>
                 <element signature="e#53819#53820#0" expanded="true" />
                 <element signature="e#53887#53888#0" expanded="true" />
@@ -101,6 +99,15 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Model.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Model/Model.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="111">
+              <caret line="85" column="49" selection-start-line="85" selection-start-column="49" selection-end-line="85" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="homeMenu.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/homeMenu.fxml">
           <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
@@ -111,6 +118,15 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/personalArea.fxml">
           <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
           <provider editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="Vacation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/View/Vacation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="22" column="10" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="10" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="Messages.fxml" pinned="false" current-in-tab="false">
@@ -126,8 +142,8 @@
       <file leaf-file-name="userMessage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/View/userMessage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="27" lean-forward="true" selection-start-line="25" selection-end-line="26" />
+            <state relative-caret-position="238">
+              <caret line="20" column="90" selection-start-line="20" selection-start-column="86" selection-end-line="20" selection-end-column="90" />
             </state>
           </provider>
         </entry>
@@ -135,23 +151,14 @@
       <file leaf-file-name="DataBase.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Model/DataBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="584" lean-forward="true" selection-start-line="584" selection-end-line="584" />
+            <state relative-caret-position="168">
+              <caret line="406" column="31" selection-start-line="406" selection-start-column="31" selection-end-line="406" selection-end-column="31" />
               <folding>
-                <element signature="e#22398#22408#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Controller/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="95" column="31" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="31" />
-              <folding>
-                <element signature="e#1976#1977#0" expanded="true" />
-                <element signature="e#2032#2033#0" expanded="true" />
+                <element signature="e#17118#17131#0" expanded="true" />
+                <element signature="e#18261#18274#0" expanded="true" />
+                <element signature="e#24661#24671#0" expanded="true" />
+                <element signature="e#27002#27012#0" expanded="true" />
+                <element signature="e#30648#30658#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -160,8 +167,8 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/View/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
+            <state relative-caret-position="910">
+              <caret line="163" column="63" selection-start-line="163" selection-start-column="63" selection-end-line="163" selection-end-column="63" />
               <folding>
                 <element signature="e#2968#2969#0" expanded="true" />
                 <element signature="e#3016#3017#0" expanded="true" />
@@ -199,7 +206,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>deler</find>
       <find>Buy</find>
       <find>confirm</find>
       <find>Me</find>
@@ -225,10 +231,11 @@
       <find>send</find>
       <find>from</find>
       <find>Accoridion</find>
-      <find>Accordion</find>
       <find>acc_reqMessage</find>
       <find>offer</find>
+      <find>Accordion</find>
       <find>vacationToOffer</find>
+      <find>new u</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -287,12 +294,12 @@
         <option value="$PROJECT_DIR$/src/main/java/View/View.java" />
         <option value="$PROJECT_DIR$/src/main/java/Model/Model.java" />
         <option value="$PROJECT_DIR$/src/main/java/Controller/Controller.java" />
-        <option value="$PROJECT_DIR$/src/main/java/View/userMessage.java" />
         <option value="$PROJECT_DIR$/src/main/resources/addVacation.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/Model/DataBase.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/Vacation.java" />
         <option value="$PROJECT_DIR$/src/main/resources/Messages.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/View/userMessage.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/System.java" />
       </list>
     </option>
@@ -359,6 +366,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Vacation4UClone" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Vacation4UClone" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="Model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -416,12 +431,10 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\user\IdeaProjects\Vacation4UClone\src\SQL" />
-      <recent name="C:\Users\user\Documents\לימודים\חומרי לימוד\סמסטר ה\ניתוץ\פרויקט\עבודה 3\30.11 1030\Vacation4U\src\SQL" />
-      <recent name="C:\Users\user\Documents\לימודים\חומרי לימוד\סמסטר ה\ניתוץ\פרויקט\עבודה 3\26.11.18 0043\Vacation4U\src\SQL" />
-      <recent name="C:\Users\user\Documents\לימודים\חומרי לימוד\סמסטר ה\ניתוץ\פרויקט\עבודה 3\19.11 2118\Vacation4U\src\SQL" />
-      <recent name="C:\Users\user\Documents\לימודים\חומרי לימוד\סמסטר ה\ניתוץ\פרויקט\עבודה 3\18.11_1920\Vacation4U\src\main\resources" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Model" />
+      <recent name="View" />
+      <recent name="sample.Model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\Documents\לימודים\חומרי לימוד\סמסטר ה\ניתוץ\פרויקט\עבודה 3\30.11 1030\Vacation4U\src\SQL" />
@@ -432,10 +445,12 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="sample.Model" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="Model" />
-      <recent name="View" />
-      <recent name="sample.Model" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\IdeaProjects\Vacation4UClone\src\SQL" />
+      <recent name="C:\Users\user\Documents\לימודים\חומרי לימוד\סמסטר ה\ניתוץ\פרויקט\עבודה 3\30.11 1030\Vacation4U\src\SQL" />
+      <recent name="C:\Users\user\Documents\לימודים\חומרי לימוד\סמסטר ה\ניתוץ\פרויקט\עבודה 3\26.11.18 0043\Vacation4U\src\SQL" />
+      <recent name="C:\Users\user\Documents\לימודים\חומרי לימוד\סמסטר ה\ניתוץ\פרויקט\עבודה 3\19.11 2118\Vacation4U\src\SQL" />
+      <recent name="C:\Users\user\Documents\לימודים\חומרי לימוד\סמסטר ה\ניתוץ\פרויקט\עבודה 3\18.11_1920\Vacation4U\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -755,11 +770,25 @@
       <option name="project" value="LOCAL" />
       <updated>1545482771699</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Merge branch 'master' of https://github.com/arazic/Vacation4U&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/View/System.java">
+      <created>1545489237529</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1545489237529</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Merge branch 'master' of https://github.com/arazic/Vacation4U&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/View/System.java">
+      <created>1545489370021</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1545489370021</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215262000" />
+    <option name="totallyTimeSpent" value="216579000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -772,41 +801,63 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3267974" />
-      <window_info anchor="bottom" id="Messages" order="15" sideWeight="0.49959514" weight="0.31663686" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4979757" weight="0.3255814" />
+      <window_info anchor="bottom" id="Messages" order="15" sideWeight="0.49878544" weight="0.31663686" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.11983806" side_tool="true" visible="true" weight="0.021466905" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.36275303" side_tool="true" visible="true" weight="0.45974955" />
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.88016194" visible="true" weight="0.021466905" />
-      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.7959514" weight="0.050089445" />
-      <window_info anchor="bottom" id="Terminal" order="14" weight="0.32737032" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6987854" weight="0.45617172" />
+      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.63724697" visible="true" weight="0.45974955" />
+      <window_info anchor="bottom" id="Terminal" order="14" sideWeight="0.49959514" weight="0.32737032" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" weight="0.26153848" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.26153848" />
       <window_info anchor="right" id="Database" order="5" weight="0.12064777" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.19320215" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="3" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6933657" weight="0.28422275" />
       <window_info id="Favorites" order="4" side_tool="true" />
-      <window_info anchor="right" id="JetGradle" order="6" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.19320215" />
-      <window_info anchor="bottom" id="Changes" order="8" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Profiler" order="9" />
-      <window_info anchor="bottom" id="Problems" order="11" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.11983806" side_tool="true" visible="true" weight="0.021466905" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" weight="0.26153848" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="bottom" id="Problems" order="11" />
       <window_info anchor="bottom" id="Application Servers" order="13" />
+      <window_info id="UI Designer" order="3" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6933657" weight="0.28422275" />
+      <window_info anchor="bottom" id="Profiler" order="9" />
+      <window_info id="Image Layers" order="6" />
+      <window_info anchor="bottom" id="Changes" order="8" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Database" order="5" weight="0.12064777" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.7959514" weight="0.050089445" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3267974" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.19320215" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="JetGradle" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="14" weight="0.32737032" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.88016194" visible="true" weight="0.021466905" />
+      <window_info anchor="bottom" id="Messages" order="15" sideWeight="0.49959514" weight="0.31663686" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info id="Designer" order="2" />
     </layout>
     <layout-to-restore>
       <window_info anchor="bottom" id="Application Servers" order="13" />
@@ -904,7 +955,8 @@
     <MESSAGE value="changes2" />
     <MESSAGE value="universal" />
     <MESSAGE value="before_message" />
-    <option name="LAST_COMMIT_MESSAGE" value="before_message" />
+    <MESSAGE value="Merge branch 'master' of https://github.com/arazic/Vacation4U&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/View/System.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/arazic/Vacation4U&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/View/System.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1075,6 +1127,51 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/View/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="590" column="31" selection-start-line="590" selection-start-column="31" selection-end-line="590" selection-end-column="31" />
+          <folding>
+            <element signature="e#53819#53820#0" expanded="true" />
+            <element signature="e#53887#53888#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/View/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="910">
+          <caret line="163" column="63" selection-start-line="163" selection-start-column="63" selection-end-line="163" selection-end-column="63" />
+          <folding>
+            <element signature="e#2968#2969#0" expanded="true" />
+            <element signature="e#3016#3017#0" expanded="true" />
+            <element signature="e#3228#3229#0" expanded="true" />
+            <element signature="e#3276#3277#0" expanded="true" />
+            <element signature="e#3330#3331#0" expanded="true" />
+            <element signature="e#3378#3379#0" expanded="true" />
+            <element signature="e#3472#3473#0" expanded="true" />
+            <element signature="e#3523#3524#0" expanded="true" />
+            <element signature="e#3620#3621#0" expanded="true" />
+            <element signature="e#3678#3679#0" expanded="true" />
+            <element signature="e#3082#3083#0" expanded="true" />
+            <element signature="e#3133#3134#0" expanded="true" />
+            <element signature="e#3859#3860#0" expanded="true" />
+            <element signature="e#3908#3909#0" expanded="true" />
+            <element signature="e#4143#4144#0" expanded="true" />
+            <element signature="e#4192#4193#0" expanded="true" />
+            <element signature="e#3660#3661#0" expanded="true" />
+            <element signature="e#3702#3703#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/View/userMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="27" lean-forward="true" selection-start-line="25" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$PROJECT_DIR$/src/SQL/sqlite-jdbc-3.23.1.jar!/org/sqlite/core/NativeDB.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
@@ -1365,39 +1462,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Model/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="154" column="33" lean-forward="true" selection-start-line="154" selection-start-column="33" selection-end-line="154" selection-end-column="33" />
-          <folding>
-            <element signature="e#3644#3645#0" expanded="true" />
-            <element signature="e#3697#3698#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/View/Vacation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="89" column="22" selection-start-line="89" selection-start-column="22" selection-end-line="89" selection-end-column="22" />
-          <folding>
-            <element signature="e#1237#1238#0" expanded="true" />
-            <element signature="e#1269#1270#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/View/userMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="27" lean-forward="true" selection-start-line="25" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
-          <caret line="95" column="31" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="31" />
+          <caret line="99" column="31" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
           <folding>
             <element signature="e#1976#1977#0" expanded="true" />
             <element signature="e#2032#2033#0" expanded="true" />
@@ -1405,20 +1473,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Model/DataBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="584" lean-forward="true" selection-start-line="584" selection-end-line="584" />
-          <folding>
-            <element signature="e#22398#22408#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/View/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
+        <state relative-caret-position="910">
+          <caret line="163" column="63" selection-start-line="163" selection-start-column="63" selection-end-line="163" selection-end-column="63" />
           <folding>
             <element signature="e#2968#2969#0" expanded="true" />
             <element signature="e#3016#3017#0" expanded="true" />
@@ -1442,25 +1500,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/searchUser.fxml">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Messages.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/sellVacation.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/vacationDetails.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/personalArea.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/homeMenu.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="51" column="61" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="61" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/vacationTrading.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
@@ -1470,22 +1516,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Messages.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/homeMenu.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/personalArea.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/View/Vacation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="51" column="61" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="61" />
+          <caret line="22" column="10" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/View/userMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="20" column="90" selection-start-line="20" selection-start-column="86" selection-end-line="20" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Model/DataBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="406" column="31" selection-start-line="406" selection-start-column="31" selection-end-line="406" selection-end-column="31" />
+          <folding>
+            <element signature="e#17118#17131#0" expanded="true" />
+            <element signature="e#18261#18274#0" expanded="true" />
+            <element signature="e#24661#24671#0" expanded="true" />
+            <element signature="e#27002#27012#0" expanded="true" />
+            <element signature="e#30648#30658#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/View/System.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="591" column="86" selection-start-line="591" selection-start-column="86" selection-end-line="591" selection-end-column="86" />
+        <state relative-caret-position="81">
+          <caret line="1008" column="76" lean-forward="true" selection-start-line="1008" selection-start-column="76" selection-end-line="1008" selection-end-column="76" />
           <folding>
             <element signature="e#53819#53820#0" expanded="true" />
             <element signature="e#53887#53888#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Model/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="85" column="49" selection-start-line="85" selection-start-column="49" selection-end-line="85" selection-end-column="49" />
         </state>
       </provider>
     </entry>
