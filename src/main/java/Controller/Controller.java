@@ -50,6 +50,7 @@ public class Controller  {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public List<userMessage> searchAnsMessages(User registeredUser) {

@@ -84,7 +84,7 @@ public class Model  {
     public boolean insertTradingMessage(userMessage Message) throws  Exception{
         try{
             dataBase.insertTradingMessage(Message.getVacationOffer() ,Message.getFromUser().getUserName(),
-                    Message.getVacationOffer(), Message.getFromUser().getUserName(), Message.getStatus());
+                    Message.getVacationToBuy(), Message.getToUser().getUserName(), Message.getStatus());
             Message.getToUser().setMessageNum(Message.getToUser().getMessageNum()+1);
             return true;
         }catch (Exception e) {
