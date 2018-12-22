@@ -195,15 +195,15 @@ public class DataBase {
                 "\tPRIMARY KEY(`FlightNum`,`SalerName`)\n" +
                 ");";
 
-//        try (Connection conn = DriverManager.getConnection(url);
-//             Statement stmt = conn.createStatement()) {
-//            // create a new table
-//            stmt.execute(sql);
-//        } catch (SQLException e) {
-//            if (!e.getMessage().contains("already exists"))
-//                System.out.println(e.getMessage());
-//        }
-//
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            // create a new table
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            if (!e.getMessage().contains("already exists"))
+                System.out.println(e.getMessage());
+        }
+
 //        sql = "CREATE TABLE `VacationsOfUsers` (\n" +
 //                "\t`UserName`\tTEXT NOT NULL,\n" +
 //                "\t`FlightNum`\tINTEGER NOT NULL,\n" +
@@ -295,7 +295,6 @@ public class DataBase {
 
 
     public Vacation searchVacationFlightNum(String vacationFlightNum, String seller) {
-
         Vacation foundVacation= null;
 
         String sql = "SELECT FlightNum, FromPlace, ToPlace, AirlineCompany, FromDate, ToDate, TicketType, Baggage, TripType, Lodging, SalerName "
@@ -512,7 +511,7 @@ public class DataBase {
     }
 
     public boolean addVacation(Vacation vacation) {
-        String sql = "INSERT INTO Vacations(FlightNum, FromPlace, ToPlace, AirlineCompany, FromDate, ToDate, TicketType, Baggage, TripType, Lodging, SalerName) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Vacations(FlightNum, FromPlace, ToPlace, AirlineCompany, FromDate, ToDate, TicketType, Baggage, TripType, Lodging, SalerName, BuyerName) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         //java.sql.Time fromDate = new java.sql.Time(vacation.getFromDate().);
 
         try (Connection conn = this.getConnection();
@@ -528,6 +527,8 @@ public class DataBase {
             pstmt.setString(9, vacation.getTripType());
             pstmt.setString(10, vacation.getLodging());
             pstmt.setString(11, vacation.getSaler());
+            pstmt.setString(12, "NULL");
+
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
