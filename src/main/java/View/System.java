@@ -724,6 +724,7 @@ public class System {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     registeredUser.buyVacation(vacationToBuy);
+                    vacationToBuy.setBuyer(registeredUser.userName);
                     Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Congratulations");
                     alert.setHeaderText("You bought your vacation to " + vacationToBuy.getToPlace() + " !!!");
@@ -763,7 +764,6 @@ public class System {
                         userMessage Message = new userMessage(vacationToBuy.getFlightNum(), registeredUser, salerUser, "waiting");
                         salerUser.addIncomingReqMessages(Message);
                         registeredUser.addIncomingReqMessages(Message);
-                        registeredUser.addOutgoingMessages(Message);
                         try {
                             if (controller.insertMessage(Message)) {
                                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -1202,29 +1202,28 @@ public class System {
             root = scene.getRoot();
             stage.setScene(scene);
             stage.show();
-
-
         }
     }
 
     public void showTradingOppor(ActionEvent actionEvent) {
-
 
     }
 
     public void sendTradeRequestMsg(ActionEvent actionEvent) throws IOException {
         Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
         alert2.setTitle("Request sent");
-        alert2.setHeaderText("Do You want to send the trade request to the seller " + vacationToBuy.getSaler() + " ?");
+        alert2.setHeaderText("Do You want to send the trade request to the seller " + vacationToBuy.getBuyer() + " ?");
         alert2.setContentText("When you receive a reply it will appear in your message box");
         Optional<ButtonType> result2 = alert2.showAndWait();
         if (result2.get() == ButtonType.OK) {
             // ... user chose OK
             User salerUser = controller.seacrhUser(vacationToBuy.getSaler());
             if (!registeredUser.userName.equals(salerUser.userName)) {
-                userMessage Message = new userMessage(vacationToBuy.getFlightNum(), registeredUser, vacationToOffer.getFlightNum(), salerUser, "waiting");
-                salerUser.addIncomingReqMessages(Message);
-                registeredUser.addIncomingReqMessages(Message);
+                userMessage Message = new userMessage(vacationToOffer.getFlightNum(), registeredUser ,vacationToBuy.getFlightNum(), salerUser, "waiting");
+                controller.insertTradingMessage(Message);
+                // what the buyer offer , who is the buyer,  what the buyer want, from how he want to buy
+                salerUser.addIncomingTradingReqMessages(Message);
+                registeredUser.addIncomingTradingReqMessages(Message);
                 try {
 //                    if (controller.insertTradingMessage(Message)) {
                     if (controller.insertMessage(Message)) {

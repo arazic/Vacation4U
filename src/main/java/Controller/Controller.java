@@ -44,9 +44,13 @@ public class Controller  {
         return model.insertMessage(Message);
     }
 
-//    public boolean insertTradingMessage(userMessage message) {
-//        return model.insertTradingMessge(message);
-//    }
+    public boolean insertTradingMessage(userMessage message) {
+        try {
+            return model.insertTradingMessage(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<userMessage> searchAnsMessages(User registeredUser) {
         return model.searchAnsMessages(registeredUser);

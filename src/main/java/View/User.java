@@ -16,7 +16,10 @@ public class User {
     int messageNum;
     List<userMessage> incomingReqMessages;
     List<userMessage> incomingAnsMessages;
-    List<userMessage> outgoingMessages;
+    List<userMessage> incomingTradingReqMessages;
+    List<userMessage> incomingTradingAnsMessages;
+
+
     List<Vacation> myVacations;
 
 
@@ -31,7 +34,8 @@ public class User {
         this.messageNum=0;
         this.incomingReqMessages = new ArrayList<userMessage>();
         this.incomingAnsMessages = new ArrayList<userMessage>();
-        this.outgoingMessages = new ArrayList<userMessage>();
+        this.incomingTradingReqMessages = new ArrayList<userMessage>();
+        this.incomingTradingAnsMessages = new ArrayList<userMessage>();
         this.myVacations = new ArrayList<Vacation>();
         //Vacation test = new Vacation("31d","israel","london","elal",)
     }
@@ -123,10 +127,42 @@ public class User {
         incomingReqMessages.add(message);
     }
 
+    public void addIncomingTradingReqMessages(userMessage message) {
+        incomingTradingReqMessages.add(message);
+    }
+    public void addIncomingTradingAnsMessages(userMessage message) {
+        incomingTradingAnsMessages.add(message);
+    }
+
+    public void removeIncomingTradingReqMessages(userMessage message) {
+        incomingTradingReqMessages.remove(message);
+    }
+
+    public void removeIncomingTradingAnsMessages(userMessage message) {
+        incomingTradingAnsMessages.remove(message);
+    }
+
+
     public void removeIncomingReqMessages(userMessage message) {
         incomingReqMessages.remove(message);
     }
 
+
+    public List<userMessage> getIncomingTradingReqMessages() {
+        return incomingTradingReqMessages;
+    }
+
+    public void setIncomingTradingReqMessages(List<userMessage> incomingTradingReqMessages) {
+        this.incomingTradingReqMessages = incomingTradingReqMessages;
+    }
+
+    public List<userMessage> getIncomingTradingAnsMessages() {
+        return incomingTradingAnsMessages;
+    }
+
+    public void setIncomingTradingAnsMessages(List<userMessage> incomingTradingAnsMessages) {
+        this.incomingTradingAnsMessages = incomingTradingAnsMessages;
+    }
     public void addIncomingAnsMessages(userMessage message) {
         incomingAnsMessages.add(message);
     }
@@ -151,20 +187,6 @@ public class User {
         this.incomingAnsMessages = incomingAnsMessages;
     }
 
-    public List<userMessage> getOutgoingMessages() {
-        return outgoingMessages;
-    }
-
-    public void setOutgoingMessages(List<userMessage> outgoingMessages) {
-        this.outgoingMessages = outgoingMessages;
-    }
-
-    public void addOutgoingMessages(userMessage message) {
-        outgoingMessages.add(message);
-    }
-    public void removeOutgoingMessages(userMessage message) {
-        outgoingMessages.remove(message);
-    }
 
 
     public void buyVacation(Vacation vacationToBuy) {

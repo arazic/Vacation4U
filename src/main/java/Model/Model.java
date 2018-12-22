@@ -77,16 +77,20 @@ public class Model  {
         }
     }
 
-//    public boolean insertTradingMessge(userMessage Message) throws  Exception{
-//        try{
-//            dataBase.insertMessage(Message.getFromUser(),Message.getVacationToBuy(), Message.getToUser().getUserName());
-//            Message.getToUser().setMessageNum(Message.getToUser().getMessageNum()+1);
-//            return true;
-//        }catch (Exception e){
-//            return false;
-//        }
-//        }
-//    }
+//        String sql = "INSERT INTO TradingMessages
+// (FlightNumToGet,UserNameFrom,FlightNumOffering,UserNameOffering,Status) VALUES(?,?,?,?)";
+    //    public userMessage
+// (String vacationOffering, User fromUser,  String vacationToBuy, User toUser, String status) {
+    public boolean insertTradingMessage(userMessage Message) throws  Exception{
+        try{
+            dataBase.insertTradingMessage(Message.getVacationOffer() ,Message.getFromUser().getUserName(),
+                    Message.getVacationOffer(), Message.getFromUser().getUserName(), Message.getStatus());
+            Message.getToUser().setMessageNum(Message.getToUser().getMessageNum()+1);
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
+    }
 
     public List<userMessage> searchAnsMessages(User registeredUser) {
         return dataBase.searchAnsMessages(registeredUser);
@@ -154,6 +158,5 @@ public class Model  {
     public ArrayList<Vacation> searchVacationTrading(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
         return dataBase.searchVacationTrading(fromPlace,toPlace,dp_departureDate,dp_returnDate,ticketType);
     }
-
 
 }
