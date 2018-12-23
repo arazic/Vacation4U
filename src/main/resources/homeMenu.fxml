@@ -266,7 +266,7 @@
                                <Insets left="5.0" />
                            </GridPane.margin>
                        </Button>
-                  <Button fx:id="btn_SellVacation1" layoutX="15.0" layoutY="66.0" mnemonicParsing="false" onAction="#goToMyVacation" prefHeight="30.0" prefWidth="119.0" text="My Vacations" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="btn_MyVacation" visible="false" layoutX="15.0" layoutY="66.0" mnemonicParsing="false" onAction="#goToMyVacation" prefHeight="30.0" prefWidth="119.0" text="My Vacations" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="278.0" />
                      </GridPane.margin>

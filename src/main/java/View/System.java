@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import Controller.Controller;
 
 import java.io.IOException;
-import java.sql.Array;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,32 +58,23 @@ public class System {
     public javafx.scene.control.Button btn_GoSearchVacation;
     public javafx.scene.control.Button btn_PerArea;
     public javafx.scene.control.Label lab_looking;
-    public javafx.scene.control.TextArea txt_textArea;
     public javafx.scene.control.TabPane TabP_Waiting;
-    public javafx.scene.control.Button btn_patience;
-    public javafx.scene.control.Label txt_loading;
-    public javafx.scene.control.TableView TV_Message;
-    public javafx.scene.control.CheckBox ChBox_1;
-    public javafx.scene.control.CheckBox ChBox_2;
-    public javafx.scene.control.CheckBox ChBox_3;
     public javafx.scene.control.Button btn_Reject;
     public javafx.scene.control.Button btn_Confirm;
-    public javafx.scene.control.TextArea txt_ansMessage;
     public javafx.scene.control.TextArea TA_details;
     public javafx.scene.control.Accordion acc_Vacations;
     public javafx.scene.control.Accordion acc_reqMessage;
     public javafx.scene.control.Accordion acc_ansMessage;
     public javafx.scene.control.Accordion acc_TraidreqMessage;
-    public javafx.scene.control.Accordion acc_TraidansMessage;
+    public javafx.scene.control.Accordion acc_TraidAnsMessage;
     public javafx.scene.control.Label txt_messageLabel;
     public javafx.scene.control.Button btn_backFromMes;
     public javafx.scene.control.Button btn_SellVacation;
     // addVacationProperties
     public javafx.scene.control.Button btn_sell;
+    public javafx.scene.control.Button btn_MyVacation;
     public javafx.scene.control.TextField tf_airlineName;
     public javafx.scene.control.TextField tf_flightNumber;
-    public javafx.scene.control.TextField tf_lodgingAddress;
-    public javafx.scene.control.TextField tf_lodgingCity;
     public javafx.scene.control.ChoiceBox<String> cb_rate;
     public javafx.scene.control.ChoiceBox<String> cb_accommondation;
     public javafx.scene.control.ChoiceBox<String> cb_kind;
@@ -459,8 +449,13 @@ public class System {
         btn_SignIn.setVisible(false);
         btn_PerArea = (Button) scene.lookup("#btn_PerArea");
         txt_Welcome = (Label) scene.lookup("#txt_Welcome");
+        btn_MyVacation= (Button) scene.lookup("#btn_MyVacation");
+        if(btn_MyVacation!=null){
+        btn_MyVacation.setVisible(true);}
         registeredUser.setIncomingReqMessages(controller.searchReqMessages(registeredUser));
         registeredUser.setIncomingAnsMessages(controller.searchAnsMessages(registeredUser));
+        registeredUser.setIncomingTradingReqMessages(controller.searchTraidReqMessages(registeredUser));
+        registeredUser.setIncomingTradingAnsMessages(controller.searchTraidAnsMessages(registeredUser));
         if (registeredUser.getMessageNum() == 0) {
             btn_PerArea.setText(" no messages");
         } else if (registeredUser.getMessageNum() == 1) {
@@ -523,7 +518,7 @@ public class System {
                         @Override
                         public void handle(ActionEvent e) {
                             Bt.getText();
-                            vacationToBuy = controller.searchVacationFlightNum(flightNumOfVacation, seller);
+                            vacationToBuy = controller.searchVacationFlightNumBySeller(flightNumOfVacation, seller);
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
                             pagesApp.add("vacationDetails");
                             Parent root = null;
@@ -585,7 +580,7 @@ public class System {
                                 return;
                             } else {
                                 vacationToOffer = (Vacation) finalCb.getValue();
-                                vacationToBuy= controller.searchVacationFlightNum(flightNumOfVacationToGet, seller);
+                                vacationToBuy= controller.searchVacationFlightNumBySeller(flightNumOfVacationToGet, seller);
                                  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationTrading.fxml"));
                                 pagesApp.add("vacationTrading");
 
@@ -914,7 +909,7 @@ public class System {
             for (int i = 0; i < registeredUser.getIncomingAnsMessages().size(); i++) {
 //                acc_ansMessage= (Accordion) scene.lookup("#acc_ansMessage");
                 currentMessage = registeredUser.getIncomingAnsMessages().get(i);
-                TextArea TA = new TextArea(registeredUser.getIncomingAnsMessages().get(i).getToUser().getUserName() + " answer to your request  " +
+                TextArea TA = new TextArea(registeredUser.getIncomingAnsMessages().get(i).getToUser().getUserName() + " answer to your request" +
                         " regarding flight num: " + registeredUser.getIncomingAnsMessages().get(i).getVacationToBuy() + ". The answer is: "
                         + registeredUser.getIncomingAnsMessages().get(i).getStatus());
                 Button toBuy = new Button("Buy " + currentMessage.getVacationToBuy());
@@ -925,7 +920,7 @@ public class System {
                     @Override
                     public void handle(ActionEvent e) {
                         registeredUser.removeIncomingAnsMessages(currentMessage);
-                        vacationToBuy = controller.searchVacationFlightNum(currentMessage.getVacationToBuy(), currentMessage.getToUser().userName);
+                        vacationToBuy = controller.searchVacationFlightNumBySeller(currentMessage.getVacationToBuy(), currentMessage.getToUser().userName);
 
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
                         Parent root = null;
@@ -962,23 +957,22 @@ public class System {
                 acc_ansMessage.setExpandedPane(tpsAns[0]);
             }
 
-/////////////////
-          /*  acc_reqMessage = (Accordion) scene.lookup("#acc_reqMessage");
+            acc_TraidreqMessage = (Accordion) scene.lookup("#acc_TraidreqMessage");
 
-            TitledPane[] tpsReq = new TitledPane[registeredUser.getIncomingReqMessages().size()];
-            for (int i = 0; i < registeredUser.getIncomingReqMessages().size(); i++) {
-                acc_reqMessage = (Accordion) scene.lookup("#acc_reqMessage");
-                currentMessage = registeredUser.getIncomingReqMessages().get(i);
-                TextArea TA = new TextArea(registeredUser.getIncomingReqMessages().get(i).getFromUser().getUserName() + " want to buy from" +
-                        " you flight num: " + registeredUser.getIncomingReqMessages().get(i).getVacationToBuy());
-                Button Confirm = new Button("confirm " + registeredUser.getIncomingReqMessages().get(i).toString());
-                Button Reject = new Button("Reject " + registeredUser.getIncomingReqMessages().get(i).toString());
+            TitledPane[] TraidTpsReq = new TitledPane[registeredUser.getIncomingTradingReqMessages().size()];
+            for (int i = 0; i < registeredUser.getIncomingTradingReqMessages().size(); i++) {
+                currentMessage = registeredUser.getIncomingTradingReqMessages().get(i);
+                TextArea TA = new TextArea(registeredUser.getIncomingTradingReqMessages().get(i).getFromUser().getUserName() + " want to so some trading. Hw want " +
+                        "flight num: " + registeredUser.getIncomingTradingReqMessages().get(i).getVacationToBuy()+
+                ". He offer flight num: "+ registeredUser.getIncomingTradingReqMessages().get(i).getVacationOffer());
+                Button Confirm = new Button("confirm " + registeredUser.getIncomingTradingReqMessages().get(i).toString());
+                Button Reject = new Button("Reject " + registeredUser.getIncomingTradingReqMessages().get(i).toString());
                 Confirm.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
                         currentMessage.setStatus("confirm");
-                        if (controller.updateMessage(currentMessage, "confirm")) {
-                            registeredUser.removeIncomingReqMessages(currentMessage);
+                        if (controller.updateTradingMessage(currentMessage, "confirm")) {
+                            registeredUser.removeIncomingTradingReqMessages(currentMessage);
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulation");
                             alert.setHeaderText("Your message has been sent \n");
@@ -991,8 +985,8 @@ public class System {
                     @Override
                     public void handle(ActionEvent e) {
                         currentMessage.setStatus("reject");
-                        if (controller.updateMessage(currentMessage, "reject")) {
-                            registeredUser.removeIncomingReqMessages(currentMessage);
+                        if (controller.updateTradingMessage(currentMessage, "reject")) {
+                            registeredUser.removeIncomingTradingReqMessages(currentMessage);
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulation");
                             alert.setHeaderText("Your message has been sent \n");
@@ -1006,14 +1000,111 @@ public class System {
 
                 GP.add(Confirm, 1, 0);
                 GP.add(Reject, 2, 0);
-                tpsReq[i] = new TitledPane("request number " + (i + 1), GP);
+                TraidTpsReq[i] = new TitledPane("request number " + (i + 1), GP);
             }
 
-            if (registeredUser.getIncomingReqMessages().size() != 0) {
-                acc_reqMessage.getPanes().addAll(tpsReq);
-                acc_reqMessage.setExpandedPane(tpsReq[0]);
-            }*/
-            ///////////////////
+            if (registeredUser.getIncomingTradingReqMessages().size() != 0) {
+                acc_TraidreqMessage.getPanes().addAll(TraidTpsReq);
+                acc_TraidreqMessage.setExpandedPane(TraidTpsReq[0]);
+            }
+
+            acc_TraidAnsMessage = (Accordion) scene.lookup("#acc_TraidAnsMessage");
+
+            TitledPane[] TraidTpsAns = new TitledPane[registeredUser.getIncomingTradingAnsMessages().size()];
+            for (int i = 0; i < registeredUser.getIncomingTradingAnsMessages().size(); i++) {
+                currentMessage = registeredUser.getIncomingTradingAnsMessages().get(i);
+                TextArea TA = new TextArea(registeredUser.getIncomingTradingAnsMessages().get(i).getToUser().getUserName() + " answer to your request  " +
+                        " regarding flight num: " + registeredUser.getIncomingTradingAnsMessages().get(i).getVacationToBuy() + ". The answer is: "
+                        + registeredUser.getIncomingTradingAnsMessages().get(i).getStatus());
+                Button trading = new Button("trading " );
+                Button btnOk= new Button("OK");
+                btnOk.setVisible(false);
+                if (!(currentMessage.getStatus().equals("confirm"))) {
+                    trading.setDisable(true);
+                    btnOk.setVisible(true);
+                }
+                trading.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        registeredUser.removeIncomingTradingAnsMessages(currentMessage);
+                        vacationToOffer= controller.searchVacationFlightNumByBuyer(currentMessage.getVacationOffer(),currentMessage.getFromUser().userName);
+                        vacationToBuy = controller.searchVacationFlightNumByBuyer(currentMessage.getVacationToBuy(), currentMessage.getToUser().userName);
+                        controller.updateVacationSell(vacationToOffer,vacationToBuy.getBuyer());
+                        controller.updateVacationSell(vacationToBuy, vacationToOffer.getBuyer());
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
+                        Parent root = null;
+                        try {
+                            root = fxmlLoader.load(getClass().getClassLoader().getResource("vacationDetails.fxml").openStream());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Congratulation");
+                        alert.setHeaderText("trading success!");
+                        alert.setContentText("the flight to" +vacationToBuy.getFromPlace()+" is closer then ever ! " );
+                        alert.showAndWait();
+                        if (controller.removeTraidMessage(currentMessage)) {
+                            java.lang.System.out.println("Message removed");
+                        }
+                        Parent root2 = null;
+                        FXMLLoader fxmlLoader2 = new FXMLLoader();
+                        try {
+                             root2 = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        pagesApp.add("homeMenu");
+                        Scene scene2 = new Scene(root2, 700, 500);
+                        scene2.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                        Stage stage2= (Stage) trading.getScene().getWindow();
+                        String title = "Welcome " + registeredUser.getFirstName() + " " + registeredUser.getLastName();
+                        stage2.setTitle(title);
+                        stage2.setScene(scene2);
+                        stage2.show();
+                        personalHome(scene2);
+                    }
+
+                });
+
+                btnOk.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        if (controller.removeTraidMessage(currentMessage)) {
+                            java.lang.System.out.println("Message removed");
+                        }
+
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        Parent root = null;
+                        try {
+                            root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        pagesApp.add("homeMenu");
+                        Scene scene = new Scene(root, 700, 500);
+                        scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                        Stage stage = (Stage) btnOk.getScene().getWindow();
+                        String title = "Welcome " + registeredUser.getFirstName() + " " + registeredUser.getLastName();
+                        stage.setTitle(title);
+                        stage.setScene(scene);
+                        stage.show();
+                        personalHome(scene);
+                    }
+
+                });
+
+                GridPane GP = new GridPane();
+                GP.add(TA, 0, 0);
+                GP.add(trading, 1, 0);
+                GP.add(btnOk, 2, 0);
+                TraidTpsAns[i] = new TitledPane("answer number " + (i + 1), GP);
+
+            }
+            if (registeredUser.getIncomingTradingAnsMessages().size() != 0) {
+                acc_TraidAnsMessage.getPanes().addAll(TraidTpsAns);
+                acc_TraidAnsMessage.setExpandedPane(TraidTpsAns[0]);
+            }
+
 
             root = scene.getRoot();
             stage.setScene(scene);
@@ -1220,7 +1311,7 @@ public class System {
 //                    public void handle(ActionEvent e) {
 //                        Bt.getText();
 //                        //vacationToBuy= controller.searchVacationByFlightNum(Bt.getText());
-//                        vacationToBuy= controller.searchVacationFlightNum(Bt.getText());
+//                        vacationToBuy= controller.searchVacationFlightNumBySeller(Bt.getText());
 //                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
 //                        pagesApp.add("vacationDetails");
 //                        Parent root = null;
@@ -1261,13 +1352,13 @@ public class System {
     public void sendTradeRequestMsg(ActionEvent actionEvent) throws IOException {
         Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
         alert2.setTitle("Request sent");
-        alert2.setHeaderText("Do You want to send the trade request to the seller " + vacationToBuy.getBuyer() + " ?");
+        alert2.setHeaderText("Do You want to send the trade request to the buyer " + vacationToBuy.getBuyer() + " ?");
         alert2.setContentText("When you receive a reply it will appear in your message box");
         Optional<ButtonType> result2 = alert2.showAndWait();
         if (result2.get() == ButtonType.OK) {
             // ... user chose OK
-            User sellerUser = controller.seacrhUser(vacationToBuy.getSaler());
-            if (!registeredUser.userName.equals(sellerUser.userName)) {
+            User BuyerUser = controller.seacrhUser(vacationToBuy.getBuyer());
+            if (!registeredUser.userName.equals(BuyerUser.userName)) {
                 User buyer= controller.seacrhUser(vacationToBuy.getBuyer());
                 userMessage message= new userMessage(vacationToOffer.getFlightNum(), registeredUser,vacationToBuy.getFlightNum(),buyer,"waiting");
                 registeredUser.addIncomingTradingReqMessages(message);

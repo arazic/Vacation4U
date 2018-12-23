@@ -23,6 +23,7 @@ public class Model  {
         dataBase.createUserNewTable();
         dataBase.createVacationNewTable();
         dataBase.createMessagesNewTable();
+        dataBase.createVacationsOfUsersNewTable();
     }
 
     public void setController(Controller controller) {
@@ -100,8 +101,8 @@ public class Model  {
         return dataBase.searchReqMessages(registeredUser);
     }
 
-    public Vacation searchVacationFlightNum(String flightNum, String seller) {
-        return dataBase.searchVacationFlightNum(flightNum, seller);
+    public Vacation searchVacationFlightNumBySeller(String flightNum, String seller) {
+        return dataBase.searchVacationFlightNumBySeller(flightNum, seller);
     }
 
     public boolean updateMessage(userMessage currentMessage, String newStatus) {
@@ -159,4 +160,32 @@ public class Model  {
         return dataBase.searchVacationTrading(fromPlace,toPlace,dp_departureDate,dp_returnDate,ticketType);
     }
 
+    public boolean updateTradingMessage(userMessage currentMessage, String newStatus) {
+
+        try {
+            return dataBase.updateTradingMessage(currentMessage,newStatus);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public List<userMessage> searchTraidReqMessages(User user) {
+        return dataBase.searchTraidReqMessages(user);
+    }
+
+    public List<userMessage> searchTraidAnsMessages(User user) {
+        return dataBase.searchTraidAnsMessages(user);
+    }
+
+    public boolean removeTraidMessage(userMessage currentMessage) {
+        if(dataBase.removeTraidMessage(currentMessage)==1)
+            return true;
+        return false;
+    }
+
+
+    public Vacation searchVacationFlightNumByBuyer(String vacation, String userName) {
+        return dataBase.searchVacationFlightNumByBuyer(vacation,userName);
+    }
 }

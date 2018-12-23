@@ -103,6 +103,31 @@ public class DataBase {
                 System.out.println(e.getMessage());
         }
 //        System.out.println("The new table created");
+
+
+    }
+
+
+    public static void createVacationsOfUsersNewTable() {
+        // SQLite connection string
+        String url = "jdbc:sqlite:src\\SQL\\" + name + ".db";
+
+        // SQL statement for creating a new table
+        String sql = "CREATE TABLE `VacationsOfUsers` (\n" +
+                "\t`UserName`\tTEXT NOT NULL,\n" +
+                "\t`FlightNum`\tTEXT NOT NULL,\n" +
+                "\tPRIMARY KEY(`UserName`)\n" +
+                ");";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            // create a new table
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            if (!e.getMessage().contains("already exists"))
+                System.out.println(e.getMessage());
+        }
+//        System.out.println("The new table created");
     }
 
     public void insertUser(User user) throws Exception {
@@ -173,6 +198,15 @@ public class DataBase {
         return pstmt.executeUpdate();
     }
 
+    public int deleteUser(String buyer, Vacation vacationToBuy) throws SQLException {
+        String sql = "DELETE FROM VacationsOfUsers WHERE (UserName = ?) AND (FlightNum = ?)";
+        Connection conn = this.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, buyer);
+        pstmt.setString(2, vacationToBuy.getFlightNum());
+        return pstmt.executeUpdate();
+
+    }
 
     public  void createVacationNewTable() {
         // SQLite connection string
@@ -294,7 +328,7 @@ public class DataBase {
     }
 
 
-    public Vacation searchVacationFlightNum(String vacationFlightNum, String seller) {
+    public Vacation searchVacationFlightNumBySeller(String vacationFlightNum, String seller) {
         Vacation foundVacation= null;
 
         String sql = "SELECT FlightNum, FromPlace, ToPlace, AirlineCompany, FromDate, ToDate, TicketType, Baggage, TripType, Lodging, SalerName, BuyerName "
@@ -307,6 +341,44 @@ public class DataBase {
         ) {
             pstmt.setString(1, vacationFlightNum);
             pstmt.setString(2, seller);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String FlightNum= rs.getString("FlightNum");
+                String FromPlace = rs.getString("FromPlace");
+                String ToPlace = rs.getString("ToPlace");
+                String Airline= rs.getString("AirlineCompany");
+                String TicketType = rs.getString("TicketType");
+                String baggage= rs.getString("Baggage");
+                String salerName= rs.getString("SalerName");
+                String tripType = rs.getString("TripType");
+                String lodging = rs.getString("Lodging");
+                LocalDate FromDate = LocalDate.parse(rs.getString("FromDate"));
+                LocalDate ToDate = LocalDate.parse(rs.getString("ToDate"));
+                String BuyerName= rs.getString("BuyerName");
+
+                foundVacation= new Vacation(FlightNum,FromPlace,ToPlace,Airline,FromDate,ToDate,TicketType,baggage,tripType,lodging,salerName, BuyerName);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return foundVacation;
+
+    }
+
+    public Vacation searchVacationFlightNumByBuyer(String vacationFlightNum, String buyer) {
+        Vacation foundVacation= null;
+
+        String sql = "SELECT FlightNum, FromPlace, ToPlace, AirlineCompany, FromDate, ToDate, TicketType, Baggage, TripType, Lodging, SalerName, BuyerName "
+                + "FROM Vacations "
+                + "WHERE (FlightNum = ?) AND (BuyerName = ?)";  //AND ((FromDate BETWEEN ? AND ?) OR (ToDate BETWEEN ? AND ?))
+
+        try (
+                Connection conn = this.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)
+        ) {
+            pstmt.setString(1, vacationFlightNum);
+            pstmt.setString(2, buyer);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 String FlightNum= rs.getString("FlightNum");
@@ -359,9 +431,9 @@ public class DataBase {
                 "\t`FlightNumOffering`\tTEXT NOT NULL,\n" +
                 "\t`UserNameOffering`\tTEXT NOT NULL,\n" +
                 "\t`FlightNumToGet`\tTEXT NOT NULL,\n" +
-                "\t`FromUser`\tTEXT,\n" +
+                "\t`ToUser`\tTEXT,\n" +
                 "\t`Status`\tTEXT,\n" +
-                "\tPRIMARY KEY(`FlightNumToGet`,`FromUser`,`FlightNumOffering`,`UserNameOffering`)\n" +
+                "\tPRIMARY KEY(`FlightNumToGet`,`ToUser`,`FlightNumOffering`,`UserNameOffering`)\n" +
                 ");";
 //        public void insertTradingMessage(String vacationOffering, String userNameOffering, String vacationToGet, String fromUser, String status) {
 
@@ -409,14 +481,14 @@ public class DataBase {
 ////
 //            dataBase.insertTradingMessage(Message.getVacationOffer() ,Message.getFromUser().getUserName(),
 //                    Message.getVacationToBuy(), Message.getToUser().getUserName(), Message.getStatus());
-    public void insertTradingMessage(String flightNumOffering, String userNameOffering, String flightNumToGet, String fromUser, String status) {
-        String sql = "INSERT INTO TradingMessages(FlightNumOffering,UserNameOffering,FlightNumToGet,FromUser,Status) VALUES(?,?,?,?,?)";
+    public void insertTradingMessage(String flightNumOffering, String userNameOffering, String flightNumToGet, String ToUser, String status) {
+        String sql = "INSERT INTO TradingMessages(FlightNumOffering,UserNameOffering,FlightNumToGet,ToUser,Status) VALUES(?,?,?,?,?)";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, flightNumOffering);
             pstmt.setString(2, userNameOffering);
             pstmt.setString(3, flightNumToGet);
-            pstmt.setString(4, fromUser);
+            pstmt.setString(4, ToUser);
             pstmt.setString(5, "waiting");
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -451,6 +523,34 @@ public class DataBase {
         return foundMessages;
 
     }
+    public List<userMessage> searchTraidReqMessages(User user) {
+
+        List<userMessage> foundMessages= new ArrayList <userMessage> ();
+//TradingMessages(FlightNumOffering,UserNameOffering,FlightNumToGet,ToUser,Status)
+        String sql = "SELECT FlightNumOffering, UserNameOffering, FlightNumToGet, ToUser, Status " +
+                "FROM TradingMessages WHERE (ToUser =? ) ";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.getUserName());
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String FlightNumOffering= rs.getString("FlightNumOffering");
+                String UserNameOffering = rs.getString("UserNameOffering");
+                String FlightNumToGet = rs.getString("FlightNumToGet");
+                String ToUser = rs.getString("ToUser");
+                String Status= rs.getString("Status");
+
+                User UserNameOffer= searchUser(UserNameOffering);
+                userMessage inboxMessage= new userMessage(FlightNumOffering,UserNameOffer,FlightNumToGet, user, Status) ;
+                foundMessages.add(inboxMessage);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return foundMessages;
+
+    }
 
     public List<userMessage> searchAnsMessages(User user) {
 
@@ -471,6 +571,36 @@ public class DataBase {
                 User userFrom= searchUser(UserNameFrom);
                 User userTo= searchUser(UserNameTo);
                 userMessage inboxMessage= new userMessage(FlightNum,userFrom, userTo, Status) ;
+                foundMessages.add(inboxMessage);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return foundMessages;
+    }
+
+    public List<userMessage> searchTraidAnsMessages(User user) {
+
+        List<userMessage> foundMessages= new ArrayList <userMessage> ();
+
+        String sql = "SELECT FlightNumOffering, UserNameOffering, FlightNumToGet, ToUser, Status " +
+                "FROM TradingMessages WHERE (UserNameOffering =? ) ";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.getUserName());
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String FlightNumOffering= rs.getString("FlightNumOffering");
+                String UserNameOffering = rs.getString("UserNameOffering");
+                String FlightNumToGet = rs.getString("FlightNumToGet");
+                String ToUser = rs.getString("ToUser");
+                String Status= rs.getString("Status");
+
+
+                User userFrom= searchUser(UserNameOffering);
+                User userTo= searchUser(ToUser);
+                userMessage inboxMessage= new userMessage(FlightNumOffering,userFrom, FlightNumToGet, userTo, Status) ;
                 foundMessages.add(inboxMessage);
             }
         } catch (SQLException e) {
@@ -556,6 +686,25 @@ public class DataBase {
             pstmt.setString(1, currentMessage.getVacationToBuy());
             pstmt.setString(2, currentMessage.getFromUser().getUserName());
             pstmt.setString(3, currentMessage.getToUser().getUserName());
+            return pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+
+    }
+
+
+    public int removeTraidMessage(userMessage currentMessage) {
+        String sql = "DELETE FROM TradingMessages WHERE (FlightNumOffering = ?) AND (UserNameOffering = ?) AND (FlightNumToGet = ?) AND (ToUser = ?)";
+        Connection conn = this.getConnection();
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, currentMessage.getVacationOffer());
+            pstmt.setString(2, currentMessage.getFromUser().getUserName());
+            pstmt.setString(3, currentMessage.getVacationToBuy());
+            pstmt.setString(4, currentMessage.getToUser().getUserName());
             return pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -753,5 +902,27 @@ public class DataBase {
     }
 
 
+    public boolean updateTradingMessage(userMessage currentMessage, String newStatus) throws SQLException {
+        if(currentMessage==null ||newStatus==null){
+            return false;
+        }
+        //       (FlightNumOffering,UserNameOffering,FlightNumToGet,FromUser,Status) VALUES(?,?,?,?,?)";
+        else {
+            String sql = "UPDATE TradingMessages SET Status " + " = ? "
+                    + "WHERE (FlightNumOffering = ?) AND (UserNameOffering = ?) AND (FlightNumToGet = ?) AND (ToUser = ?)";
+//            System.out.println(sql);
+            Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // set the corresponding param
+            pstmt.setString(1, newStatus);
+            pstmt.setString(2, currentMessage.getVacationOffer());
+            pstmt.setString(3, currentMessage.getFromUser().getUserName());
+            pstmt.setString(4, currentMessage.getVacationToBuy());
+            pstmt.setString(5, currentMessage.getToUser().getUserName());
+            //update
+            pstmt.executeUpdate();
+            return true;
+        }
+    }
 }
 

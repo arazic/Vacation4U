@@ -62,8 +62,8 @@ public class Controller  {
         return model.searchReqMessages(registeredUser);
     }
 
-    public Vacation searchVacationFlightNum(String flightNum, String seller) {
-        return model.searchVacationFlightNum(flightNum, seller);
+    public Vacation searchVacationFlightNumBySeller(String flightNum, String seller) {
+        return model.searchVacationFlightNumBySeller(flightNum, seller);
     }
 
     public boolean updateMessage(userMessage currentMessage, String newStatus) {
@@ -101,6 +101,27 @@ public class Controller  {
         return model.searchVacationTrading(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
     }
 
+    public boolean updateTradingMessage(userMessage currentMessage, String newStatus) {
+        return model.updateTradingMessage(currentMessage,newStatus);
+
+    }
+
+    public List<userMessage> searchTraidReqMessages(User User) {
+    return model.searchTraidReqMessages(User);
+    }
+
+    public List<userMessage> searchTraidAnsMessages(User User) {
+        return model.searchTraidAnsMessages(User);
+    }
+
+    public boolean removeTraidMessage(userMessage currentMessage) {
+        return model.removeTraidMessage(currentMessage);
+    }
+
+
+    public Vacation searchVacationFlightNumByBuyer(String vacation, String userName) {
+    return model.searchVacationFlightNumByBuyer(vacation,userName);
+    }
 }
 
 

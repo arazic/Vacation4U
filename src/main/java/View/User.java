@@ -116,7 +116,8 @@ public class User {
     }
 
     public int getMessageNum() {
-        return incomingReqMessages.size()+ incomingAnsMessages.size();
+        return incomingReqMessages.size()+ incomingAnsMessages.size()
+                +incomingTradingAnsMessages.size()+ incomingTradingReqMessages.size();
     }
 
     public void setMessageNum(int messageNum) {
