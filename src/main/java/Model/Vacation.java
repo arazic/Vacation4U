@@ -108,6 +108,7 @@ public class Vacation {
 
     @Override
     public String toString() {
+
         return "Vacation" + '\n' +
                 "flightNum: " + flightNum + '\n' +
                 "fromPlace: " + fromPlace + '\n' +

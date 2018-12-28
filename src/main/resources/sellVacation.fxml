@@ -305,7 +305,7 @@
                                 <Image url="logo.jpg" />
                             </image>
                         </ImageView>
-                        <Button fx:id="btn_PerArea" onAction="#goToPersonal"  visible="false" prefHeight="31.0" prefWidth="90" mnemonicParsing="false" text="Personal Area" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Button fx:id="btn_Mess" onAction="#goToPersonalMessage" visible="false" prefHeight="31.0" prefWidth="90" mnemonicParsing="false" text="Personal Area" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <GridPane.margin>
                                 <Insets left="3.0" />
                             </GridPane.margin></Button>

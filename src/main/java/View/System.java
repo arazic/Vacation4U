@@ -60,7 +60,8 @@ public class System {
     public javafx.scene.control.TextField txtfld_TO;
     public javafx.scene.control.Button btn_toBuy;
     public javafx.scene.control.Button btn_GoSearchVacation;
-    public javafx.scene.control.Button btn_PerArea;
+    public javafx.scene.control.Button btn_Mess;
+    public javafx.scene.control.Button btn_PersonalArea;
     public javafx.scene.control.Label lab_looking;
     public javafx.scene.control.TabPane TabP_Waiting;
     public javafx.scene.control.Button btn_Reject;
@@ -378,8 +379,10 @@ public class System {
             registeredUser.setLogIn(false);
             Stage stage = (Stage) btn_LogIn.getScene().getWindow();
             showStage(scene, stage);
-            btn_PerArea = (Button) scene.lookup("#btn_PerArea");
-            btn_PerArea.setVisible(false);
+            btn_Mess = (Button) scene.lookup("#btn_Mess");
+            btn_Mess.setVisible(false);
+            btn_PersonalArea= (Button) scene.lookup("#btn_PersonalArea");
+            btn_PersonalArea.setVisible(false);
             txt_Welcome = (Label) scene.lookup("#txt_Welcome");
             txt_Welcome.setVisible(false);
         } else {
@@ -464,7 +467,9 @@ public class System {
         btn_SignIn.setVisible(false);
         btn_SignIn = (Button) scene.lookup("#btn_SignIn");
         btn_SignIn.setVisible(false);
-        btn_PerArea = (Button) scene.lookup("#btn_PerArea");
+        btn_Mess = (Button) scene.lookup("#btn_Mess");
+        btn_PersonalArea = (Button) scene.lookup("#btn_PersonalArea");
+        btn_PersonalArea.setVisible(true);
         txt_Welcome = (Label) scene.lookup("#txt_Welcome");
         btn_MyVacation= (Button) scene.lookup("#btn_MyVacation");
         if(btn_MyVacation!=null){
@@ -474,13 +479,13 @@ public class System {
         registeredUser.setIncomingTradingReqMessages(controller.searchTraidReqMessages(registeredUser));
         registeredUser.setIncomingTradingAnsMessages(controller.searchTraidAnsMessages(registeredUser));
         if (registeredUser.getMessageNum() == 0) {
-            btn_PerArea.setText(" no messages");
+            btn_Mess.setText(" no messages");
         } else if (registeredUser.getMessageNum() == 1) {
-            btn_PerArea.setText(registeredUser.getMessageNum() + " message");
+            btn_Mess.setText(registeredUser.getMessageNum() + " message");
         } else {
-            btn_PerArea.setText(registeredUser.getMessageNum() + " messages");
+            btn_Mess.setText(registeredUser.getMessageNum() + " messages");
         }
-        btn_PerArea.setVisible(true);
+        btn_Mess.setVisible(true);
         txt_Welcome.setText("welcome " + registeredUser.getUserName()+ " !");
         txt_Welcome.setVisible(true);
     }
@@ -494,12 +499,14 @@ public class System {
     }
 
     public void goToSearchVacation(ActionEvent actionEvent) throws IOException, ParseException {
-
         if (datesLegal(dp_return, dp_departure))
             if (checkOneValuesIsLegal(sp_adults.getValue().toString()) && checkOneValuesIsLegal(sp_children.getValue().toString()) &&
                     checkOneValuesIsLegal(txtfld_FROM.getText()) && checkOneValuesIsLegal(txtfld_TO.getText())) {
                 String ticketType = "adult"; // need to change
-                LocalDate dp_returnDate = LocalDate.of(dp_departure.getValue().getYear(), dp_departure.getValue().getMonthValue(), dp_departure.getValue().getDayOfMonth());
+                LocalDate dp_returnDate=null;
+                if(dp_departure.getValue()!=null) {
+                    dp_returnDate = LocalDate.of(dp_departure.getValue().getYear(), dp_departure.getValue().getMonthValue(), dp_departure.getValue().getDayOfMonth());
+                }
                 LocalDate dp_departureDate = LocalDate.of(dp_return.getValue().getYear(), dp_return.getValue().getMonthValue(), dp_return.getValue().getDayOfMonth());
                 String fromPlace = txtfld_FROM.getText();
                 String toPlace = txtfld_TO.getText();
@@ -507,7 +514,7 @@ public class System {
                 // Return the available vacations that nobody buy yet.
                 /*ArrayList<Vacation>*/ foundVacation = controller.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
                 // Return the vacations that is optional to trade (someone bought the vacation already).
-                ArrayList<Vacation> foundVacationForTrading = controller.searchVacationTrading(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
+                ArrayList<Vacation>  foundVacationForTrading = controller.searchVacationTrading(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
 
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("foundVacations.fxml"));
@@ -568,76 +575,76 @@ public class System {
                     acc_Vacations.setExpandedPane(tps[0]);
                 }
 
-
-                TitledPane[] tps1 = new TitledPane[foundVacationForTrading.size()];
-                for (int i = 0; i < foundVacationForTrading.size(); i++) {
-                    ChoiceBox cb = null;
-                    if (registeredUser != null) {
-                        ArrayList<Vacation> userVactions = controller.getUserVacations(registeredUser.getUserName());
-                        cb = new ChoiceBox(FXCollections.observableArrayList(
-                                userVactions)
-                        );
-                    }
-                    acc_Vacations1 = (Accordion) scene.lookup("#acc_Vacations1");
-                    TextArea TA = new TextArea(foundVacationForTrading.get(i).toString());
-                    Button Bt = new Button(foundVacationForTrading.get(i).getFlightNum());
-                    String flightNumOfVacationToGet = foundVacationForTrading.get(i).getFlightNum();
-                    String seller = foundVacationForTrading.get(i).getSaler();
-                    Label lb = new Label("Vacation to offer");
-                    ChoiceBox finalCb = cb;
-                    Bt.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent e) {
-                            // User must choose some of his vacation to trade offer
-                            if (finalCb.getValue() == null) {
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Details are invalid\n");
-                                alert.setContentText("You have to choose vacation to offer");
-                                alert.showAndWait();
-                                return;
-                            } else {
-                                vacationToOffer = (Vacation) finalCb.getValue();
-                                vacationToBuy= controller.searchVacationFlightNumBySeller(flightNumOfVacationToGet, seller);
-                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationTrading.fxml"));
-                                pagesApp.add("vacationTrading");
-
-                                Parent root = null;
-                                try {
-                                    root = fxmlLoader.load();
-                                } catch (IOException e1) {
-                                    e1.printStackTrace();
-                                }
-                                Scene scene = new Scene(root, 700, 500);
-                                scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
-                                Stage stage = (Stage) Bt.getScene().getWindow();
-                                String title = "Vacation Trading";
-                                stage.setTitle(title);
-                                stage.setScene(scene);
-                                stage.show();
-                                //vacationToBuy = (Vacation) controller.searchVacationByFlightNum(Bt.getText());
-                                TA_vacationOfferDetails = (TextArea) scene.lookup("#TA_vacationOfferDetails");
-                                TA_vacationToGetDetails = (TextArea) scene.lookup("#TA_vacationToGetDetails");
-                                TA_vacationOfferDetails.setText(vacationToOffer.toString());
-                                TA_vacationToGetDetails.setText(vacationToBuy.toString());
-                            }
+                if(foundVacationForTrading!=null) {
+                    TitledPane[] tps1 = new TitledPane[foundVacationForTrading.size()];
+                    for (int i = 0; i < foundVacationForTrading.size(); i++) {
+                        ChoiceBox cb = null;
+                        if (registeredUser != null) {
+                            ArrayList<Vacation> userVactions = controller.getUserVacations(registeredUser.getUserName());
+                            cb = new ChoiceBox(FXCollections.observableArrayList(
+                                    userVactions)
+                            );
                         }
-                    });
+                        acc_Vacations1 = (Accordion) scene.lookup("#acc_Vacations1");
+                        TextArea TA = new TextArea(foundVacationForTrading.get(i).toString());
+                        Button Bt = new Button(foundVacationForTrading.get(i).getFlightNum());
+                        String flightNumOfVacationToGet = foundVacationForTrading.get(i).getFlightNum();
+                        String seller = foundVacationForTrading.get(i).getSaler();
+                        Label lb = new Label("Vacation to offer");
+                        ChoiceBox finalCb = cb;
+                        Bt.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent e) {
+                                // User must choose some of his vacation to trade offer
+                                if (finalCb.getValue() == null) {
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                    alert.setTitle("Details are invalid\n");
+                                    alert.setContentText("You have to choose vacation to offer");
+                                    alert.showAndWait();
+                                    return;
+                                } else {
+                                    vacationToOffer = (Vacation) finalCb.getValue();
+                                    vacationToBuy = controller.searchVacationFlightNumBySeller(flightNumOfVacationToGet, seller);
+                                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationTrading.fxml"));
+                                    pagesApp.add("vacationTrading");
 
-                    GridPane GP1 = new GridPane();
-                    GP1.add(TA, 0, 0);
-                    GP1.add(Bt, 1, 0);
-                    if (registeredUser != null) {
-                        GP1.add(lb, 2, 0);
-                        GP1.add(cb, 2, 1);
+                                    Parent root = null;
+                                    try {
+                                        root = fxmlLoader.load();
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                    Scene scene = new Scene(root, 700, 500);
+                                    scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                                    Stage stage = (Stage) Bt.getScene().getWindow();
+                                    String title = "Vacation Trading";
+                                    stage.setTitle(title);
+                                    stage.setScene(scene);
+                                    stage.show();
+                                    //vacationToBuy = (Vacation) controller.searchVacationByFlightNum(Bt.getText());
+                                    TA_vacationOfferDetails = (TextArea) scene.lookup("#TA_vacationOfferDetails");
+                                    TA_vacationToGetDetails = (TextArea) scene.lookup("#TA_vacationToGetDetails");
+                                    TA_vacationOfferDetails.setText(vacationToOffer.toString());
+                                    TA_vacationToGetDetails.setText(vacationToBuy.toString());
+                                }
+                            }
+                        });
+
+                        GridPane GP1 = new GridPane();
+                        GP1.add(TA, 0, 0);
+                        GP1.add(Bt, 1, 0);
+                        if (registeredUser != null) {
+                            GP1.add(lb, 2, 0);
+                            GP1.add(cb, 2, 1);
+                        }
+                        tps1[i] = new TitledPane(foundVacationForTrading.get(i).getFlightNum(), GP1);
+
                     }
-                    tps1[i] = new TitledPane(foundVacationForTrading.get(i).getFlightNum(), GP1);
-
+                    if (tps1.length > 0) {
+                        acc_Vacations1.getPanes().addAll(tps1);
+                        acc_Vacations1.setExpandedPane(tps1[0]);
+                    }
                 }
-                if (tps1.length > 0) {
-                    acc_Vacations1.getPanes().addAll(tps1);
-                    acc_Vacations1.setExpandedPane(tps1[0]);
-                }
-
                 root = scene.getRoot();
                 stage.setScene(scene);
                 stage.show();
@@ -650,7 +657,7 @@ public class System {
 
 
     private boolean datesLegal(DatePicker dp_departure, DatePicker dp_return) {
-        if (dp_departure.getValue() == null || dp_return.getValue() == null) {
+        if (dp_departure.getValue() == null ) {
             EmptyFieldAlert();
             return false;
         } else {
@@ -660,7 +667,8 @@ public class System {
             try {
                 currentDate = sdf.parse(localDate.toString());
                 departureDate = sdf.parse(dp_departure.getValue().toString());
-                returnDate = sdf.parse(dp_return.getValue().toString());
+                if(dp_return.getValue() !=null){
+                returnDate = sdf.parse(dp_return.getValue().toString());}
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -673,14 +681,16 @@ public class System {
                 alert.showAndWait();
                 return false;
             }
-            if (departureDate.compareTo(returnDate) > 0) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Details are invalid\n");
-                alert.setHeaderText(" return date can not be before departure\n");
-                alert.setContentText("Try again");
+            if(dp_return.getValue() !=null){
+             if (departureDate.compareTo(returnDate) > 0) {
+                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                 alert.setTitle("Details are invalid\n");
+                 alert.setHeaderText(" return date can not be before departure\n");
+                 alert.setContentText("Try again");
 
-                alert.showAndWait();
-                return false;
+                 alert.showAndWait();
+                 return false;
+             }
             }
 
             return true;
@@ -755,8 +765,10 @@ public class System {
                         stage.setScene(scene);
                         stage.show();
                         java.lang.System.out.println("deleted");
-                        btn_PerArea = (Button) scene.lookup("#btn_PerArea");
-                        btn_PerArea.setVisible(false);
+                        btn_Mess = (Button) scene.lookup("#btn_Mess");
+                        btn_Mess.setVisible(false);
+                        btn_PersonalArea=(Button) scene.lookup("#btn_PersonalArea");
+                        btn_PersonalArea.setVisible(false);
                         txt_Welcome = (Label) scene.lookup("#txt_Welcome");
                         txt_Welcome.setVisible(false);
 
@@ -839,7 +851,7 @@ public class System {
     }
 
 
-    public void goToPersonal(ActionEvent actionEvent) throws IOException {
+    public void goToPersonalMessage(ActionEvent actionEvent) throws IOException {
         if (registeredUser == null || (!registeredUser.isLogIn())) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Be Attention");
@@ -852,7 +864,7 @@ public class System {
                 Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
                 pagesApp.add("logIn");
                 Scene scene = new Scene(root, 700, 500);
-                Stage stage = (Stage) btn_PerArea.getScene().getWindow();
+                Stage stage = (Stage) btn_Mess.getScene().getWindow();
                 scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
                 stage.setTitle("Log in");
                 stage.setScene(scene);
@@ -865,7 +877,7 @@ public class System {
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("Messages.fxml").openStream());
             pagesApp.add("Messages");
             Scene scene = new Scene(root, 700, 500);
-            Stage stage = (Stage) btn_PerArea.getScene().getWindow();
+            Stage stage = (Stage) btn_Mess.getScene().getWindow();
             scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
             stage.setTitle("your messages");
             stage.setScene(scene);
