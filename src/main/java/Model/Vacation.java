@@ -9,18 +9,18 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Vacation {
-    String flightNum;
-    String fromPlace;
-    String toPlace;
-    String airlineCompany;
-    LocalDate fromDate;
-    LocalDate toDate;
-    String ticketType;
-    String baggage;
-    String tripType;
-    String lodging = "NOT INCLUDED";
-    String saler;
-    String BuyerName;
+    private String flightNum;
+    private String fromPlace;
+    private String toPlace;
+    private String airlineCompany;
+    private LocalDate fromDate;
+    private LocalDate toDate;
+    private String ticketType;
+    private String baggage;
+    private String tripType;
+    private String lodging = "NOT INCLUDED";
+    private String saler;
+    private String BuyerName;
 
     public Vacation(String flightNum, String fromPlace, String toPlace, String airlineCompany, LocalDate fromDate, LocalDate toDate, String ticketType, String baggage, String tripType, String lodging, String saler, String BuyerName) {
         this.flightNum = flightNum;

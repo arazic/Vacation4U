@@ -922,5 +922,82 @@ public class DataBase {
             return true;
         }
     }
+
+    public List<Vacation> searchAllVacations() {
+        List<Vacation> foundVacation= new ArrayList<>();
+        Vacation CurrentVacation=null;
+
+        String sql = "SELECT *"
+                + "FROM Vacations "
+                + "WHERE (BuyerName == ?);";  //AND ((FromDate BETWEEN ? AND ?) OR (ToDate BETWEEN ? AND ?))
+
+        try (
+                Connection conn = this.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)
+        ) {
+            pstmt.setString(1, "NULL");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String FlightNum= rs.getString("FlightNum");
+                String FromPlace = rs.getString("FromPlace");
+                String ToPlace = rs.getString("ToPlace");
+                String Airline= rs.getString("AirlineCompany");
+                String TicketType = rs.getString("TicketType");
+                String baggage= rs.getString("Baggage");
+                String salerName= rs.getString("SalerName");
+                String tripType = rs.getString("TripType");
+                String lodging = rs.getString("Lodging");
+                LocalDate FromDate = LocalDate.parse(rs.getString("FromDate"));
+                LocalDate ToDate = LocalDate.parse(rs.getString("ToDate"));
+                String BuyerName= rs.getString("BuyerName");
+
+                CurrentVacation= new Vacation(FlightNum,FromPlace,ToPlace,Airline,FromDate,ToDate,TicketType,baggage,tripType,lodging,salerName, BuyerName);
+                foundVacation.add(CurrentVacation);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return foundVacation;
+
+    }
+
+    public List<Vacation> searchAllTradingVacations() {
+        List<Vacation> foundVacation= new ArrayList<>();
+        Vacation CurrentVacation=null;
+
+        String sql = "SELECT *"
+                + "FROM Vacations "
+                + "WHERE (BuyerName != ?);";  //AND ((FromDate BETWEEN ? AND ?) OR (ToDate BETWEEN ? AND ?))
+
+        try (
+                Connection conn = this.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)
+        ) {
+            pstmt.setString(1, "NULL");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String FlightNum= rs.getString("FlightNum");
+                String FromPlace = rs.getString("FromPlace");
+                String ToPlace = rs.getString("ToPlace");
+                String Airline= rs.getString("AirlineCompany");
+                String TicketType = rs.getString("TicketType");
+                String baggage= rs.getString("Baggage");
+                String salerName= rs.getString("SalerName");
+                String tripType = rs.getString("TripType");
+                String lodging = rs.getString("Lodging");
+                LocalDate FromDate = LocalDate.parse(rs.getString("FromDate"));
+                LocalDate ToDate = LocalDate.parse(rs.getString("ToDate"));
+                String BuyerName= rs.getString("BuyerName");
+
+                CurrentVacation= new Vacation(FlightNum,FromPlace,ToPlace,Airline,FromDate,ToDate,TicketType,baggage,tripType,lodging,salerName, BuyerName);
+                foundVacation.add(CurrentVacation);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return foundVacation;
+    }
 }
 

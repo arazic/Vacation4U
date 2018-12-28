@@ -4,11 +4,11 @@ import Model.User;
 
 public class userMessage {
 
-    String vacationToBuy;
-    String vacationOffer;
-    User fromUser; // purchaser
-    User toUser; // saler
-    String Status;
+    private String vacationToBuy;
+    private String vacationOffer;
+    private User fromUser; // purchaser
+    private User toUser; // saler
+    private String Status;
 
 
     public userMessage(String vacationToBuy, User fromUser, User toUser, String Status) {

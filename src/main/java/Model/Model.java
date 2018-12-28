@@ -186,4 +186,12 @@ public class Model  {
     public Vacation searchVacationFlightNumByBuyer(String vacation, String userName) {
         return dataBase.searchVacationFlightNumByBuyer(vacation,userName);
     }
+
+    public List<Vacation> searchAllVacations() {
+        return dataBase.searchAllVacations();
+    }
+
+    public List<Vacation> searchAllTradingVacations() {
+        return dataBase.searchAllTradingVacations();
+    }
 }

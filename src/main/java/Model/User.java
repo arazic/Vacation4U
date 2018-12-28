@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    String userName;
-    String password;
-    String birthDate;
-    String firstName;
-    String lastName;
-    String city;
-    boolean logIn;
-    int messageNum;
-    List<userMessage> incomingReqMessages;
-    List<userMessage> incomingAnsMessages;
-    List<userMessage> incomingTradingReqMessages;
-    List<userMessage> incomingTradingAnsMessages;
-    List<Vacation> myVacations;
+    private String userName;
+    private String password;
+    private String birthDate;
+    private String firstName;
+    private String lastName;
+    private String city;
+    private boolean logIn;
+    private int messageNum;
+    private List<userMessage> incomingReqMessages;
+    private List<userMessage> incomingAnsMessages;
+    private List<userMessage> incomingTradingReqMessages;
+    private List<userMessage> incomingTradingAnsMessages;
+    private List<Vacation> myVacations;
 
 
     public User(String userName, String password, String birthDate, String firstName, String lastName, String city, boolean logIn) {

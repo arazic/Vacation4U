@@ -122,6 +122,14 @@ public class Controller  {
     public Vacation searchVacationFlightNumByBuyer(String vacation, String userName) {
     return model.searchVacationFlightNumByBuyer(vacation,userName);
     }
+
+    public List<Vacation> searchAllVacations() {
+        return model.searchAllVacations();
+    }
+
+    public List<Vacation> searchAllTradingVacations() {
+        return model.searchAllTradingVacations();
+    }
 }
 
 

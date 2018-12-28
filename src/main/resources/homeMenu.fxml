@@ -35,25 +35,26 @@
                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="36.0" />
                              </columnConstraints>
                              <rowConstraints>
-                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                                 <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                                 <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                                 <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                                 <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="11.0" vgrow="SOMETIMES" />
                                  <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
                              </rowConstraints>
                              <children>
                                  <SplitPane dividerPositions="0.50355871886121" prefHeight="160.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                      <items>
-                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="283.0">
-                                             <children>
-                                                 <TextField fx:id="txtfld_FROM" layoutX="-2.0" layoutY="2.0" prefHeight="26.0" prefWidth="285.0" />
-                                             </children>
-                                         </AnchorPane>
                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                              <children>
-                                                 <TextField fx:id="txtfld_TO" layoutX="-3.0" layoutY="2.0" prefHeight="26.0" prefWidth="280.0" />
+                                                 <TextField fx:id="txtfld_TO" layoutX="-1.0" layoutY="-6.0" prefHeight="45.0" prefWidth="285.0" />
+                                             </children>
+                                         </AnchorPane>
+                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="283.0">
+                                             <children>
+                                                 <TextField fx:id="txtfld_FROM" layoutX="-5.0" layoutY="-6.0" prefHeight="44.0" prefWidth="283.0" />
                                              </children>
                                          </AnchorPane>
                                      </items>
@@ -150,6 +151,7 @@
                                          <Button fx:id="btn_GoSearchVacation" minWidth="46.0" mnemonicParsing="false" onAction="#goToSearchVacation" prefHeight="31.0" prefWidth="83.0" text="Go!" GridPane.columnIndex="1" />
                                      </children>
                                  </GridPane>
+                        <Button  fx:id="btn_allVacations" mnemonicParsing="false" text="show me all vacations" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" onAction="#allVacations" />
                              </children>
                          </GridPane>
                </children>
@@ -259,7 +261,7 @@
                            </GridPane.margin>
                        </Button>
 
-                       <Label fx:id="txt_Welcome" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="98.0" text="Welcome !" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT"  GridPane.rowIndex="1">
+                       <Label fx:id="txt_Welcome" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="98.0" text="Welcome !" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                            <GridPane.margin>
                                <Insets right="15.0" />
                            </GridPane.margin>
@@ -271,7 +273,7 @@
                                <Insets left="5.0" />
                            </GridPane.margin>
                        </Button>
-                       <Button fx:id="btn_MyVacation" mnemonicParsing="false" onAction="#goToMyVacation" prefHeight="39.0" prefWidth="114.0" text="My Vacations" GridPane.columnIndex="1" GridPane.rowIndex="2" visible="false">
+                       <Button fx:id="btn_MyVacation" mnemonicParsing="false" onAction="#goToMyVacation" prefHeight="39.0" prefWidth="114.0" text="My Vacations" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <GridPane.margin>
                                <Insets left="3.0" />
                            </GridPane.margin>
