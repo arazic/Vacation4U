@@ -1,9 +1,7 @@
 package Model;
 
 import Controller.Controller;
-import View.User;
-import View.Vacation;
-import View.userMessage;
+import Model.Vacation;
 
 import java.sql.SQLException;
 import java.time.LocalDate;

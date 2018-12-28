@@ -1,5 +1,8 @@
 package View;
 
+import Model.User;
+import Model.Vacation;
+import Model.userMessage;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -464,7 +467,7 @@ public class System {
             btn_PerArea.setText(registeredUser.getMessageNum() + " messages");
         }
         btn_PerArea.setVisible(true);
-        txt_Welcome.setText("welcome " + registeredUser.userName + " !");
+        txt_Welcome.setText("welcome " + registeredUser.getUserName()+ " !");
         txt_Welcome.setVisible(true);
     }
 
@@ -556,7 +559,7 @@ public class System {
                 for (int i = 0; i < foundVacationForTrading.size(); i++) {
                     ChoiceBox cb = null;
                     if (registeredUser != null) {
-                        ArrayList<Vacation> userVactions = controller.getUserVacations(registeredUser.userName);
+                        ArrayList<Vacation> userVactions = controller.getUserVacations(registeredUser.getUserName());
                         cb = new ChoiceBox(FXCollections.observableArrayList(
                                 userVactions)
                         );
@@ -720,14 +723,14 @@ public class System {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     registeredUser.buyVacation(vacationToBuy);
-                    vacationToBuy.setBuyer(registeredUser.userName);
+                    vacationToBuy.setBuyer(registeredUser.getUserName());
                     Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Congratulations");
                     alert.setHeaderText("You bought your vacation to " + vacationToBuy.getToPlace() + " !!!");
                     alert.setContentText(vacationToBuy.getToPlace() + " feels closer than ever...!");
                     alert.showAndWait();
 
-                    if (controller.updateVacationSell(vacationToBuy, registeredUser.userName)) {
+                    if (controller.updateVacationSell(vacationToBuy, registeredUser.getUserName())) {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
                         pagesApp.add("homeMenu");
@@ -756,7 +759,7 @@ public class System {
                 if (result2.get() == ButtonType.OK) {
                     // ... user chose OK
                     User salerUser = controller.seacrhUser(vacationToBuy.getSaler());
-                    if (!registeredUser.userName.equals(salerUser.userName)) {
+                    if (!registeredUser.getUserName().equals(salerUser.getUserName())) {
                         userMessage Message = new userMessage(vacationToBuy.getFlightNum(), registeredUser, salerUser, "waiting");
                         salerUser.addIncomingReqMessages(Message);
                         registeredUser.addIncomingReqMessages(Message);
@@ -920,7 +923,7 @@ public class System {
                     @Override
                     public void handle(ActionEvent e) {
                         registeredUser.removeIncomingAnsMessages(currentMessage);
-                        vacationToBuy = controller.searchVacationFlightNumBySeller(currentMessage.getVacationToBuy(), currentMessage.getToUser().userName);
+                        vacationToBuy = controller.searchVacationFlightNumBySeller(currentMessage.getVacationToBuy(), currentMessage.getToUser().getUserName());
 
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
                         Parent root = null;
@@ -1027,8 +1030,8 @@ public class System {
                     @Override
                     public void handle(ActionEvent e) {
                         registeredUser.removeIncomingTradingAnsMessages(currentMessage);
-                        vacationToOffer= controller.searchVacationFlightNumByBuyer(currentMessage.getVacationOffer(),currentMessage.getFromUser().userName);
-                        vacationToBuy = controller.searchVacationFlightNumByBuyer(currentMessage.getVacationToBuy(), currentMessage.getToUser().userName);
+                        vacationToOffer= controller.searchVacationFlightNumByBuyer(currentMessage.getVacationOffer(),currentMessage.getFromUser().getUserName());
+                        vacationToBuy = controller.searchVacationFlightNumByBuyer(currentMessage.getVacationToBuy(), currentMessage.getToUser().getUserName());
                         controller.updateVacationSell(vacationToOffer,vacationToBuy.getBuyer());
                         controller.updateVacationSell(vacationToBuy, vacationToOffer.getBuyer());
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
@@ -1231,7 +1234,7 @@ public class System {
             lodging = cb_accommondation.getValue() + cb_rate.getValue();
         //public Vacation(String flightNum, String fromPlace, String toPlace, String airlineCompany, Date fromDate, Date toDate, String ticketType, String baggage, String tripType, String lodging, String saler) {
 
-        Vacation vacation = new Vacation(flightNum, from, to, airlineCompany, fromDate, toDate, ticketType, baggageWeight, kind, lodging, registeredUser.userName);
+        Vacation vacation = new Vacation(flightNum, from, to, airlineCompany, fromDate, toDate, ticketType, baggageWeight, kind, lodging, registeredUser.getUserName());
         if (controller.addVacationToSell(vacation)) {
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Good news\n");
@@ -1300,12 +1303,12 @@ public class System {
             stage.show();
             //personalHome(scene);
 
-            registeredUser.myVacations = controller.getUserVacations(registeredUser.userName);
-            TitledPane[] tps = new TitledPane[registeredUser.myVacations.size()];
-            for (int i = 0; i < registeredUser.myVacations.size(); i++) {
+            registeredUser.setMyVacations( controller.getUserVacations(registeredUser.getUserName()));
+            TitledPane[] tps = new TitledPane[registeredUser.getMyVacations().size()];
+            for (int i = 0; i < registeredUser.getMyVacations().size(); i++) {
                 my_Vacations = (Accordion) scene.lookup("#user_Vacations");
-                TextArea TA = new TextArea(registeredUser.myVacations.get(i).toString());
-                Button Bt = new Button(registeredUser.myVacations.get(i).getFlightNum());
+                TextArea TA = new TextArea(registeredUser.getMyVacations().get(i).toString());
+                Button Bt = new Button(registeredUser.getMyVacations().get(i).getFlightNum());
 //                Bt.setOnAction(new EventHandler<ActionEvent>() {
 //                    @Override
 //                    public void handle(ActionEvent e) {
@@ -1336,7 +1339,7 @@ public class System {
                 GridPane GP = new GridPane();
                 GP.add(TA, 0, 0);
                 GP.add(Bt, 1, 0);
-                tps[i] = new TitledPane(registeredUser.myVacations.get(i).getFlightNum(), GP);
+                tps[i] = new TitledPane(registeredUser.getMyVacations().get(i).getFlightNum(), GP);
             }
             if (tps.length > 0) {
                 my_Vacations.getPanes().addAll(tps);
@@ -1358,7 +1361,7 @@ public class System {
         if (result2.get() == ButtonType.OK) {
             // ... user chose OK
             User BuyerUser = controller.seacrhUser(vacationToBuy.getBuyer());
-            if (!registeredUser.userName.equals(BuyerUser.userName)) {
+            if (!registeredUser.getUserName().equals(BuyerUser.getUserName())) {
                 User buyer= controller.seacrhUser(vacationToBuy.getBuyer());
                 userMessage message= new userMessage(vacationToOffer.getFlightNum(), registeredUser,vacationToBuy.getFlightNum(),buyer,"waiting");
                 registeredUser.addIncomingTradingReqMessages(message);

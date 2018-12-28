@@ -1,7 +1,8 @@
-package View;
+package Model;
 
 
-import java.time.LocalDate;
+import Model.Vacation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +19,6 @@ public class User {
     List<userMessage> incomingAnsMessages;
     List<userMessage> incomingTradingReqMessages;
     List<userMessage> incomingTradingAnsMessages;
-
-
     List<Vacation> myVacations;
 
 
@@ -189,7 +188,12 @@ public class User {
     }
 
 
-
+    public List<Vacation> getMyVacations() {
+        return myVacations;
+    }
+    public void setMyVacations(List<Vacation> myVacations) {
+        this.myVacations = myVacations;
+    }
     public void buyVacation(Vacation vacationToBuy) {
         myVacations.add(vacationToBuy);
     }

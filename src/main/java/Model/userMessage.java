@@ -1,4 +1,6 @@
-package View;
+package Model;
+
+import Model.User;
 
 public class userMessage {
 

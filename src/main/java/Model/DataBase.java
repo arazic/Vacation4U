@@ -1,8 +1,6 @@
 package Model;
 
-import View.User;
-import View.Vacation;
-import View.userMessage;
+import Model.Vacation;
 
 import java.sql.Connection;
 import java.sql.SQLException;
