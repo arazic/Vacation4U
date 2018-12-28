@@ -117,7 +117,7 @@ public class System {
         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("createUser.fxml").openStream());
         Stage stage = (Stage) btn_create.getScene().getWindow();
         stage.setTitle("Create user");
-        Scene scene2 = new Scene(root, 300, 300);
+        Scene scene2 = new Scene(root, 700, 500);
         scene2.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
         stage.show();
@@ -1593,6 +1593,27 @@ public class System {
         }
 
         root = scene.getRoot();
+        stage.setScene(scene);
+        stage.show();
+
+
+    }
+
+    public void goToPersonalArea(ActionEvent actionEvent) {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("ManagerMenu.fxml"));
+        pagesApp.add("ManagerMenu");
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(root, 700, 500);
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+        Stage stage = (Stage) btn_PersonalArea.getScene().getWindow();
+        String title = "Personal Area";
+        stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
 
