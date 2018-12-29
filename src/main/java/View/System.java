@@ -140,7 +140,7 @@ public class System {
         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("searchUser.fxml").openStream());
         Stage stage = (Stage) btn_search.getScene().getWindow();
         stage.setTitle("Search user");
-        Scene scene2 = new Scene(root, 850, 230);
+        Scene scene2 = new Scene(root, 850, 400);
         scene2.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
         System system = fxmlLoader.getController();
@@ -150,9 +150,9 @@ public class System {
     public void goToDeletePage(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("deleteUser.fxml").openStream());
-        Stage stage = (Stage) btn_search.getScene().getWindow();
+        Stage stage = (Stage) btn_delete.getScene().getWindow();
         stage.setTitle("Delete user");
-        Scene scene2 = new Scene(root, 400, 250);
+        Scene scene2 = new Scene(root, 700, 500);
         scene2.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
         System system = fxmlLoader.getController();
@@ -200,7 +200,7 @@ public class System {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("ManagerMenu.fxml").openStream());
-                Scene scene = new Scene(root, 300, 300);
+                Scene scene = new Scene(root, 700, 500);
                 Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
                 stage.setTitle("Vacation4U");
                 scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -212,7 +212,7 @@ public class System {
                 alert.close();
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("ManagerMenu.fxml").openStream());
-                Scene scene = new Scene(root, 300, 300);
+                Scene scene = new Scene(root, 700, 500);
                 scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
                 Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
                 stage.setTitle("Vacation4U");
@@ -237,7 +237,7 @@ public class System {
             }
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("ManagerMenu.fxml").openStream());
-            Scene scene = new Scene(root, 300, 300);
+            Scene scene = new Scene(root, 700, 500);
             scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
             Stage stage = (Stage) txtfld_userNameToedit.getScene().getWindow();
             stage.setTitle("Vacation4U");
