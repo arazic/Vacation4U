@@ -164,6 +164,10 @@ public class Controller {
         }
 
     }
+
+    public void setUserVacations(User user) {
+        user.setMyVacations(Vacation4UManager.dataBase.getUserVacations(user.getUserName()));
+    }
 }
 
 

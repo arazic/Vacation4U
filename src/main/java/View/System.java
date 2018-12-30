@@ -1324,8 +1324,7 @@ public class System {
             stage.setScene(scene);
             stage.show();
             //personalHome(scene);
-
-            registeredUser.setMyVacations( controller.getUserVacations(registeredUser.getUserName()));
+            controller.setUserVacations(registeredUser);
             TitledPane[] tps = new TitledPane[registeredUser.getMyVacations().size()];
             for (int i = 0; i < registeredUser.getMyVacations().size(); i++) {
                 my_Vacations = (Accordion) scene.lookup("#user_Vacations");
@@ -1383,14 +1382,6 @@ public class System {
         if (result2.get() == ButtonType.OK) {
             // ... user chose OK
             if (controller.sendTradingRequestMessage(registeredUser, vacationToOffer.getFlightNum(), vacationToBuy.getFlightNum(), vacationToBuy.getBuyer())){
-//                if (!registeredUser.getUserName().equals(BuyerUser.getUserName())) {
-//                User buyer= controller.seacrhUser(vacationToBuy.getBuyer());
-//                userMessage message= new userMessage(vacationToOffer.getFlightNum(), registeredUser,vacationToBuy.getFlightNum(),buyer,"waiting");
-//                registeredUser.addIncomingTradingReqMessages(message);
-//               // sellerUser.addIncomingTradingReqMessages(Message);
-//                try {
-////                    if (controller.insertTradingMessage(Message)) {
-//                    if (controller.insertTradingMessage(message)) {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Good news");
                         alert.setHeaderText("The message has been sent ");
