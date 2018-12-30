@@ -1,10 +1,11 @@
 import Controller.Controller;
+import Model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import Model.Model;
+import Model.Vacation4UManager;
 import View.System;
 
 public class Main extends Application {
@@ -14,9 +15,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         Main.primaryStage = primaryStage;
-        Model model = new Model();
-        Controller controller = new Controller(model);
-        model.setController(controller);
+        User administrator = new User("admin", "12345678",  "13/09/1990", "admin", "admin", "Beer Sheva", true);
+        Vacation4UManager vacation4UManager = new Vacation4UManager(administrator);
+        Controller controller = new Controller(vacation4UManager);
+        vacation4UManager.setController(controller);
 
         primaryStage.setTitle("Vacation4U System");
         FXMLLoader fxmlLoader = new FXMLLoader();

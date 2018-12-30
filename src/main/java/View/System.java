@@ -225,6 +225,14 @@ public class System {
 
 
     public void editUser(ActionEvent actionEvent) throws IOException {
+        if (!txtfld_userNameToedit.equals(registeredUser.getUserName()) && !registeredUser.getUserName().equals("admin")){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Illegall action");
+            alert.setHeaderText("You can edit only your account");
+            alert.showAndWait();
+            return;
+        }
+
         if (checkOneValuesIsLegal(txtfld_userNameToedit.getText()) && checkOneValuesIsLegal(txtfld_newValue.getText())
                 && checkChbxValuesIsLegal(chbx_optionToChange.getValue())) {
             if (controller.editUser(txtfld_userNameToedit.getText(), chbx_optionToChange.getValue(), txtfld_newValue.getText())) {
@@ -273,11 +281,11 @@ public class System {
         //  System.out.println(" " + txtfld_firstName.getText() + " " + txtfld_lastName.getText() + " " + txtfld_birthDate.getValue().toString());
         if (checkAllValuesIsLegal(txtfld_userName.getText(), txtfld_password.getText(), txtfld_birthDate.getValue(),
                 txtfld_firstName.getText(), txtfld_lastName.getText(), txtfld_city.getText())) {
-            User user = new User(txtfld_userName.getText(), txtfld_password.getText(), txtfld_birthDate.getValue().toString(),
-                    txtfld_firstName.getText(), txtfld_lastName.getText(), txtfld_city.getText(), false);
+//            User user = new User(txtfld_userName.getText(), txtfld_password.getText(), txtfld_birthDate.getValue().toString(),
+//                    txtfld_firstName.getText(), txtfld_lastName.getText(), txtfld_city.getText(), false);
 //            System.out.println(user.toString());
-
-            if (controller.createUser(user)) {
+            if (controller.createUser(txtfld_userName.getText(), txtfld_password.getText(), txtfld_birthDate.getValue().toString(),
+                    txtfld_firstName.getText(), txtfld_lastName.getText(), txtfld_city.getText(), false)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Congratulations");
                 alert.setHeaderText("A new user has been created named " + txtfld_userName.getText() + " !!!");
@@ -783,14 +791,7 @@ public class System {
                 alert2.setContentText("When you receive a reply it will appear in your message box");
                 Optional<ButtonType> result2 = alert2.showAndWait();
                 if (result2.get() == ButtonType.OK) {
-                    // ... user chose OK
-                    User salerUser = controller.seacrhUser(vacationToBuy.getSaler());
-                    if (!registeredUser.getUserName().equals(salerUser.getUserName())) {
-                        userMessage Message = new userMessage(vacationToBuy.getFlightNum(), registeredUser, salerUser, "waiting");
-                        salerUser.addIncomingReqMessages(Message);
-                        registeredUser.addIncomingReqMessages(Message);
-                        try {
-                            if (controller.insertMessage(Message)) {
+                    if (controller.sendBuyingRequestMessage(registeredUser, vacationToBuy.getFlightNum(), vacationToBuy.getSaler())){
                                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                                 alert.setTitle("Good news");
                                 alert.setHeaderText("The message has been sent ");
@@ -822,11 +823,6 @@ public class System {
                                 }
 
                             }
-
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
                     } else {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Be Attention");
@@ -848,7 +844,7 @@ public class System {
                 }
             }
         }
-    }
+
 
 
     public void goToPersonalMessage(ActionEvent actionEvent) throws IOException {
@@ -1386,15 +1382,15 @@ public class System {
         Optional<ButtonType> result2 = alert2.showAndWait();
         if (result2.get() == ButtonType.OK) {
             // ... user chose OK
-            User BuyerUser = controller.seacrhUser(vacationToBuy.getBuyer());
-            if (!registeredUser.getUserName().equals(BuyerUser.getUserName())) {
-                User buyer= controller.seacrhUser(vacationToBuy.getBuyer());
-                userMessage message= new userMessage(vacationToOffer.getFlightNum(), registeredUser,vacationToBuy.getFlightNum(),buyer,"waiting");
-                registeredUser.addIncomingTradingReqMessages(message);
-               // sellerUser.addIncomingTradingReqMessages(Message);
-                try {
-//                    if (controller.insertTradingMessage(Message)) {
-                    if (controller.insertTradingMessage(message)) {
+            if (controller.sendTradingRequestMessage(registeredUser, vacationToOffer.getFlightNum(), vacationToBuy.getFlightNum(), vacationToBuy.getBuyer())){
+//                if (!registeredUser.getUserName().equals(BuyerUser.getUserName())) {
+//                User buyer= controller.seacrhUser(vacationToBuy.getBuyer());
+//                userMessage message= new userMessage(vacationToOffer.getFlightNum(), registeredUser,vacationToBuy.getFlightNum(),buyer,"waiting");
+//                registeredUser.addIncomingTradingReqMessages(message);
+//               // sellerUser.addIncomingTradingReqMessages(Message);
+//                try {
+////                    if (controller.insertTradingMessage(Message)) {
+//                    if (controller.insertTradingMessage(message)) {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Good news");
                         alert.setHeaderText("The message has been sent ");
@@ -1426,11 +1422,6 @@ public class System {
                         }
 
                     }
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Be Attention");
@@ -1448,9 +1439,8 @@ public class System {
                 stage.show();
                 personalHome(scene);
             }
-
         }
-    }
+
 
     public void allVacations(ActionEvent actionEvent) {
 // Return the available vacations that nobody buy yet.
@@ -1615,9 +1605,22 @@ public class System {
         String title = "Personal Area";
         stage.setTitle(title);
         stage.setScene(scene);
+        btn_delete = (Button) scene.lookup("#btn_delete");
+        btn_create = (Button) scene.lookup("#btn_create");
+        if (isAdmin()){
+            btn_delete.setDisable(false);
+            btn_create.setDisable(false);
+        }
+
         stage.show();
 
 
+    }
+
+    public boolean isAdmin() {
+        if (registeredUser.getUserName().equals("admin"))
+            return true;
+        return false;
     }
 }
 

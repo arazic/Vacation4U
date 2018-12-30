@@ -76,7 +76,7 @@
                         </AnchorPane>
                     </children>
                 </TextFlow>
-                <Button fx:id="btn_create" layoutX="10.0" mnemonicParsing="false" onAction="#goToCreatePage" prefHeight="39.0" prefWidth="122.0" text="Create User" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="12">
+                <Button fx:id="btn_create" layoutX="10.0" mnemonicParsing="false" onAction="#goToCreatePage" prefHeight="39.0" prefWidth="122.0" text="Create User" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="12" disable="true">
                     <GridPane.margin>
                         <Insets left="50.0" right="20.0" top="20.0" />
                     </GridPane.margin>
@@ -109,7 +109,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btn_delete" layoutX="10.0" layoutY="135.0" mnemonicParsing="false" onAction="#goToDeletePage" prefHeight="39.0" prefWidth="122.0" text="Delete User" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="27">
+            <Button fx:id="btn_delete" layoutX="10.0" layoutY="135.0" mnemonicParsing="false" onAction="#goToDeletePage" prefHeight="39.0" prefWidth="122.0" text="Delete User" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="27" disable="true">
                <GridPane.margin>
                   <Insets left="50.0" right="20.0" top="20.0" />
                </GridPane.margin>

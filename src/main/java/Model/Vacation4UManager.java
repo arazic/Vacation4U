@@ -1,20 +1,22 @@
 package Model;
 
 import Controller.Controller;
-import Model.Vacation;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Model  {
+public class Vacation4UManager {
+
+    private final User administrator;
 
     private static Controller controller;
-    private DataBase dataBase;
+    public static DataBase dataBase;
 //    private Connection db_connection;
 
-    public Model() {
+    public Vacation4UManager(User administrator) {
+        this.administrator = administrator;
         dataBase = new DataBase("Vacation4u");
         dataBase.createNewDatabase();
         dataBase.connect();
@@ -22,6 +24,11 @@ public class Model  {
         dataBase.createVacationNewTable();
         dataBase.createMessagesNewTable();
         dataBase.createVacationsOfUsersNewTable();
+        try {
+            dataBase.insertUser(administrator);
+        } catch (Exception e) {
+            System.out.println("The admin username of the system is: " + administrator.getUserName()) ;
+        }
     }
 
     public void setController(Controller controller) {
@@ -45,7 +52,6 @@ public class Model  {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 

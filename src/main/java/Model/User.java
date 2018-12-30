@@ -198,4 +198,43 @@ public class User {
         myVacations.add(vacationToBuy);
     }
 
+    public boolean sendBuyingRequestMessage(String flightNum, String sellerUser) {
+        if (this.userName.equals(sellerUser))
+            return false;
+        else
+            try{
+            Vacation4UManager.dataBase.insertMessage(this, flightNum, sellerUser);
+            return true;
+            } catch (Exception e) {
+                return false;
+            }
+    }
+//        return fromUser.sendTradingRequestMessage(offerVacationNum, requestFlightNum, toUser);
+
+    public boolean sendTradingRequestMessage(String offerVacationNum, String requestflightNum, String toUser) {
+        if (this.userName.equals(toUser)){
+            return false;
+        }
+        else{
+            User toUserObject = Vacation4UManager.dataBase.searchUser(toUser);
+            if (Vacation4UManager.dataBase.insertTradingMessage(offerVacationNum,this.userName,requestflightNum,toUser,"waiting")){
+                userMessage tradingRequestMessage = new userMessage(offerVacationNum, this, requestflightNum, toUserObject, "waiting");
+                toUserObject.addIncomingTradingReqMessages(tradingRequestMessage);
+                return true;
+            }
+            return false;
+        }
+
+
+
+        //        User BuyerUser = controller.seacrhUser(vacationToBuy.getBuyer());
+//        if (!registeredUser.getUserName().equals(BuyerUser.getUserName())) {
+//            User buyer= controller.seacrhUser(vacationToBuy.getBuyer());
+//            userMessage message= new userMessage(vacationToOffer.getFlightNum(), registeredUser,vacationToBuy.getFlightNum(),buyer,"waiting");
+//            registeredUser.addIncomingTradingReqMessages(message);
+        // sellerUser.addIncomingTradingReqMessages(Message);
+//        try {
+////                    if (controller.insertTradingMessage(Message)) {
+//            if (controller.insertTradingMessage(message)) {
+    }
 }
