@@ -1,8 +1,9 @@
 package Model;
 
 
-import Model.Vacation;
+import Controller.Controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +16,10 @@ public class User {
     private String city;
     private boolean logIn;
     private int messageNum;
-    private List<userMessage> incomingReqMessages;
-    private List<userMessage> incomingAnsMessages;
-    private List<userMessage> incomingTradingReqMessages;
-    private List<userMessage> incomingTradingAnsMessages;
+    private List<UserMessage> incomingReqMessages;
+    private List<UserMessage> incomingAnsMessages;
+    private List<UserTradingMessage> incomingTradingReqMessages;
+    private List<UserTradingMessage> incomingTradingAnsMessages;
     private List<Vacation> myVacations;
 
 
@@ -31,10 +32,10 @@ public class User {
         this.city = city;
         this.logIn= false;
         this.messageNum=0;
-        this.incomingReqMessages = new ArrayList<userMessage>();
-        this.incomingAnsMessages = new ArrayList<userMessage>();
-        this.incomingTradingReqMessages = new ArrayList<userMessage>();
-        this.incomingTradingAnsMessages = new ArrayList<userMessage>();
+        this.incomingReqMessages = new ArrayList<UserMessage>();
+        this.incomingAnsMessages = new ArrayList<UserMessage>();
+        this.incomingTradingReqMessages = new ArrayList<UserTradingMessage>();
+        this.incomingTradingAnsMessages = new ArrayList<UserTradingMessage>();
         this.myVacations = new ArrayList<Vacation>();
         //Vacation test = new Vacation("31d","israel","london","elal",)
     }
@@ -123,67 +124,67 @@ public class User {
         this.messageNum = messageNum;
     }
 
-    public void addIncomingReqMessages(userMessage message) {
+    public void addIncomingReqMessages(UserMessage message) {
         incomingReqMessages.add(message);
     }
 
-    public void addIncomingTradingReqMessages(userMessage message) {
+    public void addIncomingTradingReqMessages(UserTradingMessage message) {
         incomingTradingReqMessages.add(message);
     }
-    public void addIncomingTradingAnsMessages(userMessage message) {
+    public void addIncomingTradingAnsMessages(UserTradingMessage message) {
         incomingTradingAnsMessages.add(message);
     }
 
-    public void removeIncomingTradingReqMessages(userMessage message) {
+    public void removeIncomingTradingReqMessages(UserMessage message) {
         incomingTradingReqMessages.remove(message);
     }
 
-    public void removeIncomingTradingAnsMessages(userMessage message) {
+    public void removeIncomingTradingAnsMessages(UserMessage message) {
         incomingTradingAnsMessages.remove(message);
     }
 
 
-    public void removeIncomingReqMessages(userMessage message) {
+    public void removeIncomingReqMessages(UserMessage message) {
         incomingReqMessages.remove(message);
     }
 
 
-    public List<userMessage> getIncomingTradingReqMessages() {
+    public List<UserTradingMessage> getIncomingTradingReqMessages() {
         return incomingTradingReqMessages;
     }
 
-    public void setIncomingTradingReqMessages(List<userMessage> incomingTradingReqMessages) {
+    public void setIncomingTradingReqMessages(List<UserTradingMessage> incomingTradingReqMessages) {
         this.incomingTradingReqMessages = incomingTradingReqMessages;
     }
 
-    public List<userMessage> getIncomingTradingAnsMessages() {
+    public List<UserTradingMessage> getIncomingTradingAnsMessages() {
         return incomingTradingAnsMessages;
     }
 
-    public void setIncomingTradingAnsMessages(List<userMessage> incomingTradingAnsMessages) {
+    public void setIncomingTradingAnsMessages(List<UserTradingMessage> incomingTradingAnsMessages) {
         this.incomingTradingAnsMessages = incomingTradingAnsMessages;
     }
-    public void addIncomingAnsMessages(userMessage message) {
+    public void addIncomingAnsMessages(UserMessage message) {
         incomingAnsMessages.add(message);
     }
 
-    public void removeIncomingAnsMessages(userMessage message) {
+    public void removeIncomingAnsMessages(UserMessage message) {
         incomingAnsMessages.remove(message);
     }
 
-    public List<userMessage> getIncomingReqMessages() {
+    public List<UserMessage> getIncomingReqMessages() {
         return incomingReqMessages;
     }
 
-    public void setIncomingReqMessages(List<userMessage> incomingReqMessages) {
+    public void setIncomingReqMessages(List<UserMessage> incomingReqMessages) {
         this.incomingReqMessages = incomingReqMessages;
     }
 
-    public List<userMessage> getIncomingAnsMessages() {
+    public List<UserMessage> getIncomingAnsMessages() {
         return incomingAnsMessages;
     }
 
-    public void setIncomingAnsMessages(List<userMessage> incomingAnsMessages) {
+    public void setIncomingAnsMessages(List<UserMessage> incomingAnsMessages) {
         this.incomingAnsMessages = incomingAnsMessages;
     }
 
@@ -203,7 +204,7 @@ public class User {
             return false;
         else
             try{
-            Vacation4UManager.dataBase.insertMessage(this, flightNum, sellerUser);
+                Controller.dataBase.insertMessage(this, flightNum, sellerUser);
             return true;
             } catch (Exception e) {
                 return false;
@@ -211,30 +212,24 @@ public class User {
     }
 //        return fromUser.sendTradingRequestMessage(offerVacationNum, requestFlightNum, toUser);
 
-    public boolean sendTradingRequestMessage(String offerVacationNum, String requestflightNum, String toUser) {
+    public boolean sendTradingRequestMessage(String offerVacationNum, String requestFlightNum, String toUser) {
         if (this.userName.equals(toUser)){
             return false;
         }
         else{
-            User toUserObject = Vacation4UManager.dataBase.searchUser(toUser);
-            if (Vacation4UManager.dataBase.insertTradingMessage(offerVacationNum,this.userName,requestflightNum,toUser,"waiting")){
-                userMessage tradingRequestMessage = new userMessage(offerVacationNum, this, requestflightNum, toUserObject, "waiting");
+            User toUserObject = Controller.dataBase.searchUser(toUser);
+            if (Controller.dataBase.insertTradingMessage(offerVacationNum,this.userName, requestFlightNum,toUser,"waiting")){
+                UserTradingMessage tradingRequestMessage = new UserTradingMessage(offerVacationNum, this, requestFlightNum, toUserObject, "waiting");
                 toUserObject.addIncomingTradingReqMessages(tradingRequestMessage);
                 return true;
             }
             return false;
         }
-
-
-
-        //        User BuyerUser = controller.seacrhUser(vacationToBuy.getBuyer());
-//        if (!registeredUser.getUserName().equals(BuyerUser.getUserName())) {
-//            User buyer= controller.seacrhUser(vacationToBuy.getBuyer());
-//            userMessage message= new userMessage(vacationToOffer.getFlightNum(), registeredUser,vacationToBuy.getFlightNum(),buyer,"waiting");
-//            registeredUser.addIncomingTradingReqMessages(message);
-        // sellerUser.addIncomingTradingReqMessages(Message);
-//        try {
-////                    if (controller.insertTradingMessage(Message)) {
-//            if (controller.insertTradingMessage(message)) {
     }
+
+    public boolean addVacationToSell(String flightNum, String from, String to, String airlineCompany, LocalDate fromDate, LocalDate toDate, String ticketType, String baggageWeight, String kind, String lodging){
+        Vacation vacation = new Vacation(flightNum, from, to, airlineCompany, fromDate, toDate, ticketType, baggageWeight, kind, lodging, userName);
+        return Controller.dataBase.addVacation(vacation);
+    }
+
 }

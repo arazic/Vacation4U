@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-image: url('vacation.jpg');" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.System">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-image: url('vacation.jpg');" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.View">
     <children>
         <GridPane layoutX="12.0" layoutY="14.0" prefHeight="39.0" prefWidth="689.0">
             <columnConstraints>
@@ -72,7 +72,7 @@
                                         <Accordion fx:id="acc_ansMessage" prefHeight="293.0" prefWidth="578.0" GridPane.rowIndex="1" />
                               <Label text="want to buy from me..." GridPane.halignment="CENTER" />
                               <Label text="want to traid" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                              <Accordion fx:id="acc_TraidAnsMessage" GridPane.rowIndex="3" />
+                              <Accordion fx:id="acc_TradeAnsMessage" GridPane.rowIndex="3" />
                                     </children>
                                 </GridPane>
                             </children>

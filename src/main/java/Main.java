@@ -1,12 +1,12 @@
 import Controller.Controller;
+import Model.DataBase;
 import Model.User;
+import View.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import Model.Vacation4UManager;
-import View.System;
 
 public class Main extends Application {
     public static Stage primaryStage;
@@ -16,20 +16,23 @@ public class Main extends Application {
 
         Main.primaryStage = primaryStage;
         User administrator = new User("admin", "12345678",  "13/09/1990", "admin", "admin", "Beer Sheva", true);
-        Vacation4UManager vacation4UManager = new Vacation4UManager(administrator);
-        Controller controller = new Controller(vacation4UManager);
-        vacation4UManager.setController(controller);
+        DataBase dataBase = new DataBase("Vacation4u", administrator);
+        Controller controller = new Controller(dataBase);
+//        Controller controller = new Controller(vacation4UManager, dataBase);
 
-        primaryStage.setTitle("Vacation4U System");
+//        vacation4UManager.setController(controller);
+
+
+        primaryStage.setTitle("Vacation4U View");
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
         Scene scene = new Scene(root, 700, 500);
         scene.getStylesheets().add(getClass().getResource("MenuStyle.css").toExternalForm());
         primaryStage.setScene(scene);
 
-        System system = fxmlLoader.getController();
-        system.setController(controller);
-        controller.setSystem(system);
+        View view = fxmlLoader.getController();
+        view.setController(controller);
+        controller.setView(view);
         primaryStage.show();
     }
 

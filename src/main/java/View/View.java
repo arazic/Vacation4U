@@ -1,8 +1,9 @@
 package View;
 
 import Model.User;
+import Model.UserTradingMessage;
 import Model.Vacation;
-import Model.userMessage;
+import Model.UserMessage;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +24,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 
-public class System {
+public class View {
 
     @FXML
     public javafx.scene.control.Button btn_create;
@@ -64,14 +65,14 @@ public class System {
     public javafx.scene.control.Button btn_PersonalArea;
     public javafx.scene.control.Label lab_looking;
     public javafx.scene.control.TabPane TabP_Waiting;
-    public javafx.scene.control.Button btn_Reject;
-    public javafx.scene.control.Button btn_Confirm;
+    private javafx.scene.control.Button btn_Reject;
+    private javafx.scene.control.Button btn_Confirm;
     public javafx.scene.control.TextArea TA_details;
     public javafx.scene.control.Accordion acc_Vacations;
     public javafx.scene.control.Accordion acc_reqMessage;
     public javafx.scene.control.Accordion acc_ansMessage;
     public javafx.scene.control.Accordion acc_TraidreqMessage;
-    public javafx.scene.control.Accordion acc_TraidAnsMessage;
+    public javafx.scene.control.Accordion acc_TradeAnsMessage;
     public javafx.scene.control.Label txt_messageLabel;
     public javafx.scene.control.Button btn_backFromMes;
     public javafx.scene.control.Button btn_SellVacation;
@@ -100,7 +101,7 @@ public class System {
     public static User registeredUser;
     public static List<String> pagesApp = new ArrayList<>();
     private static Controller controller;
-    public static userMessage currentMessage;
+    public static UserMessage currentMessage;
     public Accordion my_Vacations;
     public Accordion acc_Vacations1;
     public Button btn_toTrade;
@@ -131,7 +132,7 @@ public class System {
         Scene scene2 = new Scene(root, 700, 500);
         scene2.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
-        System system = fxmlLoader.getController();
+        View view = fxmlLoader.getController();
         stage.show();
     }
 
@@ -143,7 +144,7 @@ public class System {
         Scene scene2 = new Scene(root, 850, 400);
         scene2.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
-        System system = fxmlLoader.getController();
+        View view = fxmlLoader.getController();
         stage.show();
     }
 
@@ -155,14 +156,14 @@ public class System {
         Scene scene2 = new Scene(root, 700, 500);
         scene2.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
         stage.setScene(scene2);
-        System system = fxmlLoader.getController();
+        View view = fxmlLoader.getController();
         stage.show();
     }
 
     public void searchUser(ActionEvent actionEvent) throws IOException {
         if (checkOneValuesIsLegal(txtfld_userNameToSearch.getText())) {
 
-            User UserDetails = controller.seacrhUser(txtfld_userNameToSearch.getText());
+            User UserDetails = controller.searchUser(txtfld_userNameToSearch.getText());
 
             if (UserDetails != null) {
                 txtfld_userDetails.setText(UserDetails.toString());
@@ -205,7 +206,7 @@ public class System {
                 stage.setTitle("Vacation4U");
                 scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
                 stage.setScene(scene);
-                System system = fxmlLoader.getController();
+                View view = fxmlLoader.getController();
                 stage.show();
             } else {
                 // ... user chose CANCEL or closed the dialog
@@ -217,7 +218,7 @@ public class System {
                 Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
                 stage.setTitle("Vacation4U");
                 stage.setScene(scene);
-                System system = fxmlLoader.getController();
+                View view = fxmlLoader.getController();
                 stage.show();
             }
         }
@@ -250,7 +251,7 @@ public class System {
             Stage stage = (Stage) txtfld_userNameToedit.getScene().getWindow();
             stage.setTitle("Vacation4U");
             stage.setScene(scene);
-            System system = fxmlLoader.getController();
+            View view = fxmlLoader.getController();
             stage.show();
         }
     }
@@ -278,12 +279,8 @@ public class System {
 
     public void createNewUser(ActionEvent actionEvent) throws IOException {
 
-        //  System.out.println(" " + txtfld_firstName.getText() + " " + txtfld_lastName.getText() + " " + txtfld_birthDate.getValue().toString());
         if (checkAllValuesIsLegal(txtfld_userName.getText(), txtfld_password.getText(), txtfld_birthDate.getValue(),
                 txtfld_firstName.getText(), txtfld_lastName.getText(), txtfld_city.getText())) {
-//            User user = new User(txtfld_userName.getText(), txtfld_password.getText(), txtfld_birthDate.getValue().toString(),
-//                    txtfld_firstName.getText(), txtfld_lastName.getText(), txtfld_city.getText(), false);
-//            System.out.println(user.toString());
             if (controller.createUser(txtfld_userName.getText(), txtfld_password.getText(), txtfld_birthDate.getValue().toString(),
                     txtfld_firstName.getText(), txtfld_lastName.getText(), txtfld_city.getText(), false)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -422,7 +419,7 @@ public class System {
     public void logIn(ActionEvent actionEvent) throws IOException {
         if (checkOneValuesIsLegal(txtfld_userNameToLogIn.getText())) {
 
-            User UserDetails = controller.seacrhUser(txtfld_userNameToLogIn.getText());
+            User UserDetails = controller.searchUser(txtfld_userNameToLogIn.getText());
             if (UserDetails != null) {
                 if (UserDetails.getPassword().equals(txtfld_passwordToLogIn.getText())) {
 
@@ -477,15 +474,16 @@ public class System {
         btn_SignIn.setVisible(false);
         btn_Mess = (Button) scene.lookup("#btn_Mess");
         btn_PersonalArea = (Button) scene.lookup("#btn_PersonalArea");
-        btn_PersonalArea.setVisible(true);
+        if (btn_PersonalArea != null)
+            btn_PersonalArea.setVisible(true);
         txt_Welcome = (Label) scene.lookup("#txt_Welcome");
         btn_MyVacation= (Button) scene.lookup("#btn_MyVacation");
         if(btn_MyVacation!=null){
         btn_MyVacation.setVisible(true);}
         registeredUser.setIncomingReqMessages(controller.searchReqMessages(registeredUser));
         registeredUser.setIncomingAnsMessages(controller.searchAnsMessages(registeredUser));
-        registeredUser.setIncomingTradingReqMessages(controller.searchTraidReqMessages(registeredUser));
-        registeredUser.setIncomingTradingAnsMessages(controller.searchTraidAnsMessages(registeredUser));
+        registeredUser.setIncomingTradingReqMessages(controller.searchTradeReqMessages(registeredUser));
+        registeredUser.setIncomingTradingAnsMessages(controller.searchTradeAnsMessages(registeredUser));
         if (registeredUser.getMessageNum() == 0) {
             btn_Mess.setText(" no messages");
         } else if (registeredUser.getMessageNum() == 1) {
@@ -884,7 +882,7 @@ public class System {
                 acc_reqMessage = (Accordion) scene.lookup("#acc_reqMessage");
                 currentMessage = registeredUser.getIncomingReqMessages().get(i);
                 TextArea TA = new TextArea(registeredUser.getIncomingReqMessages().get(i).getFromUser().getUserName() + " want to buy from" +
-                        " you flight num: " + registeredUser.getIncomingReqMessages().get(i).getVacationToBuy());
+                        " you flight num: " + registeredUser.getIncomingReqMessages().get(i).getVacationToGet());
                 Button Confirm = new Button("confirm " + registeredUser.getIncomingReqMessages().get(i).toString());
                 Button Reject = new Button("Reject " + registeredUser.getIncomingReqMessages().get(i).toString());
                 Confirm.setOnAction(new EventHandler<ActionEvent>() {
@@ -935,9 +933,9 @@ public class System {
 //                acc_ansMessage= (Accordion) scene.lookup("#acc_ansMessage");
                 currentMessage = registeredUser.getIncomingAnsMessages().get(i);
                 TextArea TA = new TextArea(registeredUser.getIncomingAnsMessages().get(i).getToUser().getUserName() + " answer to your request" +
-                        " regarding flight num: " + registeredUser.getIncomingAnsMessages().get(i).getVacationToBuy() + ". The answer is: "
+                        " regarding flight num: " + registeredUser.getIncomingAnsMessages().get(i).getVacationToGet() + ". The answer is: "
                         + registeredUser.getIncomingAnsMessages().get(i).getStatus());
-                Button toBuy = new Button("Buy " + currentMessage.getVacationToBuy());
+                Button toBuy = new Button("Buy " + currentMessage.getVacationToGet());
                 if (!(currentMessage.getStatus().equals("confirm"))) {
                     toBuy.setDisable(true);
                 }
@@ -945,7 +943,7 @@ public class System {
                     @Override
                     public void handle(ActionEvent e) {
                         registeredUser.removeIncomingAnsMessages(currentMessage);
-                        vacationToBuy = controller.searchVacationFlightNumBySeller(currentMessage.getVacationToBuy(), currentMessage.getToUser().getUserName());
+                        vacationToBuy = controller.searchVacationFlightNumBySeller(currentMessage.getVacationToGet(), currentMessage.getToUser().getUserName());
 
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
                         Parent root = null;
@@ -988,7 +986,7 @@ public class System {
             for (int i = 0; i < registeredUser.getIncomingTradingReqMessages().size(); i++) {
                 currentMessage = registeredUser.getIncomingTradingReqMessages().get(i);
                 TextArea TA = new TextArea(registeredUser.getIncomingTradingReqMessages().get(i).getFromUser().getUserName() + " want to so some trading. Hw want " +
-                        "flight num: " + registeredUser.getIncomingTradingReqMessages().get(i).getVacationToBuy()+
+                        "flight num: " + registeredUser.getIncomingTradingReqMessages().get(i).getVacationToGet()+
                 ". He offer flight num: "+ registeredUser.getIncomingTradingReqMessages().get(i).getVacationOffer());
                 Button Confirm = new Button("confirm " + registeredUser.getIncomingTradingReqMessages().get(i).toString());
                 Button Reject = new Button("Reject " + registeredUser.getIncomingTradingReqMessages().get(i).toString());
@@ -996,7 +994,7 @@ public class System {
                     @Override
                     public void handle(ActionEvent e) {
                         currentMessage.setStatus("confirm");
-                        if (controller.updateTradingMessage(currentMessage, "confirm")) {
+                        if (controller.updateTradingMessage((UserTradingMessage)currentMessage, "confirm")) {
                             registeredUser.removeIncomingTradingReqMessages(currentMessage);
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulation");
@@ -1010,7 +1008,7 @@ public class System {
                     @Override
                     public void handle(ActionEvent e) {
                         currentMessage.setStatus("reject");
-                        if (controller.updateTradingMessage(currentMessage, "reject")) {
+                        if (controller.updateTradingMessage((UserTradingMessage)currentMessage, "reject")) {
                             registeredUser.removeIncomingTradingReqMessages(currentMessage);
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulation");
@@ -1033,13 +1031,13 @@ public class System {
                 acc_TraidreqMessage.setExpandedPane(TraidTpsReq[0]);
             }
 
-            acc_TraidAnsMessage = (Accordion) scene.lookup("#acc_TraidAnsMessage");
+            acc_TradeAnsMessage = (Accordion) scene.lookup("#acc_TradeAnsMessage");
 
-            TitledPane[] TraidTpsAns = new TitledPane[registeredUser.getIncomingTradingAnsMessages().size()];
+            TitledPane[] TradeTpsAns = new TitledPane[registeredUser.getIncomingTradingAnsMessages().size()];
             for (int i = 0; i < registeredUser.getIncomingTradingAnsMessages().size(); i++) {
                 currentMessage = registeredUser.getIncomingTradingAnsMessages().get(i);
                 TextArea TA = new TextArea(registeredUser.getIncomingTradingAnsMessages().get(i).getToUser().getUserName() + " answer to your request  " +
-                        " regarding flight num: " + registeredUser.getIncomingTradingAnsMessages().get(i).getVacationToBuy() + ". The answer is: "
+                        " regarding flight num: " + registeredUser.getIncomingTradingAnsMessages().get(i).getVacationToGet() + ". The answer is: "
                         + registeredUser.getIncomingTradingAnsMessages().get(i).getStatus());
                 Button trading = new Button("trading " );
                 Button btnOk= new Button("OK");
@@ -1053,7 +1051,7 @@ public class System {
                     public void handle(ActionEvent e) {
                         registeredUser.removeIncomingTradingAnsMessages(currentMessage);
                         vacationToOffer= controller.searchVacationFlightNumByBuyer(currentMessage.getVacationOffer(),currentMessage.getFromUser().getUserName());
-                        vacationToBuy = controller.searchVacationFlightNumByBuyer(currentMessage.getVacationToBuy(), currentMessage.getToUser().getUserName());
+                        vacationToBuy = controller.searchVacationFlightNumByBuyer(currentMessage.getVacationToGet(), currentMessage.getToUser().getUserName());
                         controller.updateVacationSell(vacationToOffer,vacationToBuy.getBuyer());
                         controller.updateVacationSell(vacationToBuy, vacationToOffer.getBuyer());
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
@@ -1068,13 +1066,13 @@ public class System {
                         alert.setHeaderText("trading success!");
                         alert.setContentText("the flight to" +vacationToBuy.getFromPlace()+" is closer then ever ! " );
                         alert.showAndWait();
-                        if (controller.removeTraidMessage(currentMessage)) {
+                        if (controller.removeTradeMessage((UserTradingMessage)currentMessage)) {
                             java.lang.System.out.println("Message removed");
                         }
                         Parent root2 = null;
                         FXMLLoader fxmlLoader2 = new FXMLLoader();
                         try {
-                             root2 = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
+                             root2 = fxmlLoader2.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
@@ -1094,7 +1092,7 @@ public class System {
                 btnOk.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        if (controller.removeTraidMessage(currentMessage)) {
+                        if (controller.removeTradeMessage((UserTradingMessage)currentMessage)) {
                             java.lang.System.out.println("Message removed");
                         }
 
@@ -1122,12 +1120,12 @@ public class System {
                 GP.add(TA, 0, 0);
                 GP.add(trading, 1, 0);
                 GP.add(btnOk, 2, 0);
-                TraidTpsAns[i] = new TitledPane("answer number " + (i + 1), GP);
+                TradeTpsAns[i] = new TitledPane("answer number " + (i + 1), GP);
 
             }
             if (registeredUser.getIncomingTradingAnsMessages().size() != 0) {
-                acc_TraidAnsMessage.getPanes().addAll(TraidTpsAns);
-                acc_TraidAnsMessage.setExpandedPane(TraidTpsAns[0]);
+                acc_TradeAnsMessage.getPanes().addAll(TradeTpsAns);
+                acc_TradeAnsMessage.setExpandedPane(TradeTpsAns[0]);
             }
 
 
@@ -1256,8 +1254,7 @@ public class System {
             lodging = cb_accommondation.getValue() + cb_rate.getValue();
         //public Vacation(String flightNum, String fromPlace, String toPlace, String airlineCompany, Date fromDate, Date toDate, String ticketType, String baggage, String tripType, String lodging, String saler) {
 
-        Vacation vacation = new Vacation(flightNum, from, to, airlineCompany, fromDate, toDate, ticketType, baggageWeight, kind, lodging, registeredUser.getUserName());
-        if (controller.addVacationToSell(vacation)) {
+        if (controller.addVacationToSell(flightNum, from, to, airlineCompany, fromDate, toDate, ticketType, baggageWeight, kind, lodging, registeredUser)) {
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Good news\n");
             alert2.setHeaderText("Your vacation been added\n");
@@ -1604,14 +1601,16 @@ public class System {
         }
 
         stage.show();
-
-
     }
 
     public boolean isAdmin() {
         if (registeredUser.getUserName().equals("admin"))
             return true;
         return false;
+    }
+
+    public void goToHomePage(ActionEvent actionEvent) {
+
     }
 }
 
