@@ -18,11 +18,6 @@ public class Main extends Application {
         User administrator = new User("admin", "12345678",  "13/09/1990", "admin", "admin", "Beer Sheva", true);
         DataBase dataBase = new DataBase("Vacation4u", administrator);
         Controller controller = new Controller(dataBase);
-//        Controller controller = new Controller(vacation4UManager, dataBase);
-
-//        vacation4UManager.setController(controller);
-
-
         primaryStage.setTitle("Vacation4U View");
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
