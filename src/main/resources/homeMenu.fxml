@@ -49,12 +49,12 @@
                                      <items>
                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                              <children>
-                                                 <TextField fx:id="txtfld_TO" layoutX="-1.0" layoutY="-6.0" prefHeight="45.0" prefWidth="285.0" />
+                                                 <TextField fx:id="txtfld_FROM" layoutX="-1.0" layoutY="-6.0" prefHeight="45.0" prefWidth="285.0" />
                                              </children>
                                          </AnchorPane>
                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="283.0">
                                              <children>
-                                                 <TextField fx:id="txtfld_FROM" layoutX="-5.0" layoutY="-6.0" prefHeight="44.0" prefWidth="283.0" />
+                                                 <TextField  fx:id="txtfld_TO" layoutX="-5.0" layoutY="-6.0" prefHeight="44.0" prefWidth="283.0" />
                                              </children>
                                          </AnchorPane>
                                      </items>

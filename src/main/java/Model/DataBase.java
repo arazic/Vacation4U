@@ -792,6 +792,9 @@ public class DataBase {
 
     public ArrayList<Vacation> searchVacationTrading(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
         ArrayList<Vacation> foundVacation = new ArrayList<Vacation>();
+        String depMinusDays= dp_departureDate.minusDays(3).toString();
+        String depPlusDays= dp_departureDate.plusDays(3).toString();
+
         String returnMinusDays = "NULL";
         String returnPlusDays = "NULL";
         if (dp_returnDate != null) {
@@ -809,8 +812,8 @@ public class DataBase {
             ) {
                 pstmt.setString(1, fromPlace);
                 pstmt.setString(2, toPlace);
-                pstmt.setString(3, dp_departureDate.minusDays(3).toString());
-                pstmt.setString(4, dp_departureDate.plusDays(3).toString());
+                pstmt.setString(3, depMinusDays);
+                pstmt.setString(4, depPlusDays);
                 pstmt.setString(5, returnMinusDays);
                 pstmt.setString(6, returnPlusDays);
                 pstmt.setString(7, "NULL");

@@ -174,50 +174,59 @@ public class View {
 
     public void deleteUser(ActionEvent actionEvent) throws IOException, SQLException {
         if (checkOneValuesIsLegal(txtfld_userNameToDelete.getText())) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Be Attention");
-            alert.setHeaderText("Delete user\n");
-            alert.setContentText("Are you sure you want to delete " + txtfld_userNameToDelete.getText() + " ?");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                // ... user chose OK
-                if (controller.deleteUser(txtfld_userNameToDelete.getText())) {
-                    Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-                    alert2.setTitle("The deletion was successful\n");
-                    alert2.setHeaderText(txtfld_userNameToDelete.getText() + " Deleted");
-                    alert2.showAndWait();
-                } else {
-                    ThereIsNoUser();
-                }
-
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("ManagerMenu.fxml").openStream());
-                Scene scene = new Scene(root, 700, 500);
-                Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
-                stage.setTitle("Vacation4U");
-                scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
-                stage.setScene(scene);
-                View view = fxmlLoader.getController();
-                stage.show();
+            if (!txtfld_userNameToDelete.getText().equals(controller.getVacation4UManager().getRegisteredUser().getUserName()) && !controller.getVacation4UManager().getRegisteredUser().getUserName().equals("admin")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Illegall action");
+                alert.setHeaderText("You can delete only your account");
+                alert.showAndWait();
+                return;
             } else {
-                // ... user chose CANCEL or closed the dialog
-                alert.close();
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("ManagerMenu.fxml").openStream());
-                Scene scene = new Scene(root, 700, 500);
-                scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
-                Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
-                stage.setTitle("Vacation4U");
-                stage.setScene(scene);
-                View view = fxmlLoader.getController();
-                stage.show();
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Be Attention");
+                alert.setHeaderText("Delete user\n");
+                alert.setContentText("Are you sure you want to delete " + txtfld_userNameToDelete.getText() + " ?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    // ... user chose OK
+                    if (controller.deleteUser(txtfld_userNameToDelete.getText())) {
+                        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                        alert2.setTitle("The deletion was successful\n");
+                        alert2.setHeaderText(txtfld_userNameToDelete.getText() + " Deleted");
+                        alert2.showAndWait();
+                    } else {
+                        ThereIsNoUser();
+                    }
+
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("ManagerMenu.fxml").openStream());
+                    Scene scene = new Scene(root, 700, 500);
+                    Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
+                    stage.setTitle("Vacation4U");
+                    scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                    stage.setScene(scene);
+                    View view = fxmlLoader.getController();
+                    stage.show();
+                } else {
+                    // ... user chose CANCEL or closed the dialog
+                    alert.close();
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("ManagerMenu.fxml").openStream());
+                    Scene scene = new Scene(root, 700, 500);
+                    scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
+                    Stage stage = (Stage) txtfld_userNameToDelete.getScene().getWindow();
+                    stage.setTitle("Vacation4U");
+                    stage.setScene(scene);
+                    View view = fxmlLoader.getController();
+                    stage.show();
+                }
             }
         }
     }
 
 
     public void editUser(ActionEvent actionEvent) throws IOException {
-        if (!txtfld_userNameToedit.equals(Vacation4UManager.registeredUser.getUserName()) && !Vacation4UManager.registeredUser.getUserName().equals("admin")){
+        if (!txtfld_userNameToedit.equals(controller.getVacation4UManager().getRegisteredUser().getUserName()) && !controller.getVacation4UManager().getRegisteredUser().getUserName().equals("admin")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Illegall action");
             alert.setHeaderText("You can edit only your account");
@@ -349,6 +358,8 @@ public class View {
 
 
     public void backToMenu(ActionEvent actionEvent) throws IOException {
+
+
         Scene scene = getScene();
         Stage stage = (Stage) btn_back.getScene().getWindow();
         showStage(scene, stage);
@@ -372,7 +383,7 @@ public class View {
 
         if (((Button) actionEvent.getSource()).getText().equals("Log Out")) {
             Scene scene = getScene();
-            Vacation4UManager.registeredUser.setLogIn(false);
+            controller.getVacation4UManager().getRegisteredUser().setLogIn(false);
             Stage stage = (Stage) btn_LogIn.getScene().getWindow();
             showStage(scene, stage);
             btn_Mess = (Button) scene.lookup("#btn_Mess");
@@ -384,7 +395,7 @@ public class View {
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
-            Vacation4UManager.pagesApp.add("logIn");
+            controller.getVacation4UManager().getPagesApp().add("logIn");
             Scene scene = new Scene(root, 700, 500);
             Stage stage = (Stage) btn_LogIn.getScene().getWindow();
             scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -414,12 +425,12 @@ public class View {
             if (UserDetails != null) {
                 if (UserDetails.getPassword().equals(txtfld_passwordToLogIn.getText())) {
 
-                    Vacation4UManager.registeredUser = UserDetails;
-                    Vacation4UManager.registeredUser.setLogIn(true);
-                    if (Vacation4UManager.pagesApp.size() >= 2 && Vacation4UManager.pagesApp.get(Vacation4UManager.pagesApp.size() - 2).equals("vacationDetails")) {
+                    controller.getVacation4UManager().setRegisteredUser(UserDetails);
+                    controller.getVacation4UManager().getRegisteredUser().setLogIn(true);
+                    if ( controller.getVacation4UManager().getPagesApp().size() >= 2 && controller.getVacation4UManager().getPagesApp().get(controller.getVacation4UManager().getPagesApp().size() - 2).equals("vacationDetails")) {
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
                         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("vacationDetails.fxml").openStream());
-                        Vacation4UManager.pagesApp.add("vacationDetails");
+                        controller.getVacation4UManager().getPagesApp().add("vacationDetails");
                         Scene scene = new Scene(root, 700, 500);
                         scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
                         Stage stage = (Stage) btn_LogInside.getScene().getWindow();
@@ -428,15 +439,15 @@ public class View {
                         stage.setScene(scene);
                         stage.show();
                         TA_details = (TextArea) scene.lookup("#TA_details");
-                        TA_details.setText(Vacation4UManager.vacationToBuy.toString());
+                        TA_details.setText(controller.getVacation4UManager().getVacationToBuy().toString());
                     } else {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-                        Vacation4UManager.pagesApp.add("homeMenu");
+                        controller.getVacation4UManager().getPagesApp().add("homeMenu");
                         Scene scene = new Scene(root, 700, 500);
                         scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
                         Stage stage = (Stage) btn_LogInside.getScene().getWindow();
-                        String title = "Welcome " + Vacation4UManager.registeredUser.getFirstName() + " " + Vacation4UManager.registeredUser.getLastName();
+                        String title = "Welcome " + controller.getVacation4UManager().getRegisteredUser().getFirstName() + " " + controller.getVacation4UManager().getRegisteredUser().getLastName();
                         stage.setTitle(title);
                         stage.setScene(scene);
                         stage.show();
@@ -471,19 +482,19 @@ public class View {
         btn_MyVacation= (Button) scene.lookup("#btn_MyVacation");
         if(btn_MyVacation!=null){
         btn_MyVacation.setVisible(true);}
-        Vacation4UManager.registeredUser.setIncomingReqMessages(controller.searchReqMessages(Vacation4UManager.registeredUser));
-        Vacation4UManager.registeredUser.setIncomingAnsMessages(controller.searchAnsMessages(Vacation4UManager.registeredUser));
-        Vacation4UManager.registeredUser.setIncomingTradingReqMessages(controller.searchTradeReqMessages(Vacation4UManager.registeredUser));
-        Vacation4UManager.registeredUser.setIncomingTradingAnsMessages(controller.searchTradeAnsMessages(Vacation4UManager.registeredUser));
-        if (Vacation4UManager.registeredUser.getMessageNum() == 0) {
+        controller.getVacation4UManager().getRegisteredUser().setIncomingReqMessages(controller.searchReqMessages(controller.getVacation4UManager().getRegisteredUser()));
+        controller.getVacation4UManager().getRegisteredUser().setIncomingAnsMessages(controller.searchAnsMessages(controller.getVacation4UManager().getRegisteredUser()));
+        controller.getVacation4UManager().getRegisteredUser().setIncomingTradingReqMessages(controller.searchTradeReqMessages(controller.getVacation4UManager().getRegisteredUser()));
+        controller.getVacation4UManager().getRegisteredUser().setIncomingTradingAnsMessages(controller.searchTradeAnsMessages(controller.getVacation4UManager().getRegisteredUser()));
+        if (controller.getVacation4UManager().getRegisteredUser().getMessageNum() == 0) {
             btn_Mess.setText(" no messages");
-        } else if (Vacation4UManager.registeredUser.getMessageNum() == 1) {
-            btn_Mess.setText(Vacation4UManager.registeredUser.getMessageNum() + " message");
+        } else if (controller.getVacation4UManager().getRegisteredUser().getMessageNum() == 1) {
+            btn_Mess.setText(controller.getVacation4UManager().getRegisteredUser().getMessageNum() + " message");
         } else {
-            btn_Mess.setText(Vacation4UManager.registeredUser.getMessageNum() + " messages");
+            btn_Mess.setText(controller.getVacation4UManager().getRegisteredUser().getMessageNum() + " messages");
         }
         btn_Mess.setVisible(true);
-        txt_Welcome.setText("welcome " + Vacation4UManager.registeredUser.getUserName()+ " !");
+        txt_Welcome.setText("welcome " + controller.getVacation4UManager().getRegisteredUser().getUserName()+ " !");
         txt_Welcome.setVisible(true);
     }
 
@@ -509,13 +520,13 @@ public class View {
                 String toPlace = txtfld_TO.getText();
 
                 // Return the available vacations that nobody buy yet.
-                /*ArrayList<Vacation>*/ Vacation4UManager.foundVacation = controller.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
+                controller.getVacation4UManager().setFoundVacation(controller.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType));
                 // Return the vacations that is optional to trade (someone bought the vacation already).
                 ArrayList<Vacation>  foundVacationForTrading = controller.searchVacationTrading(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
 
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("foundVacations.fxml"));
-                Vacation4UManager.pagesApp.add("foundVacations");
+                controller.getVacation4UManager().getPagesApp().add("foundVacations");
                 Parent root = fxmlLoader.load();
                 Scene scene = new Scene(root, 700, 500);
                 scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -528,20 +539,20 @@ public class View {
                 //   bnt_showMeVac= (Button) scene.lookup("bnt_showMeVac");
                 lab_looking = (Label) scene.lookup("#lab_looking");
 
-                TitledPane[] tps = new TitledPane[Vacation4UManager.foundVacation.size()]; // TitledPane of the available vacations that nobody buy yet.
-                for (int i = 0; i < Vacation4UManager.foundVacation.size(); i++) {
+                TitledPane[] tps = new TitledPane[controller.getVacation4UManager().getFoundVacation().size()]; // TitledPane of the available vacations that nobody buy yet.
+                for (int i = 0; i < controller.getVacation4UManager().getFoundVacation().size(); i++) {
                     acc_Vacations = (Accordion) scene.lookup("#acc_Vacations");
-                    TextArea TA = new TextArea(Vacation4UManager.foundVacation.get(i).toString());
-                    Button Bt = new Button(Vacation4UManager.foundVacation.get(i).getFlightNum());
-                    String flightNumOfVacation = Vacation4UManager.foundVacation.get(i).getFlightNum();
-                    String seller = Vacation4UManager.foundVacation.get(i).getSaler();
+                    TextArea TA = new TextArea(controller.getVacation4UManager().getFoundVacation().get(i).toString());
+                    Button Bt = new Button(controller.getVacation4UManager().getFoundVacation().get(i).getFlightNum());
+                    String flightNumOfVacation = controller.getVacation4UManager().getFoundVacation().get(i).getFlightNum();
+                    String seller = controller.getVacation4UManager().getFoundVacation().get(i).getSaler();
                     Bt.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent e) {
                             Bt.getText();
-                            Vacation4UManager.vacationToBuy = controller.searchVacationFlightNumBySeller(flightNumOfVacation, seller);
+                            controller.getVacation4UManager().setVacationToBuy(controller.searchVacationFlightNumBySeller(flightNumOfVacation, seller));
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
-                            Vacation4UManager.pagesApp.add("vacationDetails");
+                            controller.getVacation4UManager().getPagesApp().add("vacationDetails");
                             Parent root = null;
                             try {
                                 root = fxmlLoader.load();
@@ -557,14 +568,14 @@ public class View {
                             stage.show();
                             //vacationToBuy = (Vacation) controller.searchVacationByFlightNum(Bt.getText());
                             TA_details = (TextArea) scene.lookup("#TA_details");
-                            TA_details.setText(Vacation4UManager.vacationToBuy.toString());
+                            TA_details.setText(controller.getVacation4UManager().getVacationToBuy().toString());
                         }
                     });
 
                     GridPane GP = new GridPane();
                     GP.add(TA, 0, 0);
                     GP.add(Bt, 1, 0);
-                    tps[i] = new TitledPane(Vacation4UManager.foundVacation.get(i).getFlightNum(), GP);
+                    tps[i] = new TitledPane(controller.getVacation4UManager().getFoundVacation().get(i).getFlightNum(), GP);
 
                 }
                 if (tps.length > 0) {
@@ -576,8 +587,8 @@ public class View {
                     TitledPane[] tps1 = new TitledPane[foundVacationForTrading.size()];
                     for (int i = 0; i < foundVacationForTrading.size(); i++) {
                         ChoiceBox cb = null;
-                        if (Vacation4UManager.registeredUser != null) {
-                            ArrayList<Vacation> userVactions = controller.getUserVacations(Vacation4UManager.registeredUser.getUserName());
+                        if (controller.getVacation4UManager().getRegisteredUser()!= null) {
+                            ArrayList<Vacation> userVactions = controller.getUserVacations(controller.getVacation4UManager().getRegisteredUser().getUserName());
                             cb = new ChoiceBox(FXCollections.observableArrayList(
                                     userVactions)
                             );
@@ -600,10 +611,10 @@ public class View {
                                     alert.showAndWait();
                                     return;
                                 } else {
-                                    Vacation4UManager.vacationToOffer = (Vacation) finalCb.getValue();
-                                    Vacation4UManager.vacationToBuy = controller.searchVacationFlightNumBySeller(flightNumOfVacationToGet, seller);
+                                    controller.getVacation4UManager().setVacationToOffer((Vacation) finalCb.getValue());
+                                    controller.getVacation4UManager().setVacationToBuy(controller.searchVacationFlightNumBySeller(flightNumOfVacationToGet, seller));
                                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationTrading.fxml"));
-                                    Vacation4UManager.pagesApp.add("vacationTrading");
+                                    controller.getVacation4UManager().getPagesApp().add("vacationTrading");
 
                                     Parent root = null;
                                     try {
@@ -621,8 +632,8 @@ public class View {
                                     //vacationToBuy = (Vacation) controller.searchVacationByFlightNum(Bt.getText());
                                     TA_vacationOfferDetails = (TextArea) scene.lookup("#TA_vacationOfferDetails");
                                     TA_vacationToGetDetails = (TextArea) scene.lookup("#TA_vacationToGetDetails");
-                                    TA_vacationOfferDetails.setText(Vacation4UManager.vacationToOffer.toString());
-                                    TA_vacationToGetDetails.setText(Vacation4UManager.vacationToBuy.toString());
+                                    TA_vacationOfferDetails.setText(controller.getVacation4UManager().getVacationToOffer().toString());
+                                    TA_vacationToGetDetails.setText(controller.getVacation4UManager().getVacationToBuy().toString());
                                 }
                             }
                         });
@@ -630,7 +641,7 @@ public class View {
                         GridPane GP1 = new GridPane();
                         GP1.add(TA, 0, 0);
                         GP1.add(Bt, 1, 0);
-                        if (Vacation4UManager.registeredUser != null) {
+                        if (controller.getVacation4UManager().getRegisteredUser()!= null) {
                             GP1.add(lb, 2, 0);
                             GP1.add(cb, 2, 1);
                         }
@@ -706,7 +717,7 @@ public class View {
 
 
     public void goToBuyPage(ActionEvent actionEvent) throws IOException {
-        if (Vacation4UManager.registeredUser == null || (!Vacation4UManager.registeredUser.isLogIn())) {
+        if (controller.getVacation4UManager().getRegisteredUser() == null || (!controller.getVacation4UManager().getRegisteredUser().isLogIn())) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Be Attention");
             alert.setHeaderText("You need to be logged in to sell your vacation\n");
@@ -716,7 +727,7 @@ public class View {
                 // ... user chose OK
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
-                Vacation4UManager.pagesApp.add("logIn");
+                controller.getVacation4UManager().getPagesApp().add("logIn");
                 Scene scene = new Scene(root, 700, 500);
                 Stage stage = (Stage) btn_toBuy.getScene().getWindow();
                 scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -726,7 +737,7 @@ public class View {
             } else {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-                Vacation4UManager.pagesApp.add("homeMenu");
+                controller.getVacation4UManager().getPagesApp().add("homeMenu");
                 Scene scene = new Scene(root, 700, 500);
                 Stage stage = (Stage) btn_toBuy.getScene().getWindow();
                 scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -736,25 +747,25 @@ public class View {
             }
         } else {
 
-            if (Vacation4UManager.pagesApp.get(Vacation4UManager.pagesApp.size() - 1) == "vacationDetailsAfterOk") {
+            if (controller.getVacation4UManager().getPagesApp().get(controller.getVacation4UManager().getPagesApp().size() - 1) == "vacationDetailsAfterOk") {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("secure payment ");
                 alert.setHeaderText("This step will go beyond filling out details for a secure payment");
                 alert.setContentText("We assume that your secure payment has been successful");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
-                    Vacation4UManager.registeredUser.buyVacation(Vacation4UManager.vacationToBuy);
-                    Vacation4UManager.vacationToBuy.setBuyer(Vacation4UManager.registeredUser.getUserName());
+                    controller.getVacation4UManager().getRegisteredUser().buyVacation(controller.getVacation4UManager().getVacationToBuy());
+                    controller.getVacation4UManager().getVacationToBuy().setBuyer(controller.getVacation4UManager().getRegisteredUser().getUserName());
                     Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Congratulations");
-                    alert.setHeaderText("You bought your vacation to " + Vacation4UManager.vacationToBuy.getToPlace() + " !!!");
-                    alert.setContentText(Vacation4UManager.vacationToBuy.getToPlace() + " feels closer than ever...!");
+                    alert.setHeaderText("You bought your vacation to " + controller.getVacation4UManager().getVacationToBuy().getToPlace() + " !!!");
+                    alert.setContentText(controller.getVacation4UManager().getVacationToBuy().getToPlace() + " feels closer than ever...!");
                     alert.showAndWait();
 
-                    if (controller.updateVacationSell(Vacation4UManager.vacationToBuy, Vacation4UManager.registeredUser.getUserName())) {
+                    if (controller.updateVacationSell(controller.getVacation4UManager().getVacationToBuy(), controller.getVacation4UManager().getRegisteredUser().getUserName())) {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-                        Vacation4UManager.pagesApp.add("homeMenu");
+                        controller.getVacation4UManager().getPagesApp().add("homeMenu");
                         Scene scene = new Scene(root, 700, 500);
                         Stage stage = (Stage) btn_toBuy.getScene().getWindow();
                         scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -776,11 +787,11 @@ public class View {
             } else {
                 Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
                 alert2.setTitle("Request sent");
-                alert2.setHeaderText("Do You want to send the request to the seller " + Vacation4UManager.vacationToBuy.getSaler() + " ?");
+                alert2.setHeaderText("Do You want to send the request to the seller " +controller.getVacation4UManager().getVacationToBuy().getSaler() + " ?");
                 alert2.setContentText("When you receive a reply it will appear in your message box");
                 Optional<ButtonType> result2 = alert2.showAndWait();
                 if (result2.get() == ButtonType.OK) {
-                    if (controller.sendBuyingRequestMessage(Vacation4UManager.registeredUser, Vacation4UManager.vacationToBuy.getFlightNum(), Vacation4UManager.vacationToBuy.getSaler())){
+                    if (controller.sendBuyingRequestMessage(controller.getVacation4UManager().getRegisteredUser(), controller.getVacation4UManager().getVacationToBuy().getFlightNum(), controller.getVacation4UManager().getVacationToBuy().getSaler())){
                                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                                 alert.setTitle("Good news");
                                 alert.setHeaderText("The message has been sent ");
@@ -789,7 +800,7 @@ public class View {
                                 if (result.get() == ButtonType.OK) {
                                     FXMLLoader fxmlLoader = new FXMLLoader();
                                     Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-                                    Vacation4UManager.pagesApp.add("homeMenu");
+                                    controller.getVacation4UManager().getPagesApp().add("homeMenu");
                                     Scene scene = new Scene(root, 700, 500);
                                     Stage stage = (Stage) btn_toBuy.getScene().getWindow();
                                     scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -800,7 +811,7 @@ public class View {
 
                                 } else {
                                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("foundVacations.fxml"));
-                                    Vacation4UManager.pagesApp.add("foundVacations");
+                                    controller.getVacation4UManager().getPagesApp().add("foundVacations");
                                     Parent root = fxmlLoader.load();
                                     Scene scene = new Scene(root, 700, 500);
                                     scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -820,7 +831,7 @@ public class View {
                         FXMLLoader fxmlLoader = new FXMLLoader();
 
                         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-                        Vacation4UManager.pagesApp.add("homeMenu");
+                    controller.getVacation4UManager().getPagesApp().add("homeMenu");
                         Scene scene = new Scene(root, 700, 500);
                         Stage stage = (Stage) btn_toBuy.getScene().getWindow();
                         scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -837,7 +848,7 @@ public class View {
 
 
     public void goToPersonalMessage(ActionEvent actionEvent) throws IOException {
-        if (Vacation4UManager.registeredUser == null || (!Vacation4UManager.registeredUser.isLogIn())) {
+        if (controller.getVacation4UManager().getRegisteredUser() == null || (!controller.getVacation4UManager().getRegisteredUser().isLogIn())) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Be Attention");
             alert.setHeaderText("You need to be logged in to buy a vacation\n");
@@ -847,7 +858,7 @@ public class View {
                 // ... user chose OK
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
-                Vacation4UManager.pagesApp.add("logIn");
+                controller.getVacation4UManager().getPagesApp().add("logIn");
                 Scene scene = new Scene(root, 700, 500);
                 Stage stage = (Stage) btn_Mess.getScene().getWindow();
                 scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -860,7 +871,7 @@ public class View {
 
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("Messages.fxml").openStream());
-            Vacation4UManager.pagesApp.add("Messages");
+            controller.getVacation4UManager().getPagesApp().add("Messages");
             Scene scene = new Scene(root, 700, 500);
             Stage stage = (Stage) btn_Mess.getScene().getWindow();
             scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -868,20 +879,20 @@ public class View {
             stage.setScene(scene);
             stage.show();
 
-            TitledPane[] tpsReq = new TitledPane[Vacation4UManager.registeredUser.getIncomingReqMessages().size()];
-            for (int i = 0; i < Vacation4UManager.registeredUser.getIncomingReqMessages().size(); i++) {
+            TitledPane[] tpsReq = new TitledPane[controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().size()];
+            for (int i = 0; i < controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().size(); i++) {
                 acc_reqMessage = (Accordion) scene.lookup("#acc_reqMessage");
-                Vacation4UManager.currentMessage = Vacation4UManager.registeredUser.getIncomingReqMessages().get(i);
-                TextArea TA = new TextArea(Vacation4UManager.registeredUser.getIncomingReqMessages().get(i).getFromUser().getUserName() + " want to buy from" +
-                        " you flight num: " + Vacation4UManager.registeredUser.getIncomingReqMessages().get(i).getVacationToGet());
-                Button Confirm = new Button("confirm " + Vacation4UManager.registeredUser.getIncomingReqMessages().get(i).toString());
-                Button Reject = new Button("Reject " + Vacation4UManager.registeredUser.getIncomingReqMessages().get(i).toString());
+                controller.getVacation4UManager().setCurrentMessage(controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().get(i));
+                TextArea TA = new TextArea(controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().get(i).getFromUser().getUserName() + " want to buy from" +
+                        " you flight num: " + controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().get(i).getVacationToGet());
+                Button Confirm = new Button("confirm " + controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().get(i).toString());
+                Button Reject = new Button("Reject " + controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().get(i).toString());
                 Confirm.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        Vacation4UManager.currentMessage.setStatus("confirm");
-                        if (controller.updateMessage(Vacation4UManager.currentMessage, "confirm")) {
-                            Vacation4UManager.registeredUser.removeIncomingReqMessages(Vacation4UManager.currentMessage);
+                        controller.getVacation4UManager().getCurrentMessage().setStatus("confirm");
+                        if (controller.updateMessage(controller.getVacation4UManager().getCurrentMessage(), "confirm")) {
+                            controller.getVacation4UManager().getRegisteredUser().removeIncomingReqMessages(controller.getVacation4UManager().getCurrentMessage());
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulation");
                             alert.setHeaderText("Your message has been sent \n");
@@ -893,9 +904,9 @@ public class View {
                 Reject.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        Vacation4UManager.currentMessage.setStatus("reject");
-                        if (controller.updateMessage(Vacation4UManager.currentMessage, "reject")) {
-                            Vacation4UManager.registeredUser.removeIncomingReqMessages(Vacation4UManager.currentMessage);
+                        controller.getVacation4UManager().getCurrentMessage().setStatus("reject");
+                        if (controller.updateMessage(controller.getVacation4UManager().getCurrentMessage(), "reject")) {
+                            controller.getVacation4UManager().getRegisteredUser().removeIncomingReqMessages(controller.getVacation4UManager().getCurrentMessage());
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulation");
                             alert.setHeaderText("Your message has been sent \n");
@@ -912,29 +923,30 @@ public class View {
                 tpsReq[i] = new TitledPane("request number " + (i + 1), GP);
             }
 
-            if (Vacation4UManager.registeredUser.getIncomingReqMessages().size() != 0) {
+            if (controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().size() != 0) {
                 acc_reqMessage.getPanes().addAll(tpsReq);
                 acc_reqMessage.setExpandedPane(tpsReq[0]);
             }
 
             acc_ansMessage = (Accordion) scene.lookup("#acc_ansMessage");
 
-            TitledPane[] tpsAns = new TitledPane[Vacation4UManager.registeredUser.getIncomingAnsMessages().size()];
-            for (int i = 0; i < Vacation4UManager.registeredUser.getIncomingAnsMessages().size(); i++) {
+            TitledPane[] tpsAns = new TitledPane[controller.getVacation4UManager().getRegisteredUser().getIncomingAnsMessages().size()];
+            for (int i = 0; i < controller.getVacation4UManager().getRegisteredUser().getIncomingAnsMessages().size(); i++) {
 //                acc_ansMessage= (Accordion) scene.lookup("#acc_ansMessage");
-                Vacation4UManager.currentMessage = Vacation4UManager.registeredUser.getIncomingAnsMessages().get(i);
-                TextArea TA = new TextArea(Vacation4UManager.registeredUser.getIncomingAnsMessages().get(i).getToUser().getUserName() + " answer to your request" +
-                        " regarding flight num: " + Vacation4UManager.registeredUser.getIncomingAnsMessages().get(i).getVacationToGet() + ". The answer is: "
-                        + Vacation4UManager.registeredUser.getIncomingAnsMessages().get(i).getStatus());
-                Button toBuy = new Button("Buy " + Vacation4UManager.currentMessage.getVacationToGet());
-                if (!(Vacation4UManager.currentMessage.getStatus().equals("confirm"))) {
+                controller.getVacation4UManager().setCurrentMessage(controller.getVacation4UManager().getRegisteredUser().getIncomingAnsMessages().get(i));
+                TextArea TA = new TextArea(controller.getVacation4UManager().getRegisteredUser().getIncomingAnsMessages().get(i).getToUser().getUserName() + " answer to your request" +
+                        " regarding flight num: " + controller.getVacation4UManager().getRegisteredUser().getIncomingAnsMessages().get(i).getVacationToGet() + ". The answer is: "
+                        + controller.getVacation4UManager().getRegisteredUser().getIncomingAnsMessages().get(i).getStatus());
+                Button toBuy = new Button("Buy " + controller.getVacation4UManager().getCurrentMessage().getVacationToGet());
+                if (!(controller.getVacation4UManager().getCurrentMessage().getStatus().equals("confirm"))) {
                     toBuy.setDisable(true);
                 }
                 toBuy.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        Vacation4UManager.registeredUser.removeIncomingAnsMessages(Vacation4UManager.currentMessage);
-                        Vacation4UManager.vacationToBuy = controller.searchVacationFlightNumBySeller(Vacation4UManager.currentMessage.getVacationToGet(), Vacation4UManager.currentMessage.getToUser().getUserName());
+                        controller.getVacation4UManager().getRegisteredUser().removeIncomingAnsMessages(controller.getVacation4UManager().getCurrentMessage());
+                        controller.getVacation4UManager().setVacationToBuy(controller.searchVacationFlightNumBySeller(controller.getVacation4UManager().getCurrentMessage().getVacationToGet(),
+                                controller.getVacation4UManager().getCurrentMessage().getToUser().getUserName()));
 
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
                         Parent root = null;
@@ -943,7 +955,7 @@ public class View {
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
-                        Vacation4UManager.pagesApp.add("vacationDetailsAfterOk");
+                        controller.getVacation4UManager().getPagesApp().add("vacationDetailsAfterOk");
                         Scene scene = new Scene(root, 700, 500);
                         scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
                         Stage stage = (Stage) toBuy.getScene().getWindow();
@@ -952,8 +964,8 @@ public class View {
                         stage.setScene(scene);
                         stage.show();
                         TA_details = (TextArea) scene.lookup("#TA_details");
-                        TA_details.setText(Vacation4UManager.vacationToBuy.toString());
-                        if (controller.removeMessage(Vacation4UManager.currentMessage)) {
+                        TA_details.setText(controller.getVacation4UManager().getVacationToBuy().toString());
+                        if (controller.removeMessage(controller.getVacation4UManager().getCurrentMessage())) {
                             java.lang.System.out.println("Message removed");
                         }
                     }
@@ -966,27 +978,27 @@ public class View {
                 tpsAns[i] = new TitledPane("answer number " + (i + 1), GP);
 
             }
-            if (Vacation4UManager.registeredUser.getIncomingAnsMessages().size() != 0) {
+            if (controller.getVacation4UManager().getRegisteredUser().getIncomingAnsMessages().size() != 0) {
                 acc_ansMessage.getPanes().addAll(tpsAns);
                 acc_ansMessage.setExpandedPane(tpsAns[0]);
             }
 
             acc_TraidreqMessage = (Accordion) scene.lookup("#acc_TraidreqMessage");
 
-            TitledPane[] TraidTpsReq = new TitledPane[Vacation4UManager.registeredUser.getIncomingTradingReqMessages().size()];
-            for (int i = 0; i < Vacation4UManager.registeredUser.getIncomingTradingReqMessages().size(); i++) {
-                Vacation4UManager.currentMessage = Vacation4UManager.registeredUser.getIncomingTradingReqMessages().get(i);
-                TextArea TA = new TextArea(Vacation4UManager.registeredUser.getIncomingTradingReqMessages().get(i).getFromUser().getUserName() + " want to so some trading. Hw want " +
-                        "flight num: " + Vacation4UManager.registeredUser.getIncomingTradingReqMessages().get(i).getVacationToGet()+
-                ". He offer flight num: "+ Vacation4UManager.registeredUser.getIncomingTradingReqMessages().get(i).getVacationOffer());
-                Button Confirm = new Button("confirm " + Vacation4UManager.registeredUser.getIncomingTradingReqMessages().get(i).toString());
-                Button Reject = new Button("Reject " + Vacation4UManager.registeredUser.getIncomingTradingReqMessages().get(i).toString());
+            TitledPane[] TraidTpsReq = new TitledPane[controller.getVacation4UManager().getRegisteredUser().getIncomingTradingReqMessages().size()];
+            for (int i = 0; i < controller.getVacation4UManager().getRegisteredUser().getIncomingTradingReqMessages().size(); i++) {
+                controller.getVacation4UManager().setCurrentMessage(controller.getVacation4UManager().getRegisteredUser().getIncomingTradingReqMessages().get(i));
+                TextArea TA = new TextArea(controller.getVacation4UManager().getRegisteredUser().getIncomingTradingReqMessages().get(i).getFromUser().getUserName() + " want to so some trading. Hw want " +
+                        "flight num: " + controller.getVacation4UManager().getRegisteredUser().getIncomingTradingReqMessages().get(i).getVacationToGet()+
+                ". He offer flight num: "+ controller.getVacation4UManager().getRegisteredUser().getIncomingTradingReqMessages().get(i).getVacationOffer());
+                Button Confirm = new Button("confirm " + controller.getVacation4UManager().getRegisteredUser().getIncomingTradingReqMessages().get(i).toString());
+                Button Reject = new Button("Reject " + controller.getVacation4UManager().getRegisteredUser().getIncomingTradingReqMessages().get(i).toString());
                 Confirm.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        Vacation4UManager.currentMessage.setStatus("confirm");
-                        if (controller.updateTradingMessage((UserTradingMessage) Vacation4UManager.currentMessage, "confirm")) {
-                            Vacation4UManager.registeredUser.removeIncomingTradingReqMessages(Vacation4UManager.currentMessage);
+                        controller.getVacation4UManager().getCurrentMessage().setStatus("confirm");
+                        if (controller.updateTradingMessage((UserTradingMessage)controller.getVacation4UManager().getCurrentMessage(), "confirm")) {
+                            controller.getVacation4UManager().getRegisteredUser().removeIncomingTradingReqMessages(controller.getVacation4UManager().getCurrentMessage());
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulation");
                             alert.setHeaderText("Your message has been sent \n");
@@ -998,9 +1010,9 @@ public class View {
                 Reject.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        Vacation4UManager.currentMessage.setStatus("reject");
-                        if (controller.updateTradingMessage((UserTradingMessage) Vacation4UManager.currentMessage, "reject")) {
-                            Vacation4UManager.registeredUser.removeIncomingTradingReqMessages(Vacation4UManager.currentMessage);
+                        controller.getVacation4UManager().getCurrentMessage().setStatus("reject");
+                        if (controller.updateTradingMessage((UserTradingMessage) controller.getVacation4UManager().getCurrentMessage(), "reject")) {
+                            controller.getVacation4UManager().getRegisteredUser().removeIncomingTradingReqMessages(controller.getVacation4UManager().getCurrentMessage());
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Congratulation");
                             alert.setHeaderText("Your message has been sent \n");
@@ -1017,34 +1029,34 @@ public class View {
                 TraidTpsReq[i] = new TitledPane("request number " + (i + 1), GP);
             }
 
-            if (Vacation4UManager.registeredUser.getIncomingTradingReqMessages().size() != 0) {
+            if (controller.getVacation4UManager().getRegisteredUser().getIncomingTradingReqMessages().size() != 0) {
                 acc_TraidreqMessage.getPanes().addAll(TraidTpsReq);
                 acc_TraidreqMessage.setExpandedPane(TraidTpsReq[0]);
             }
 
             acc_TradeAnsMessage = (Accordion) scene.lookup("#acc_TradeAnsMessage");
 
-            TitledPane[] TradeTpsAns = new TitledPane[Vacation4UManager.registeredUser.getIncomingTradingAnsMessages().size()];
-            for (int i = 0; i < Vacation4UManager.registeredUser.getIncomingTradingAnsMessages().size(); i++) {
-                Vacation4UManager.currentMessage = Vacation4UManager.registeredUser.getIncomingTradingAnsMessages().get(i);
-                TextArea TA = new TextArea(Vacation4UManager.registeredUser.getIncomingTradingAnsMessages().get(i).getToUser().getUserName() + " answer to your request  " +
-                        " regarding flight num: " + Vacation4UManager.registeredUser.getIncomingTradingAnsMessages().get(i).getVacationToGet() + ". The answer is: "
-                        + Vacation4UManager.registeredUser.getIncomingTradingAnsMessages().get(i).getStatus());
+            TitledPane[] TradeTpsAns = new TitledPane[controller.getVacation4UManager().getRegisteredUser().getIncomingTradingAnsMessages().size()];
+            for (int i = 0; i < controller.getVacation4UManager().getRegisteredUser().getIncomingTradingAnsMessages().size(); i++) {
+                controller.getVacation4UManager().setCurrentMessage(controller.getVacation4UManager().getRegisteredUser().getIncomingTradingAnsMessages().get(i));
+                TextArea TA = new TextArea(controller.getVacation4UManager().getRegisteredUser().getIncomingTradingAnsMessages().get(i).getToUser().getUserName() + " answer to your request  " +
+                        " regarding flight num: " + controller.getVacation4UManager().getRegisteredUser().getIncomingTradingAnsMessages().get(i).getVacationToGet() + ". The answer is: "
+                        + controller.getVacation4UManager().getRegisteredUser().getIncomingTradingAnsMessages().get(i).getStatus());
                 Button trading = new Button("trading " );
                 Button btnOk= new Button("OK");
                 btnOk.setVisible(false);
-                if (!(Vacation4UManager.currentMessage.getStatus().equals("confirm"))) {
+                if (!(controller.getVacation4UManager().getCurrentMessage().getStatus().equals("confirm"))) {
                     trading.setDisable(true);
                     btnOk.setVisible(true);
                 }
                 trading.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        Vacation4UManager.registeredUser.removeIncomingTradingAnsMessages(Vacation4UManager.currentMessage);
-                        Vacation4UManager.vacationToOffer= controller.searchVacationFlightNumByBuyer(Vacation4UManager.currentMessage.getVacationOffer(), Vacation4UManager.currentMessage.getFromUser().getUserName());
-                        Vacation4UManager.vacationToBuy = controller.searchVacationFlightNumByBuyer(Vacation4UManager.currentMessage.getVacationToGet(), Vacation4UManager.currentMessage.getToUser().getUserName());
-                        controller.updateVacationSell(Vacation4UManager.vacationToOffer, Vacation4UManager.vacationToBuy.getBuyer());
-                        controller.updateVacationSell(Vacation4UManager.vacationToBuy, Vacation4UManager.vacationToOffer.getBuyer());
+                        controller.getVacation4UManager().getRegisteredUser().removeIncomingTradingAnsMessages(controller.getVacation4UManager().getCurrentMessage());
+                        controller.getVacation4UManager().setVacationToOffer(controller.searchVacationFlightNumByBuyer(controller.getVacation4UManager().getCurrentMessage().getVacationOffer(), controller.getVacation4UManager().getCurrentMessage().getFromUser().getUserName()));
+                        controller.getVacation4UManager().setVacationToBuy(controller.searchVacationFlightNumByBuyer(controller.getVacation4UManager().getCurrentMessage().getVacationToGet(), controller.getVacation4UManager().getCurrentMessage().getToUser().getUserName()));
+                        controller.updateVacationSell(controller.getVacation4UManager().getVacationToOffer(), controller.getVacation4UManager().getVacationToBuy().getBuyer());
+                        controller.updateVacationSell(controller.getVacation4UManager().getVacationToBuy(), controller.getVacation4UManager().getVacationToOffer().getBuyer());
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
                         Parent root = null;
                         try {
@@ -1055,9 +1067,9 @@ public class View {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Congratulation");
                         alert.setHeaderText("trading success!");
-                        alert.setContentText("the flight to" + Vacation4UManager.vacationToBuy.getFromPlace()+" is closer then ever ! " );
+                        alert.setContentText("the flight to" + controller.getVacation4UManager().getVacationToBuy().getFromPlace()+" is closer then ever ! " );
                         alert.showAndWait();
-                        if (controller.removeTradeMessage((UserTradingMessage) Vacation4UManager.currentMessage)) {
+                        if (controller.removeTradeMessage((UserTradingMessage) controller.getVacation4UManager().getCurrentMessage())) {
                             java.lang.System.out.println("Message removed");
                         }
                         Parent root2 = null;
@@ -1067,11 +1079,11 @@ public class View {
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
-                        Vacation4UManager.pagesApp.add("homeMenu");
+                        controller.getVacation4UManager().getPagesApp().add("homeMenu");
                         Scene scene2 = new Scene(root2, 700, 500);
                         scene2.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
                         Stage stage2= (Stage) trading.getScene().getWindow();
-                        String title = "Welcome " + Vacation4UManager.registeredUser.getFirstName() + " " + Vacation4UManager.registeredUser.getLastName();
+                        String title = "Welcome " + controller.getVacation4UManager().getRegisteredUser().getFirstName() + " " +controller.getVacation4UManager().getRegisteredUser().getLastName();
                         stage2.setTitle(title);
                         stage2.setScene(scene2);
                         stage2.show();
@@ -1083,7 +1095,7 @@ public class View {
                 btnOk.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        if (controller.removeTradeMessage((UserTradingMessage) Vacation4UManager.currentMessage)) {
+                        if (controller.removeTradeMessage((UserTradingMessage) controller.getVacation4UManager().getCurrentMessage())) {
                             java.lang.System.out.println("Message removed");
                         }
 
@@ -1094,11 +1106,11 @@ public class View {
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
-                        Vacation4UManager.pagesApp.add("homeMenu");
+                        controller.getVacation4UManager().getPagesApp().add("homeMenu");
                         Scene scene = new Scene(root, 700, 500);
                         scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
                         Stage stage = (Stage) btnOk.getScene().getWindow();
-                        String title = "Welcome " + Vacation4UManager.registeredUser.getFirstName() + " " + Vacation4UManager.registeredUser.getLastName();
+                        String title = "Welcome " + controller.getVacation4UManager().getRegisteredUser().getFirstName() + " " + controller.getVacation4UManager().getRegisteredUser().getLastName();
                         stage.setTitle(title);
                         stage.setScene(scene);
                         stage.show();
@@ -1114,7 +1126,7 @@ public class View {
                 TradeTpsAns[i] = new TitledPane("answer number " + (i + 1), GP);
 
             }
-            if (Vacation4UManager.registeredUser.getIncomingTradingAnsMessages().size() != 0) {
+            if (controller.getVacation4UManager().getRegisteredUser().getIncomingTradingAnsMessages().size() != 0) {
                 acc_TradeAnsMessage.getPanes().addAll(TradeTpsAns);
                 acc_TradeAnsMessage.setExpandedPane(TradeTpsAns[0]);
             }
@@ -1138,11 +1150,11 @@ public class View {
     public void backFromPersonal(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-        Vacation4UManager.pagesApp.add("homeMenu");
+        controller.getVacation4UManager().getPagesApp().add("homeMenu");
         Scene scene = new Scene(root, 700, 500);
         scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
         Stage stage = (Stage) txt_messageLabel.getScene().getWindow();
-        String title = "Welcome " + Vacation4UManager.registeredUser.getFirstName() + " " + Vacation4UManager.registeredUser.getLastName();
+        String title = "Welcome " + controller.getVacation4UManager().getRegisteredUser().getFirstName() + " " + controller.getVacation4UManager().getRegisteredUser().getLastName();
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
@@ -1151,7 +1163,7 @@ public class View {
     }
 
     public void goToSellVacation(ActionEvent actionEvent) throws IOException {
-        if (Vacation4UManager.registeredUser == null || (!Vacation4UManager.registeredUser.isLogIn())) {
+        if (controller.getVacation4UManager().getRegisteredUser() == null || (!controller.getVacation4UManager().getRegisteredUser().isLogIn())) {
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Be Attention");
@@ -1162,7 +1174,7 @@ public class View {
                     // ... user chose OK
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
-                    Vacation4UManager.pagesApp.add("logIn");
+                    controller.getVacation4UManager().getPagesApp().add("logIn");
                     Scene scene = new Scene(root, 700, 500);
                     Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
                     scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -1172,7 +1184,7 @@ public class View {
                 } else {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-                    Vacation4UManager.pagesApp.add("homeMenu");
+                    controller.getVacation4UManager().getPagesApp().add("homeMenu");
                     Scene scene = new Scene(root, 700, 500);
                     Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
                     scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -1186,11 +1198,11 @@ public class View {
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("addVacation.fxml").openStream());
-            Vacation4UManager.pagesApp.add("sellVacation");
+            controller.getVacation4UManager().getPagesApp().add("sellVacation");
             Scene scene = new Scene(root, 700, 500);
             scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
             Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
-            String title = "Welcome " + Vacation4UManager.registeredUser.getFirstName() + " " + Vacation4UManager.registeredUser.getLastName();
+            String title = "Welcome " + controller.getVacation4UManager().getRegisteredUser().getFirstName() + " " + controller.getVacation4UManager().getRegisteredUser().getLastName();
             stage.setTitle(title);
             stage.setScene(scene);
             stage.show();
@@ -1245,7 +1257,7 @@ public class View {
             lodging = cb_accommondation.getValue() + cb_rate.getValue();
         //public Vacation(String flightNum, String fromPlace, String toPlace, String airlineCompany, Date fromDate, Date toDate, String ticketType, String baggage, String tripType, String lodging, String saler) {
 
-        if (controller.addVacationToSell(flightNum, from, to, airlineCompany, fromDate, toDate, ticketType, baggageWeight, kind, lodging, Vacation4UManager.registeredUser)) {
+        if (controller.addVacationToSell(flightNum, from, to, airlineCompany, fromDate, toDate, ticketType, baggageWeight, kind, lodging, controller.getVacation4UManager().getRegisteredUser())) {
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
             alert2.setTitle("Good news\n");
             alert2.setHeaderText("Your vacation been added\n");
@@ -1253,11 +1265,11 @@ public class View {
 
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-            Vacation4UManager.pagesApp.add("homeMenu");
+            controller.getVacation4UManager().getPagesApp().add("homeMenu");
             Scene scene = new Scene(root, 700, 500);
             scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
             Stage stage = (Stage) btn_sell.getScene().getWindow();
-            String title = "Welcome " + Vacation4UManager.registeredUser.getFirstName() + " " + Vacation4UManager.registeredUser.getLastName();
+            String title = "Welcome " + controller.getVacation4UManager().getRegisteredUser().getFirstName() + " " + controller.getVacation4UManager().getRegisteredUser().getLastName();
             stage.setTitle(title);
             stage.setScene(scene);
             stage.show();
@@ -1268,7 +1280,7 @@ public class View {
     }
 
     public void goToMyVacation(ActionEvent actionEvent) throws IOException {
-        if (Vacation4UManager.registeredUser == null || (!Vacation4UManager.registeredUser.isLogIn())) {
+        if (controller.getVacation4UManager().getRegisteredUser() == null || (!controller.getVacation4UManager().getRegisteredUser().isLogIn())) {
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Be Attention");
@@ -1279,7 +1291,7 @@ public class View {
                     // ... user chose OK
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("logIn.fxml").openStream());
-                    Vacation4UManager.pagesApp.add("logIn");
+                    controller.getVacation4UManager().getPagesApp().add("logIn");
                     Scene scene = new Scene(root, 700, 500);
                     Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
                     scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -1289,7 +1301,7 @@ public class View {
                 } else {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-                    Vacation4UManager.pagesApp.add("homeMenu");
+                    controller.getVacation4UManager().getPagesApp().add("homeMenu");
                     Scene scene = new Scene(root, 700, 500);
                     Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
                     scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -1303,21 +1315,21 @@ public class View {
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("myVacations.fxml").openStream());
-            Vacation4UManager.pagesApp.add("myVacations");
+            controller.getVacation4UManager().getPagesApp().add("myVacations");
             Scene scene = new Scene(root, 700, 500);
             scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
             Stage stage = (Stage) btn_SellVacation.getScene().getWindow();
-            String title = Vacation4UManager.registeredUser.getFirstName() + " " + Vacation4UManager.registeredUser.getLastName() + " Vacations";
+            String title = controller.getVacation4UManager().getRegisteredUser().getFirstName() + " " + controller.getVacation4UManager().getRegisteredUser().getLastName() + " Vacations";
             stage.setTitle(title);
             stage.setScene(scene);
             stage.show();
             //personalHome(scene);
-            controller.setUserVacations(Vacation4UManager.registeredUser);
-            TitledPane[] tps = new TitledPane[Vacation4UManager.registeredUser.getMyVacations().size()];
-            for (int i = 0; i < Vacation4UManager.registeredUser.getMyVacations().size(); i++) {
+            controller.setUserVacations(controller.getVacation4UManager().getRegisteredUser());
+            TitledPane[] tps = new TitledPane[controller.getVacation4UManager().getRegisteredUser().getMyVacations().size()];
+            for (int i = 0; i < controller.getVacation4UManager().getRegisteredUser().getMyVacations().size(); i++) {
                 my_Vacations = (Accordion) scene.lookup("#user_Vacations");
-                TextArea TA = new TextArea(Vacation4UManager.registeredUser.getMyVacations().get(i).toString());
-                Button Bt = new Button(Vacation4UManager.registeredUser.getMyVacations().get(i).getFlightNum());
+                TextArea TA = new TextArea(controller.getVacation4UManager().getRegisteredUser().getMyVacations().get(i).toString());
+                Button Bt = new Button(controller.getVacation4UManager().getRegisteredUser().getMyVacations().get(i).getFlightNum());
 //                Bt.setOnAction(new EventHandler<ActionEvent>() {
 //                    @Override
 //                    public void handle(ActionEvent e) {
@@ -1325,7 +1337,7 @@ public class View {
 //                        //vacationToBuy= controller.searchVacationByFlightNum(Bt.getText());
 //                        vacationToBuy= controller.searchVacationFlightNumBySeller(Bt.getText());
 //                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
-//                        pagesApp.add("vacationDetails");
+//                       controller.getVacation4UManager().getPagesApp().add("vacationDetails");
 //                        Parent root = null;
 //                        try {
 //                            root = fxmlLoader.load();
@@ -1348,7 +1360,7 @@ public class View {
                 GridPane GP = new GridPane();
                 GP.add(TA, 0, 0);
                 GP.add(Bt, 1, 0);
-                tps[i] = new TitledPane(Vacation4UManager.registeredUser.getMyVacations().get(i).getFlightNum(), GP);
+                tps[i] = new TitledPane(controller.getVacation4UManager().getRegisteredUser().getMyVacations().get(i).getFlightNum(), GP);
             }
             if (tps.length > 0) {
                 my_Vacations.getPanes().addAll(tps);
@@ -1364,12 +1376,12 @@ public class View {
     public void sendTradeRequestMsg(ActionEvent actionEvent) throws IOException {
         Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION);
         alert2.setTitle("Request sent");
-        alert2.setHeaderText("Do You want to send the trade request to the buyer " + Vacation4UManager.vacationToBuy.getBuyer() + " ?");
+        alert2.setHeaderText("Do You want to send the trade request to the buyer " + controller.getVacation4UManager().getVacationToBuy().getBuyer() + " ?");
         alert2.setContentText("When you receive a reply it will appear in your message box");
         Optional<ButtonType> result2 = alert2.showAndWait();
         if (result2.get() == ButtonType.OK) {
             // ... user chose OK
-            if (controller.sendTradingRequestMessage(Vacation4UManager.registeredUser, Vacation4UManager.vacationToOffer.getFlightNum(), Vacation4UManager.vacationToBuy.getFlightNum(), Vacation4UManager.vacationToBuy.getBuyer())){
+            if (controller.sendTradingRequestMessage(controller.getVacation4UManager().getRegisteredUser(), controller.getVacation4UManager().getVacationToOffer().getFlightNum(), controller.getVacation4UManager().getVacationToBuy().getFlightNum(), controller.getVacation4UManager().getVacationToBuy().getBuyer())){
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Good news");
                         alert.setHeaderText("The message has been sent ");
@@ -1378,7 +1390,7 @@ public class View {
                         if (result.get() == ButtonType.OK) {
                             FXMLLoader fxmlLoader = new FXMLLoader();
                             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-                            Vacation4UManager.pagesApp.add("homeMenu");
+                            controller.getVacation4UManager().getPagesApp().add("homeMenu");
                             Scene scene = new Scene(root, 700, 500);
                             Stage stage = (Stage) btn_toTrade.getScene().getWindow();
                             scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -1389,7 +1401,7 @@ public class View {
 
                         } else {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("foundVacations.fxml"));
-                            Vacation4UManager.pagesApp.add("foundVacations");
+                            controller.getVacation4UManager().getPagesApp().add("foundVacations");
                             Parent root = fxmlLoader.load();
                             Scene scene = new Scene(root, 700, 500);
                             scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -1409,7 +1421,7 @@ public class View {
                 FXMLLoader fxmlLoader = new FXMLLoader();
 
                 Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());
-                Vacation4UManager.pagesApp.add("homeMenu");
+            controller.getVacation4UManager().getPagesApp().add("homeMenu");
                 Scene scene = new Scene(root, 700, 500);
                 Stage stage = (Stage) btn_toTrade.getScene().getWindow();
                 scene.getStylesheets().add(getClass().getClassLoader().getResource("MenuStyle.css").toExternalForm());
@@ -1423,13 +1435,13 @@ public class View {
 
     public void allVacations(ActionEvent actionEvent) {
 // Return the available vacations that nobody buy yet.
-         Vacation4UManager.foundVacation = controller.searchAllVacations();
+        controller.getVacation4UManager().setFoundVacation(controller.searchAllVacations());
         // Return the vacations that is optional to trade (someone bought the vacation already).
         List<Vacation> foundVacationForTrading = controller.searchAllTradingVacations();
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("foundVacations.fxml"));
-        Vacation4UManager.pagesApp.add("foundVacations");
+        controller.getVacation4UManager().getPagesApp().add("foundVacations");
         Parent root = null;
         try {
             root = fxmlLoader.load();
@@ -1447,20 +1459,20 @@ public class View {
         //   bnt_showMeVac= (Button) scene.lookup("bnt_showMeVac");
         lab_looking = (Label) scene.lookup("#lab_looking");
 
-        TitledPane[] tps = new TitledPane[Vacation4UManager.foundVacation.size()]; // TitledPane of the available vacations that nobody buy yet.
-        for (int i = 0; i < Vacation4UManager.foundVacation.size(); i++) {
+        TitledPane[] tps = new TitledPane[controller.getVacation4UManager().getFoundVacation().size()]; // TitledPane of the available vacations that nobody buy yet.
+        for (int i = 0; i < controller.getVacation4UManager().getFoundVacation().size(); i++) {
             acc_Vacations = (Accordion) scene.lookup("#acc_Vacations");
-            TextArea TA = new TextArea(Vacation4UManager.foundVacation.get(i).toString());
-            Button Bt = new Button(Vacation4UManager.foundVacation.get(i).getFlightNum());
-            String flightNumOfVacation = Vacation4UManager.foundVacation.get(i).getFlightNum();
-            String seller = Vacation4UManager.foundVacation.get(i).getSaler();
+            TextArea TA = new TextArea(controller.getVacation4UManager().getFoundVacation().get(i).toString());
+            Button Bt = new Button(controller.getVacation4UManager().getFoundVacation().get(i).getFlightNum());
+            String flightNumOfVacation = controller.getVacation4UManager().getFoundVacation().get(i).getFlightNum();
+            String seller = controller.getVacation4UManager().getFoundVacation().get(i).getSaler();
             Bt.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
                     Bt.getText();
-                    Vacation4UManager.vacationToBuy = controller.searchVacationFlightNumBySeller(flightNumOfVacation, seller);
+                    controller.getVacation4UManager().setVacationToBuy(controller.searchVacationFlightNumBySeller(flightNumOfVacation, seller));
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationDetails.fxml"));
-                    Vacation4UManager.pagesApp.add("vacationDetails");
+                    controller.getVacation4UManager().getPagesApp().add("vacationDetails");
                     Parent root = null;
                     try {
                         root = fxmlLoader.load();
@@ -1476,14 +1488,14 @@ public class View {
                     stage.show();
                     //vacationToBuy = (Vacation) controller.searchVacationByFlightNum(Bt.getText());
                     TA_details = (TextArea) scene.lookup("#TA_details");
-                    TA_details.setText(Vacation4UManager.vacationToBuy.toString());
+                    TA_details.setText(controller.getVacation4UManager().getVacationToBuy().toString());
                 }
             });
 
             GridPane GP = new GridPane();
             GP.add(TA, 0, 0);
             GP.add(Bt, 1, 0);
-            tps[i] = new TitledPane(Vacation4UManager.foundVacation.get(i).getFlightNum(), GP);
+            tps[i] = new TitledPane(controller.getVacation4UManager().getFoundVacation().get(i).getFlightNum(), GP);
 
         }
         if (tps.length > 0) {
@@ -1495,8 +1507,8 @@ public class View {
         TitledPane[] tps1 = new TitledPane[foundVacationForTrading.size()];
         for (int i = 0; i < foundVacationForTrading.size(); i++) {
             ChoiceBox cb = null;
-            if (Vacation4UManager.registeredUser != null) {
-                ArrayList<Vacation> userVactions = controller.getUserVacations(Vacation4UManager.registeredUser.getUserName());
+            if (controller.getVacation4UManager().getRegisteredUser()!= null) {
+                ArrayList<Vacation> userVactions = controller.getUserVacations(controller.getVacation4UManager().getRegisteredUser().getUserName());
                 cb = new ChoiceBox(FXCollections.observableArrayList(
                         userVactions)
                 );
@@ -1519,10 +1531,10 @@ public class View {
                         alert.showAndWait();
                         return;
                     } else {
-                        Vacation4UManager.vacationToOffer = (Vacation) finalCb.getValue();
-                        Vacation4UManager.vacationToBuy= controller.searchVacationFlightNumBySeller(flightNumOfVacationToGet, seller);
+                        controller.getVacation4UManager().setVacationToOffer((Vacation) finalCb.getValue());
+                        controller.getVacation4UManager().setVacationToBuy(controller.searchVacationFlightNumBySeller(flightNumOfVacationToGet, seller));
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("vacationTrading.fxml"));
-                        Vacation4UManager.pagesApp.add("vacationTrading");
+                        controller.getVacation4UManager().getPagesApp().add("vacationTrading");
 
                         Parent root = null;
                         try {
@@ -1540,8 +1552,8 @@ public class View {
                         //vacationToBuy = (Vacation) controller.searchVacationByFlightNum(Bt.getText());
                         TA_vacationOfferDetails = (TextArea) scene.lookup("#TA_vacationOfferDetails");
                         TA_vacationToGetDetails = (TextArea) scene.lookup("#TA_vacationToGetDetails");
-                        TA_vacationOfferDetails.setText(Vacation4UManager.vacationToOffer.toString());
-                        TA_vacationToGetDetails.setText(Vacation4UManager.vacationToBuy.toString());
+                        TA_vacationOfferDetails.setText(controller.getVacation4UManager().getVacationToOffer().toString());
+                        TA_vacationToGetDetails.setText(controller.getVacation4UManager().getVacationToBuy().toString());
                     }
                 }
             });
@@ -1549,7 +1561,7 @@ public class View {
             GridPane GP1 = new GridPane();
             GP1.add(TA, 0, 0);
             GP1.add(Bt, 1, 0);
-            if (Vacation4UManager.registeredUser != null) {
+            if (controller.getVacation4UManager().getRegisteredUser() != null) {
                 GP1.add(lb, 2, 0);
                 GP1.add(cb, 2, 1);
             }
@@ -1571,7 +1583,7 @@ public class View {
     public void goToPersonalArea(ActionEvent actionEvent) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("ManagerMenu.fxml"));
-        Vacation4UManager.pagesApp.add("ManagerMenu");
+        controller.getVacation4UManager().getPagesApp().add("ManagerMenu");
         Parent root = null;
         try {
             root = fxmlLoader.load();
@@ -1584,10 +1596,10 @@ public class View {
         String title = "Personal Area";
         stage.setTitle(title);
         stage.setScene(scene);
-        btn_delete = (Button) scene.lookup("#btn_delete");
+        btn_search = (Button) scene.lookup("#btn_search");
         btn_create = (Button) scene.lookup("#btn_create");
         if (isAdmin()){
-            btn_delete.setDisable(false);
+            btn_search.setDisable(false);
             btn_create.setDisable(false);
         }
 
@@ -1595,7 +1607,7 @@ public class View {
     }
 
     public boolean isAdmin() {
-        if (Vacation4UManager.registeredUser.getUserName().equals("admin"))
+        if (controller.getVacation4UManager().getRegisteredUser().getUserName().equals("admin"))
             return true;
         return false;
     }

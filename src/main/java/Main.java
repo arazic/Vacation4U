@@ -1,6 +1,7 @@
 import Controller.Controller;
 import Model.DataBase;
 import Model.User;
+import Model.Vacation4UManager;
 import View.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,10 @@ public class Main extends Application {
         Main.primaryStage = primaryStage;
         User administrator = new User("admin", "12345678",  "13/09/1990", "admin", "admin", "Beer Sheva", true);
         DataBase dataBase = new DataBase("Vacation4u", administrator);
-        Controller controller = new Controller(dataBase);
+        Vacation4UManager Vacation4UManager = new Vacation4UManager(dataBase);
+        Controller controller = new Controller(Vacation4UManager);
+        Vacation4UManager.setController(controller);
+
         primaryStage.setTitle("Vacation4U View");
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("homeMenu.fxml").openStream());

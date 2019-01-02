@@ -9,125 +9,108 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
-    public static DataBase dataBase;
-    private View view;
+    private static Vacation4UManager vacation4UManager;
+    private static View view;
 
-    public Controller(DataBase dataBase) {
-        this.dataBase = dataBase;
+    public Controller( Vacation4UManager Vacation4UManager) {
+        this.vacation4UManager = Vacation4UManager;
+    }
+
+    public Vacation4UManager getVacation4UManager() {
+        return vacation4UManager;
+    }
+
+    public void setVacation4UManager(Vacation4UManager vacation4UManager) {
+        this.vacation4UManager = vacation4UManager;
     }
 
     public boolean editUser(String userNameToedit, String optionToChange, String newValue) {
-        try {
-            return dataBase.updateUserData(userNameToedit, optionToChange, newValue);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+            return vacation4UManager.editUser(userNameToedit, optionToChange, newValue);
     }
 
     public User searchUser(String userNameToSearch) {
-        return dataBase.searchUser(userNameToSearch);
+        return vacation4UManager.searchUser(userNameToSearch);
     }
 
     public boolean deleteUser(String userNameToDelete) throws SQLException {
-        if (dataBase.deleteUser(userNameToDelete) == 1)
-            return true;
-        return false;
+        return vacation4UManager.deleteUser(userNameToDelete);
+
     }
 
     public List<UserMessage> searchAnsMessages(User registeredUser) {
-        return dataBase.searchAnsMessages(registeredUser);
+        return vacation4UManager.searchAnsMessages(registeredUser);
     }
 
     public List<UserMessage> searchReqMessages(User registeredUser) {
-        return dataBase.searchReqMessages(registeredUser);
+        return vacation4UManager.searchReqMessages(registeredUser);
     }
 
     public Vacation searchVacationFlightNumBySeller(String flightNum, String seller) {
-        return dataBase.searchVacationFlightNumBySeller(flightNum, seller);
+        return vacation4UManager.searchVacationFlightNumBySeller(flightNum, seller);
     }
 
     public boolean updateMessage(UserMessage currentMessage, String newStatus) {
-        try {
-            return dataBase.updateMessage(currentMessage,newStatus);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+
+        return vacation4UManager.updateMessage(currentMessage,newStatus);
+
     }
 
 
     public boolean removeMessage(UserMessage currentMessage) {
-        return dataBase.removeMessage(currentMessage) == 1;
+        return vacation4UManager.removeMessage(currentMessage);
     }
 
 
     public ArrayList<Vacation> searchVacation(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
-        return dataBase.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
+        return vacation4UManager.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
     }
 
     public boolean deleteVacation(Vacation vacationToDelete) {
-        try {
-            if(dataBase.deleteVacation(vacationToDelete)==1){
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+         return vacation4UManager.deleteVacation(vacationToDelete);
+
     }
 
     public boolean updateVacationSell(Vacation vacationToBuy, String buyer) {
-        try {
-            if(dataBase.updateVacationSell(vacationToBuy, buyer)==1){
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+       return  vacation4UManager.updateVacationSell(vacationToBuy, buyer);
+
     }
 
     public ArrayList<Vacation> getUserVacations(String userName) {
-        return dataBase.getUserVacations(userName);
+        return vacation4UManager.getUserVacations(userName);
     }
 
     public ArrayList<Vacation> searchVacationTrading(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
-        return dataBase.searchVacationTrading(fromPlace,toPlace,dp_departureDate,dp_returnDate,ticketType);
+        return vacation4UManager.searchVacationTrading(fromPlace,toPlace,dp_departureDate,dp_returnDate,ticketType);
     }
 
     public boolean updateTradingMessage(UserTradingMessage currentMessage, String newStatus) {
-        try {
-            return dataBase.updateTradingMessage(currentMessage,newStatus);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+            return vacation4UManager.updateTradingMessage(currentMessage,newStatus);
+
     }
 
     public List<UserTradingMessage> searchTradeReqMessages(User user) {
-        return dataBase.searchTradeReqMessages(user);
+        return vacation4UManager.searchTradeReqMessages(user);
     }
 
     public List<UserTradingMessage> searchTradeAnsMessages(User user) {
-        return dataBase.searchTradeAnsMessages(user);
+        return vacation4UManager.searchTradeAnsMessages(user);
     }
 
     public boolean removeTradeMessage(UserTradingMessage currentMessage) {
-        return dataBase.removeTradeMessage(currentMessage) == 1;
+        return vacation4UManager.removeTradeMessage(currentMessage);
     }
 
 
     public Vacation searchVacationFlightNumByBuyer(String vacation, String userName) {
-        return dataBase.searchVacationFlightNumByBuyer(vacation,userName);
+        return vacation4UManager.searchVacationFlightNumByBuyer(vacation,userName);
     }
 
     public List<Vacation> searchAllVacations() {
-        return dataBase.searchAllVacations();
+        return vacation4UManager.searchAllVacations();
     }
 
     public List<Vacation> searchAllTradingVacations() {
-        return dataBase.searchAllTradingVacations();
+        return vacation4UManager.searchAllTradingVacations();
     }
 
     public boolean sendBuyingRequestMessage(User registeredUser, String flightNum, String sellerUser) {
@@ -141,7 +124,7 @@ public class Controller {
 
     public boolean createUser(String userName, String password, String birthDate, String firstName, String lastName, String city, boolean b) {
         try {
-            dataBase.insertUser(userName, password, birthDate, firstName, lastName, city, b);
+            vacation4UManager.createUser(userName, password, birthDate, firstName, lastName, city, b);
             return true;
         }catch (Exception e){
             return false;
@@ -150,7 +133,7 @@ public class Controller {
     }
 
     public void setUserVacations(User user) {
-        user.setMyVacations(dataBase.getUserVacations(user.getUserName()));
+        user.setMyVacations(vacation4UManager.getUserVacations(user.getUserName()));
     }
 
     public boolean addVacationToSell(String flightNum, String from, String to, String airlineCompany, LocalDate fromDate, LocalDate toDate, String ticketType, String baggageWeight, String kind, String lodging, User registeredUser) {

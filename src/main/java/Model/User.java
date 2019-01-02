@@ -204,7 +204,7 @@ public class User {
             return false;
         else
             try{
-                Controller.dataBase.insertMessage(this, flightNum, sellerUser);
+                Vacation4UManager.getDataBase().insertMessage(this, flightNum, sellerUser);
             return true;
             } catch (Exception e) {
                 return false;
@@ -217,8 +217,8 @@ public class User {
             return false;
         }
         else{
-            User toUserObject = Controller.dataBase.searchUser(toUser);
-            if (Controller.dataBase.insertTradingMessage(offerVacationNum,this.userName, requestFlightNum,toUser,"waiting")){
+            User toUserObject = Vacation4UManager.getDataBase().searchUser(toUser);
+            if (Vacation4UManager.getDataBase().insertTradingMessage(offerVacationNum,this.userName, requestFlightNum,toUser,"waiting")){
                 UserTradingMessage tradingRequestMessage = new UserTradingMessage(offerVacationNum, this, requestFlightNum, toUserObject, "waiting");
                 toUserObject.addIncomingTradingReqMessages(tradingRequestMessage);
                 return true;
@@ -229,7 +229,7 @@ public class User {
 
     public boolean addVacationToSell(String flightNum, String from, String to, String airlineCompany, LocalDate fromDate, LocalDate toDate, String ticketType, String baggageWeight, String kind, String lodging){
         Vacation vacation = new Vacation(flightNum, from, to, airlineCompany, fromDate, toDate, ticketType, baggageWeight, kind, lodging, userName);
-        return Controller.dataBase.addVacation(vacation);
+        return Vacation4UManager.getDataBase().addVacation(vacation);
     }
 
 }
