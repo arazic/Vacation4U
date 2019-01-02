@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.TextFlow?>
 
-<GridPane alignment="center" hgap="10" style="-fx-background-image: url('./vacation.JPG');" prefHeight="500.0" prefWidth="700.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.System">
+<GridPane alignment="center" hgap="10" style="-fx-background-image: url('./vacation.JPG');" prefHeight="500.0" prefWidth="700.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.View">
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>
@@ -76,7 +76,7 @@
                         </AnchorPane>
                     </children>
                 </TextFlow>
-                <Button fx:id="btn_create" layoutX="10.0" mnemonicParsing="false" onAction="#goToCreatePage" prefHeight="39.0" prefWidth="122.0" text="Create User" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="12">
+                <Button fx:id="btn_create" layoutX="10.0" mnemonicParsing="false" onAction="#goToCreatePage" prefHeight="39.0" prefWidth="122.0" text="Create User" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="12" disable="true">
                     <GridPane.margin>
                         <Insets left="50.0" right="20.0" top="20.0" />
                     </GridPane.margin>
@@ -109,7 +109,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btn_delete" layoutX="10.0" layoutY="135.0" mnemonicParsing="false" onAction="#goToDeletePage" prefHeight="39.0" prefWidth="122.0" text="Delete User" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="27">
+            <Button fx:id="btn_delete" layoutX="10.0" layoutY="135.0" mnemonicParsing="false" onAction="#goToDeletePage" prefHeight="39.0" prefWidth="122.0" text="Delete User" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="27" disable="true">
                <GridPane.margin>
                   <Insets left="50.0" right="20.0" top="20.0" />
                </GridPane.margin>
@@ -121,7 +121,7 @@
                </opaqueInsets>
             </Button>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="31" />
-            <Button mnemonicParsing="false" text="back" GridPane.halignment="LEFT" />
+            <Button fx:id="btn_back" mnemonicParsing="false" text="back" GridPane.halignment="LEFT" onAction="#backToMenu" />
             </children>
         </GridPane>
     </children>

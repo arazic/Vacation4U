@@ -1,134 +1,164 @@
 package Controller;
 
-import Model.Model;
-import View.System;
-import Model.User;
-import Model.Vacation;
-import Model.userMessage;
+import Model.*;
+import View.View;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller  {
-    private System system;
-    private Model model;
+public class Controller {
+    public static DataBase dataBase;
+    private View view;
 
-    public Controller(Model model) {
-        this.model = model;
-    }
-
-    public void setSystem(System system){
-        this.system = system;
-    }
-
-    public boolean createUser(User user) {
-        return model.createUser(user);
+    public Controller(DataBase dataBase) {
+        this.dataBase = dataBase;
     }
 
     public boolean editUser(String userNameToedit, String optionToChange, String newValue) {
-        return model.editUser(userNameToedit, optionToChange,newValue);
+        try {
+            return dataBase.updateUserData(userNameToedit, optionToChange, newValue);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public User seacrhUser(String userNameToSearch) {
-        return model.searchUser(userNameToSearch);
+    public User searchUser(String userNameToSearch) {
+        return dataBase.searchUser(userNameToSearch);
     }
 
     public boolean deleteUser(String userNameToDelete) throws SQLException {
-        return model.deleteUser(userNameToDelete);
+        if (dataBase.deleteUser(userNameToDelete) == 1)
+            return true;
+        return false;
     }
 
-
-    public boolean insertMessage(userMessage Message) throws Exception {
-        return model.insertMessage(Message);
+    public List<UserMessage> searchAnsMessages(User registeredUser) {
+        return dataBase.searchAnsMessages(registeredUser);
     }
 
-    public boolean insertTradingMessage(userMessage message) {
+    public List<UserMessage> searchReqMessages(User registeredUser) {
+        return dataBase.searchReqMessages(registeredUser);
+    }
+
+    public Vacation searchVacationFlightNumBySeller(String flightNum, String seller) {
+        return dataBase.searchVacationFlightNumBySeller(flightNum, seller);
+    }
+
+    public boolean updateMessage(UserMessage currentMessage, String newStatus) {
         try {
-            return model.insertTradingMessage(message);
-        } catch (Exception e) {
+            return dataBase.updateMessage(currentMessage,newStatus);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public List<userMessage> searchAnsMessages(User registeredUser) {
-        return model.searchAnsMessages(registeredUser);
 
+    public boolean removeMessage(UserMessage currentMessage) {
+        return dataBase.removeMessage(currentMessage) == 1;
     }
 
-    public List<userMessage> searchReqMessages(User registeredUser) {
-        return model.searchReqMessages(registeredUser);
-    }
-
-    public Vacation searchVacationFlightNumBySeller(String flightNum, String seller) {
-        return model.searchVacationFlightNumBySeller(flightNum, seller);
-    }
-
-    public boolean updateMessage(userMessage currentMessage, String newStatus) {
-        return model.updateMessage(currentMessage,newStatus);
-    }
-
-
-    public boolean removeMessage(userMessage currentMessage) {
-        return model.removeMessage(currentMessage);
-
-    }
-
-    public boolean addVacationToSell(Vacation vacation){
-        return model.addVacationToSell(vacation);
-    }
 
     public ArrayList<Vacation> searchVacation(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
-        return model.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
+        return dataBase.searchVacation(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
     }
 
-    public boolean deleteVacation(Vacation vacationToBuy) {
-        return model.deleteVacation(vacationToBuy);
-
+    public boolean deleteVacation(Vacation vacationToDelete) {
+        try {
+            if(dataBase.deleteVacation(vacationToDelete)==1){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
+
     public boolean updateVacationSell(Vacation vacationToBuy, String buyer) {
-        return model.updateVacationSell(vacationToBuy, buyer);
-
+        try {
+            if(dataBase.updateVacationSell(vacationToBuy, buyer)==1){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public ArrayList<Vacation> getUserVacations(String userName) {
-        return model.getUserVacations(userName);
+        return dataBase.getUserVacations(userName);
     }
 
     public ArrayList<Vacation> searchVacationTrading(String fromPlace, String toPlace, LocalDate dp_departureDate, LocalDate dp_returnDate, String ticketType) {
-        return model.searchVacationTrading(fromPlace, toPlace, dp_departureDate, dp_returnDate, ticketType);
+        return dataBase.searchVacationTrading(fromPlace,toPlace,dp_departureDate,dp_returnDate,ticketType);
     }
 
-    public boolean updateTradingMessage(userMessage currentMessage, String newStatus) {
-        return model.updateTradingMessage(currentMessage,newStatus);
-
+    public boolean updateTradingMessage(UserTradingMessage currentMessage, String newStatus) {
+        try {
+            return dataBase.updateTradingMessage(currentMessage,newStatus);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
-    public List<userMessage> searchTraidReqMessages(User User) {
-    return model.searchTraidReqMessages(User);
+    public List<UserTradingMessage> searchTradeReqMessages(User user) {
+        return dataBase.searchTradeReqMessages(user);
     }
 
-    public List<userMessage> searchTraidAnsMessages(User User) {
-        return model.searchTraidAnsMessages(User);
+    public List<UserTradingMessage> searchTradeAnsMessages(User user) {
+        return dataBase.searchTradeAnsMessages(user);
     }
 
-    public boolean removeTraidMessage(userMessage currentMessage) {
-        return model.removeTraidMessage(currentMessage);
+    public boolean removeTradeMessage(UserTradingMessage currentMessage) {
+        return dataBase.removeTradeMessage(currentMessage) == 1;
     }
 
 
     public Vacation searchVacationFlightNumByBuyer(String vacation, String userName) {
-    return model.searchVacationFlightNumByBuyer(vacation,userName);
+        return dataBase.searchVacationFlightNumByBuyer(vacation,userName);
     }
 
     public List<Vacation> searchAllVacations() {
-        return model.searchAllVacations();
+        return dataBase.searchAllVacations();
     }
 
     public List<Vacation> searchAllTradingVacations() {
-        return model.searchAllTradingVacations();
+        return dataBase.searchAllTradingVacations();
+    }
+
+    public boolean sendBuyingRequestMessage(User registeredUser, String flightNum, String sellerUser) {
+        return registeredUser.sendBuyingRequestMessage(flightNum, sellerUser);
+    }
+
+
+    public boolean sendTradingRequestMessage(User fromUser, String offerVacationNum, String requestFlightNum, String toUser) {
+        return fromUser.sendTradingRequestMessage(offerVacationNum, requestFlightNum, toUser);
+    }
+
+    public boolean createUser(String userName, String password, String birthDate, String firstName, String lastName, String city, boolean b) {
+        try {
+            dataBase.insertUser(userName, password, birthDate, firstName, lastName, city, b);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
+    }
+
+    public void setUserVacations(User user) {
+        user.setMyVacations(dataBase.getUserVacations(user.getUserName()));
+    }
+
+    public boolean addVacationToSell(String flightNum, String from, String to, String airlineCompany, LocalDate fromDate, LocalDate toDate, String ticketType, String baggageWeight, String kind, String lodging, User registeredUser) {
+        return registeredUser.addVacationToSell(flightNum, from, to, airlineCompany, fromDate, toDate, ticketType, baggageWeight, kind, lodging);
+    }
+
+    public void setView(View view) {
+        this.view = view;
     }
 }
 
