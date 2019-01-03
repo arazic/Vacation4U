@@ -4,15 +4,6 @@
     <list id="7c93ab68-3698-4b01-9487-7094993caaf7" name="Revert &quot;almost done&quot;" comment="Revert &quot;almost done&quot;&#10;&#10;This reverts commit bf3d43d" />
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SQL/Vacation4u.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/SQL/Vacation4u.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/DataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Vacation4UManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Vacation4UManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ManagerMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ManagerMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/homeMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/homeMenu.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataBase.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DataBase.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Model/DataBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="807" lean-forward="true" selection-start-line="807" selection-end-line="807" />
+            <state relative-caret-position="1463">
+              <caret line="795" column="68" lean-forward="true" selection-start-line="795" selection-start-column="68" selection-end-line="795" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#30517#30527#0" expanded="true" />
@@ -107,11 +98,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="View.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="View.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/View/View.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="522" selection-start-line="522" selection-end-line="522" />
+            <state relative-caret-position="383">
+              <caret line="496" column="92" selection-start-line="496" selection-start-column="75" selection-end-line="496" selection-end-column="92" />
             </state>
           </provider>
         </entry>
@@ -214,7 +205,7 @@
       <find>vacationToOffer</find>
       <find>currentMessage</find>
       <find>SEARCH</find>
-      <find>search</find>
+      <find />
       <find>searchV</find>
       <find>SETcO</find>
       <find>EDIT</find>
@@ -223,10 +214,10 @@
       <find>btn_search</find>
       <find>admin</find>
       <find>adminbtn_search</find>
-      <find>The admin username</find>
+      <find />
       <find>from</find>
-      <find>searchVacation</find>
       <find>getAllPage</find>
+      <find>searchVacation</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -317,10 +308,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1928" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-11" />
+    <option name="y" value="-11" />
+    <option name="width" value="1943" />
+    <option name="height" value="1043" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
@@ -582,7 +573,7 @@
       <workItem from="1544465615462" duration="835000" />
       <workItem from="1545472141424" duration="13641000" />
       <workItem from="1545989213519" duration="13731000" />
-      <workItem from="1546354232971" duration="9830000" />
+      <workItem from="1546354232971" duration="12733000" />
     </task>
     <task id="LOCAL-00001" summary="try">
       <created>1540372627453</created>
@@ -836,11 +827,18 @@
       <option name="project" value="LOCAL" />
       <updated>1546449685017</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="DESIGN CHANGES">
+      <created>1546450224285</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1546450224285</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="262748000" />
+    <option name="totallyTimeSpent" value="265651000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -864,12 +862,12 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5063966" side_tool="true" weight="0.3148148" />
       <window_info anchor="right" id="Maven Projects" order="4" weight="0.32928804" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.6060768" weight="0.26252723" />
+      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.6060768" visible="true" weight="0.26252723" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8678038" weight="0.2527233" />
-      <window_info anchor="bottom" id="Terminal" order="14" sideWeight="0.49514562" weight="0.32714617" />
+      <window_info anchor="bottom" id="Terminal" order="14" sideWeight="0.49514562" weight="0.3267974" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.14925373" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.14925373" />
       <window_info anchor="right" id="Database" order="5" weight="0.12064777" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4936034" weight="0.19172113" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -877,7 +875,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info id="Favorites" order="4" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.6885113" visible="true" weight="0.2832244" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6885113" weight="0.2832244" />
       <window_info anchor="right" id="JetGradle" order="6" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -961,7 +959,6 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <MESSAGE value="Search complete and create fixed" />
     <MESSAGE value="insert user to db" />
     <MESSAGE value="delete works" />
     <MESSAGE value="delete works. great design" />
@@ -986,7 +983,8 @@
     <MESSAGE value="legal checks in create user name" />
     <MESSAGE value="preparation to user update" />
     <MESSAGE value="Merge branch 'nadavBranch' of https://github.com/arazic/Vacation4U&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'nadavBranch' of https://github.com/arazic/Vacation4U&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <MESSAGE value="DESIGN CHANGES" />
+    <option name="LAST_COMMIT_MESSAGE" value="DESIGN CHANGES" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1626,21 +1624,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/View/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="522" selection-start-line="522" selection-end-line="522" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Model/DataBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="807" lean-forward="true" selection-start-line="807" selection-end-line="807" />
+        <state relative-caret-position="1463">
+          <caret line="795" column="68" lean-forward="true" selection-start-line="795" selection-start-column="68" selection-end-line="795" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#30517#30527#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/View/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="496" column="92" selection-start-line="496" selection-start-column="75" selection-end-line="496" selection-end-column="92" />
         </state>
       </provider>
     </entry>
