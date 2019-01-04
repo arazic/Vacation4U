@@ -21,15 +21,17 @@ public class User {
     private List<UserTradingMessage> incomingTradingReqMessages;
     private List<UserTradingMessage> incomingTradingAnsMessages;
     private List<Vacation> myVacations;
+    private String phoneNumber;
 
 
-    public User(String userName, String password, String birthDate, String firstName, String lastName, String city, boolean logIn) {
+    public User(String userName, String password, String birthDate, String firstName, String lastName, String city, String phoneNumber, boolean logIn) {
         this.userName = userName;
         this.password = password;
         this.birthDate = birthDate;
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
+        this.phoneNumber = phoneNumber;
         this.logIn= false;
         this.messageNum=0;
         this.incomingReqMessages = new ArrayList<UserMessage>();
@@ -120,6 +122,28 @@ public class User {
                 +incomingTradingAnsMessages.size()+ incomingTradingReqMessages.size();
     }
 
+    public int getConfirmedMessageNum(){
+        int msgToShowCounter = 0;
+        for (int i = 0; i < incomingReqMessages.size(); i++) {
+           if (!incomingReqMessages.get(i).getStatus().equals("confirm") && !incomingReqMessages.get(i).getStatus().equals("reject"))
+               msgToShowCounter++;
+        }
+        for (int i = 0; i < incomingAnsMessages.size(); i++) {
+            if (!incomingAnsMessages.get(i).getStatus().equals("waiting"))
+                msgToShowCounter++;
+        }
+        for (int i = 0; i < incomingTradingAnsMessages.size(); i++) {
+            if (!incomingTradingAnsMessages.get(i).getStatus().equals("waiting"))
+                msgToShowCounter++;
+        }
+        for (int i = 0; i < incomingTradingReqMessages.size(); i++) {
+            if (!incomingTradingReqMessages.get(i).getStatus().equals("confirm") && !incomingTradingReqMessages.get(i).getStatus().equals("reject"))
+                msgToShowCounter++;
+        }
+
+        return msgToShowCounter;
+    }
+
     public void setMessageNum(int messageNum) {
         this.messageNum = messageNum;
     }
@@ -204,7 +228,7 @@ public class User {
             return false;
         else
             try{
-                Controller.dataBase.insertMessage(this, flightNum, sellerUser);
+                Vacation4UManager.getDataBase().insertMessage(this, flightNum, sellerUser);
             return true;
             } catch (Exception e) {
                 return false;
@@ -217,8 +241,8 @@ public class User {
             return false;
         }
         else{
-            User toUserObject = Controller.dataBase.searchUser(toUser);
-            if (Controller.dataBase.insertTradingMessage(offerVacationNum,this.userName, requestFlightNum,toUser,"waiting")){
+            User toUserObject = Vacation4UManager.getDataBase().searchUser(toUser);
+            if (Vacation4UManager.getDataBase().insertTradingMessage(offerVacationNum,this.userName, requestFlightNum,toUser,"waiting")){
                 UserTradingMessage tradingRequestMessage = new UserTradingMessage(offerVacationNum, this, requestFlightNum, toUserObject, "waiting");
                 toUserObject.addIncomingTradingReqMessages(tradingRequestMessage);
                 return true;
@@ -229,7 +253,10 @@ public class User {
 
     public boolean addVacationToSell(String flightNum, String from, String to, String airlineCompany, LocalDate fromDate, LocalDate toDate, String ticketType, String baggageWeight, String kind, String lodging){
         Vacation vacation = new Vacation(flightNum, from, to, airlineCompany, fromDate, toDate, ticketType, baggageWeight, kind, lodging, userName);
-        return Controller.dataBase.addVacation(vacation);
+        return Vacation4UManager.getDataBase().addVacation(vacation);
     }
 
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
 }

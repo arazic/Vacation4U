@@ -48,8 +48,8 @@
                             <children>
                                 <Accordion fx:id="acc_reqMessage" prefHeight="376.0" prefWidth="655.0" GridPane.rowIndex="1" />
                         <Label text="want to buy from me..." GridPane.halignment="CENTER" />
-                        <Label text="want to traid...." GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                        <Accordion fx:id="acc_TraidreqMessage" GridPane.rowIndex="3" />
+                        <Label text="want to trade...." GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Accordion fx:id="acc_TradeReqMessage" GridPane.rowIndex="3" />
                             </children>
                         </GridPane>
                     </content>
@@ -71,7 +71,7 @@
                                     <children>
                                         <Accordion fx:id="acc_ansMessage" prefHeight="293.0" prefWidth="578.0" GridPane.rowIndex="1" />
                               <Label text="want to buy from me..." GridPane.halignment="CENTER" />
-                              <Label text="want to traid" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Label text="want to trade" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                               <Accordion fx:id="acc_TradeAnsMessage" GridPane.rowIndex="3" />
                                     </children>
                                 </GridPane>
