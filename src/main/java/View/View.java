@@ -362,8 +362,6 @@ public class View {
 
 
     public void backToMenu(ActionEvent actionEvent) throws IOException {
-
-
         Scene scene = getScene();
         Stage stage = (Stage) btn_back.getScene().getWindow();
         showStage(scene, stage);
@@ -892,7 +890,7 @@ public class View {
                 Button confirm;
                 Button reject = null;
                 if (controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().get(i).getStatus().equals("confirm")){
-                    confirm = new Button("I got the money from" + controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().get(i).getFromUser().getUserName());
+                    confirm = new Button("I got the money from " + controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().get(i).getFromUser().getUserName());
                     int finalI = i;
                     confirm.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -900,9 +898,14 @@ public class View {
                         controller.updateVacationSell(controller.getVacation4UManager().getVacationToBuy(),controller.getVacation4UManager().getCurrentMessage().getFromUser().getUserName());
                         controller.getVacation4UManager().getRegisteredUser().getIncomingReqMessages().get(finalI).getFromUser().buyVacation(controller.getVacation4UManager().getVacationToBuy());
                         controller.getVacation4UManager().getRegisteredUser().removeIncomingAnsMessages(controller.getVacation4UManager().getCurrentMessage());
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Congratulation");
+                        alert.setHeaderText("Thanks for your update, your vacation removed from the vacation for sell list");
+                        alert.showAndWait();
                         if (controller.removeMessage(controller.getVacation4UManager().getCurrentMessage())) {
                             java.lang.System.out.println("Message removed");
                         }
+                        confirm.setDisable(true);
                     }
 
                 });
