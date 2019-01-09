@@ -388,7 +388,7 @@ public class DataBase {
     }
 
 
-    public void insertMessage(User FromUser, String vacationToBuy, String ToUser) throws Exception {
+    public boolean insertMessage(User FromUser, String vacationToBuy, String ToUser) throws Exception {
         String sql = "INSERT INTO Messages(FlightNum,UserNameFrom,UserNameTo,Status) VALUES(?,?,?,?)";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -398,6 +398,10 @@ public class DataBase {
             pstmt.setString(4, "waiting");
 //            pstmt.setString(4, "waiting");
             pstmt.executeUpdate();
+            return true;
+        }
+        catch(Exception e){
+            return false;
         }
     }
 

@@ -999,11 +999,16 @@ public class View {
                     if (controller.getVacation4UManager().getRegisteredUser().getIncomingAnsMessages().get(i).getFromUser().getUserName().equals(controller.getVacation4UManager().getRegisteredUser().getUserName())){
                         deleteMsg = new Button("Delete");
                         int finalI = i;
+                        Button finalDeleteMsg = deleteMsg;
                         deleteMsg.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent e) {
                                 controller.getVacation4UManager().getRegisteredUser().removeIncomingAnsMessages(controller.getVacation4UManager().getCurrentMessage());
                                 if (controller.removeMessage(controller.getVacation4UManager().getCurrentMessage())) {
+                                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                                    alert.setHeaderText("The message has been deleted \n");
+                                    alert.showAndWait();
+                                    finalDeleteMsg.setDisable(true);
                                     java.lang.System.out.println("Message removed");
                                 }
                             }

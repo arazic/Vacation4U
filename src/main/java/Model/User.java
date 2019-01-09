@@ -228,7 +228,11 @@ public class User {
             return false;
         else
             try{
-                Vacation4UManager.getDataBase().insertMessage(this, flightNum, sellerUser);
+                if (Vacation4UManager.getDataBase().insertMessage(this, flightNum, sellerUser)){
+                    User seller = Vacation4UManager.getDataBase().searchUser(sellerUser);
+                    UserMessage buyingRequestMessage = new UserMessage(flightNum, this, seller, "waiting");
+                    seller.addIncomingReqMessages(buyingRequestMessage);
+                }
             return true;
             } catch (Exception e) {
                 return false;
